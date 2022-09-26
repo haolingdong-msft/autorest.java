@@ -663,7 +663,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
     protected void generatePagingSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
-        typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
             function.methodReturn(String.format("new PagedIterable<>(%s(%s))", clientMethod.getSimpleAsyncMethodName(), clientMethod.getArgumentList()));
         });
@@ -858,7 +858,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         }
         String effectiveAsyncMethodName = asyncMethodName;
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
-        typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             addOptionalVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
             if (clientMethod.getReturnValue().getType() == ClassType.InputStream) {
                 function.line("Iterator<ByteBufferBackedInputStream> iterator = %s(%s).map(ByteBufferBackedInputStream::new).toStream().iterator();",
@@ -922,7 +922,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         ProxyMethod restAPIMethod, JavaSettings settings) {
         String effectiveMethodName = clientMethod.getProxyMethod().getName() + "Sync";
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
-        typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
+        writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
 
             addValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
             addOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
@@ -1240,8 +1240,21 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     }
 
     private String getPollingStrategy(ClientMethod clientMethod, String contextParam) {
+        String endpoint = "null";
+        if (clientMethod.getProxyMethod() != null && clientMethod.getProxyMethod().getParameters() != null) {
+            endpoint = clientMethod.getProxyMethod().getParameters().stream()
+                    .filter(p -> "endpoint".equals(p.getName()) && p.isFromClient() && p.getRequestParameterLocation() == RequestParameterLocation.URI)
+                    .findFirst()
+                    .map(p -> String.format("%1$s.replace(%2$s, %3$s)",
+                            ClassType.String.defaultValueExpression(clientMethod.getProxyMethod().getBaseUrl()),
+                            ClassType.String.defaultValueExpression('{' + p.getRequestParameterName() + '}'),
+                            p.getParameterReference()
+                    ))
+                    .orElse("null");
+        }
         return clientMethod.getMethodPollingDetails().getPollingStrategy()
             .replace("{httpPipeline}", clientMethod.getClientReference() + ".getHttpPipeline()")
+            .replace("{endpoint}", endpoint)
             .replace("{context}", contextParam)
             .replace("{serializerAdapter}", clientMethod.getClientReference() + ".getSerializerAdapter()")
             .replace("{intermediate-type}", clientMethod.getMethodPollingDetails().getIntermediateType().toString())
