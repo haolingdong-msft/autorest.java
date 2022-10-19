@@ -14,15 +14,15 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 
 export interface EmitterOptions {
-  namespace: string;
-  serviceName: string;
-  partialUpdate: boolean;
-  outputPath: string;
+  namespace?: string;
+  serviceName?: string;
+  partialUpdate?: boolean;
+  outputPath?: string;
 }
 
 const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
   type: "object",
-  additionalProperties: false,
+  additionalProperties: true,
   properties: {
     namespace: { type: "string", nullable: true },
     serviceName: { type: "string", nullable: true },
@@ -62,17 +62,20 @@ export async function $onEmit(program: Program, options: EmitterOptions) {
 
     await program.host.writeFile(codeModelFileName, dump(codeModel));
 
-    program.logger.info(`Code model file written to ${codeModelFileName}`);
+    program.trace("cadl-java", `Code model file written to ${codeModelFileName}`);
+
+    const emitterOptions = JSON.stringify(options);
+    program.trace("cadl-java", `Emitter options ${emitterOptions}`);
 
     const jarFileName = resolvePath(moduleRoot, "target", "azure-cadl-extension-jar-with-dependencies.jar");
-    program.logger.info(`Exec JAR ${jarFileName}`);
+    program.trace("cadl-java", `Exec JAR ${jarFileName}`);
 
     const output = await promisify(execFile)("java", [
-      `-DemitterOptions=${JSON.stringify(options)}`,
+      `-DemitterOptions=${emitterOptions}`,
       "-jar",
       jarFileName,
       codeModelFileName,
     ]);
-    program.logger.info(output.stdout ? output.stdout : output.stderr);
+    program.trace("cadl-java", output.stdout ? output.stdout : output.stderr);
   }
 }
