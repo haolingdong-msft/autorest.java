@@ -1,0 +1,2512 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Autonomous Development Platform",
+    "version": "2022-11-30-preview",
+    "x-cadl-generated": [
+      {
+        "emitter": "@azure-tools/cadl-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://adp.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://adp.azure.com/.default": ""
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "LongRunningOperations"
+    },
+    {
+      "name": "Discoveries"
+    },
+    {
+      "name": "Uploads"
+    }
+  ],
+  "paths": {
+    "/discoveries/{discoveryId}": {
+      "put": {
+        "tags": [
+          "Discoveries"
+        ],
+        "operationId": "Discoveries_CreateOrReplace",
+        "description": "Creates a new ingestion discovery instance.",
+        "parameters": [
+          {
+            "name": "discoveryId",
+            "in": "path",
+            "required": true,
+            "description": "The discovery identifier.",
+            "minLength": 1,
+            "maxLength": 36,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "description": "Auto-generated wrapper for template parameter 'DiscoveryCreationParameters'",
+            "schema": {
+              "$ref": "#/definitions/DiscoveryCreationParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Discovery"
+            }
+          },
+          "201": {
+            "description": "A Discovery resource was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/Discovery"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Discoveries"
+        ],
+        "operationId": "Discoveries_Get",
+        "description": "Get discovery by ID.",
+        "parameters": [
+          {
+            "name": "discoveryId",
+            "in": "path",
+            "required": true,
+            "description": "The discovery identifier.",
+            "minLength": 1,
+            "maxLength": 36,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Discovery"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/discoveries/{discoveryId}:complete": {
+      "post": {
+        "tags": [
+          "Discoveries"
+        ],
+        "operationId": "Discoveries_Complete",
+        "description": "Initiates the process of completing the discovery and creating the upload file grouping manifest files.",
+        "parameters": [
+          {
+            "name": "discoveryId",
+            "in": "path",
+            "required": true,
+            "description": "The discovery identifier.",
+            "minLength": 1,
+            "maxLength": 36,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LongRunningOperationIdHeader"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "description": "The location of an instance of LongRunningOperationStatus",
+                "type": "string",
+                "format": "uri"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/DiscoveryLroResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code for specific error that occurred.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/CustomErrorResponseWithXMsErrorCodeHeader"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/discoveries/{discoveryId}:cancel": {
+      "post": {
+        "tags": [
+          "Discoveries"
+        ],
+        "operationId": "Discoveries_Cancel",
+        "description": "Initiates the process of cancelling the discovery.",
+        "parameters": [
+          {
+            "name": "discoveryId",
+            "in": "path",
+            "required": true,
+            "description": "The discovery identifier.",
+            "minLength": 1,
+            "maxLength": 36,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LongRunningOperationIdHeader"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "description": "The location of an instance of LongRunningOperationStatus",
+                "type": "string",
+                "format": "uri"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/DiscoveryLroResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code for specific error that occurred.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/CustomErrorResponseWithXMsErrorCodeHeader"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/discoveries/{discoveryId}/specialFilesUploadInfo": {
+      "get": {
+        "tags": [
+          "Discoveries"
+        ],
+        "operationId": "DiscoverySpecialFiles_List",
+        "description": "List special files details for the discovery resource.",
+        "parameters": [
+          {
+            "name": "discoveryId",
+            "in": "path",
+            "required": true,
+            "description": "The discovery identifier.",
+            "minLength": 1,
+            "maxLength": 36,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDiscoverySpecialFile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/discoveries/{discoveryId}/specialFilesUploadInfo:generate": {
+      "post": {
+        "tags": [
+          "Discoveries"
+        ],
+        "operationId": "DiscoverySpecialFiles_Generate",
+        "description": "Initiates the process of generating SAS signed URIs for uploading special files for the discovery.",
+        "parameters": [
+          {
+            "name": "discoveryId",
+            "in": "path",
+            "required": true,
+            "description": "The discovery identifier.",
+            "minLength": 1,
+            "maxLength": 36,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "description": "The location of an instance of LongRunningOperationStatus",
+                "type": "string",
+                "format": "uri"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/DiscoveryLroResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/discoveries/{discoveryId}/uploads": {
+      "get": {
+        "tags": [
+          "Discoveries"
+        ],
+        "operationId": "DiscoveryResultUploads_List",
+        "description": "List upload detail for the discovery resource.",
+        "parameters": [
+          {
+            "name": "discoveryId",
+            "in": "path",
+            "required": true,
+            "description": "The discovery identifier.",
+            "minLength": 1,
+            "maxLength": 36,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDiscoveryUpload"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/operations/{operationId}": {
+      "get": {
+        "tags": [
+          "LongRunningOperations"
+        ],
+        "operationId": "LongRunningOperations_Get",
+        "description": "Get the details of an LRO.",
+        "parameters": [
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "description": "The operation Id.",
+            "minLength": 1,
+            "maxLength": 36,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Location": {
+                "description": "Final location of the operation result.",
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/LongRunningOperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/uploads/{uploadId}": {
+      "put": {
+        "tags": [
+          "Uploads"
+        ],
+        "operationId": "Uploads_CreateOrReplace",
+        "description": "Creates a new ingestion upload instance.",
+        "parameters": [
+          {
+            "name": "uploadId",
+            "in": "path",
+            "required": true,
+            "description": "The upload resource identifier.",
+            "minLength": 1,
+            "maxLength": 36,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "description": "Auto-generated wrapper for template parameter 'UploadCreationParameters'",
+            "schema": {
+              "$ref": "#/definitions/UploadCreationParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Upload"
+            }
+          },
+          "201": {
+            "description": "A Upload resource was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/Upload"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Uploads"
+        ],
+        "operationId": "Uploads_Get",
+        "description": "Get discovery by ID.",
+        "parameters": [
+          {
+            "name": "uploadId",
+            "in": "path",
+            "required": true,
+            "description": "The upload resource identifier.",
+            "minLength": 1,
+            "maxLength": 36,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Upload"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/uploads/{uploadId}:complete": {
+      "post": {
+        "tags": [
+          "Uploads"
+        ],
+        "operationId": "Uploads_Complete",
+        "description": "Initiates the process of completing the upload and creating the measurements.",
+        "parameters": [
+          {
+            "name": "uploadId",
+            "in": "path",
+            "required": true,
+            "description": "The upload resource identifier.",
+            "minLength": 1,
+            "maxLength": 36,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LongRunningOperationIdHeader"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "description": "The location of an instance of LongRunningOperationStatus",
+                "type": "string",
+                "format": "uri"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/UploadLroResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code for specific error that occurred.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/CustomErrorResponseWithXMsErrorCodeHeader"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/uploads/{uploadId}:cancel": {
+      "post": {
+        "tags": [
+          "Uploads"
+        ],
+        "operationId": "Uploads_Cancel",
+        "description": "Initiates the process of cancelling the upload.",
+        "parameters": [
+          {
+            "name": "uploadId",
+            "in": "path",
+            "required": true,
+            "description": "The upload resource identifier.",
+            "minLength": 1,
+            "maxLength": 36,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LongRunningOperationIdHeader"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "description": "The location of an instance of LongRunningOperationStatus",
+                "type": "string",
+                "format": "uri"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/UploadLroResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code for specific error that occurred.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/CustomErrorResponseWithXMsErrorCodeHeader"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/uploads/{uploadId}/dataFilesUploadInfo": {
+      "get": {
+        "tags": [
+          "Uploads"
+        ],
+        "operationId": "UploadDataFiles_List",
+        "description": "List data files for the upload.",
+        "parameters": [
+          {
+            "name": "uploadId",
+            "in": "path",
+            "required": true,
+            "description": "The upload resource identifier.",
+            "minLength": 1,
+            "maxLength": 36,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedUploadDataFile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/uploads/{uploadId}/dataFilesUploadInfo:generate": {
+      "post": {
+        "tags": [
+          "Uploads"
+        ],
+        "operationId": "UploadDataFiles_Generate",
+        "description": "Initiates the process of sharding the data files.",
+        "parameters": [
+          {
+            "name": "uploadId",
+            "in": "path",
+            "required": true,
+            "description": "The upload resource identifier.",
+            "minLength": 1,
+            "maxLength": 36,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "description": "The location of an instance of LongRunningOperationStatus",
+                "type": "string",
+                "format": "uri"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/UploadLroResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/uploads/{uploadId}/measurements": {
+      "get": {
+        "tags": [
+          "Uploads"
+        ],
+        "operationId": "UploadResultMeasurements_List",
+        "description": "List of the measurement identifiers that have been created by the upload.",
+        "parameters": [
+          {
+            "name": "uploadId",
+            "in": "path",
+            "required": true,
+            "description": "The upload resource identifier.",
+            "minLength": 1,
+            "maxLength": 36,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedUploadResultMeasurement"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/uploads/{uploadId}/specialFilesUploadInfo": {
+      "get": {
+        "tags": [
+          "Uploads"
+        ],
+        "operationId": "UploadSpecialFiles_List",
+        "description": "List special files for the upload.",
+        "parameters": [
+          {
+            "name": "uploadId",
+            "in": "path",
+            "required": true,
+            "description": "The upload resource identifier.",
+            "minLength": 1,
+            "maxLength": 36,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedUploadSpecialFile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/uploads/{uploadId}/specialFilesUploadInfo:generate": {
+      "post": {
+        "tags": [
+          "Uploads"
+        ],
+        "operationId": "UploadSpecialFiles_Generate",
+        "description": "Initiates the process of generating SAS signed URIs for uploading special files for the upload.",
+        "parameters": [
+          {
+            "name": "uploadId",
+            "in": "path",
+            "required": true,
+            "description": "The upload resource identifier.",
+            "minLength": 1,
+            "maxLength": 36,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "description": "The location of an instance of LongRunningOperationStatus",
+                "type": "string",
+                "format": "uri"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/UploadLroResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "Azure.Core.Foundations.Error[]",
+          "description": "An array of details about specific errors that led to this reported error."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "description": "The error object.",
+      "required": [
+        "code",
+        "message",
+        "details"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "description": "A response containing error details.",
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      },
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "required": [
+        "code"
+      ]
+    },
+    "Common.Operations.LongRunningOperationClients": {
+      "type": "string",
+      "enum": [
+        "LongRunningOperationsInternalClient",
+        "LongRunningOperationsPublicClient"
+      ],
+      "x-ms-enum": {
+        "name": "LongRunningOperationClients",
+        "modelAsString": false
+      }
+    },
+    "Common.Operations.LongRunningOperationResultLocation": {
+      "type": "object",
+      "properties": {},
+      "description": "Final location of the operation result."
+    },
+    "Common.Operations.LongRunningOperationStatusKV": {
+      "type": "string",
+      "enum": [
+        "Created",
+        "InProgress",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "LongRunningOperationStatusKV",
+        "modelAsString": false
+      }
+    },
+    "Common.Operations.LongRunningOperationStatusLocation": {
+      "type": "object",
+      "properties": {},
+      "description": "Metadata for long running operation status monitor locations"
+    },
+    "Common.Operations.SupportedHttpStatusCodesKV": {
+      "type": "string",
+      "enum": [
+        "OK",
+        "Accepted",
+        "NoContent",
+        "PartialContent",
+        "BadRequest",
+        "NotFound",
+        "Conflict"
+      ],
+      "x-ms-enum": {
+        "name": "SupportedHttpStatusCodesKV",
+        "modelAsString": false
+      }
+    },
+    "Common.ResourceListQueryParameters": {
+      "type": "object",
+      "properties": {},
+      "description": "Common query parameters."
+    },
+    "CompleteLongRunningOperationRequestParams": {
+      "type": "object",
+      "properties": {
+        "httpStatusCode": {
+          "$ref": "#/definitions/SupportedHttpStatusCode",
+          "description": "The operation HTTP status code. \nThe status code will be returned to the client after the completion action will finish."
+        },
+        "resultUri": {
+          "type": "string",
+          "description": "The result resource URL."
+        }
+      },
+      "description": "The OperationCompletionRequest."
+    },
+    "CustomErrorResponseWithXMsErrorCodeHeader": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "description": "Default error response with custom header.",
+      "required": [
+        "error"
+      ]
+    },
+    "DataManagement.Ingestion.Discoveries.DiscoveryClients": {
+      "type": "string",
+      "enum": [
+        "DiscoveryClient",
+        "DiscoverySpecialFilesClient",
+        "DiscoveryUploadsClient"
+      ],
+      "x-ms-enum": {
+        "name": "DiscoveryClients",
+        "modelAsString": false
+      }
+    },
+    "DataManagement.Ingestion.Discoveries.KnownDiscoveryOperationErrorCodes": {
+      "type": "string",
+      "enum": [
+        "Succeeded",
+        "DiscoveryManifestNotFound",
+        "InvalidDiscoveryManifestFormat",
+        "SpecialFileNotFound",
+        "InvalidSpecialFileFormat",
+        "DataPoolDoesNotExist",
+        "WorkspaceDoesNotExist",
+        "InvalidDiskFolderStructure",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "KnownDiscoveryOperationErrorCodes",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has succeeded"
+          },
+          {
+            "name": "DiscoveryManifestNotFound",
+            "value": "DiscoveryManifestNotFound",
+            "description": "Discovery manifest file doesn't exist"
+          },
+          {
+            "name": "InvalidDiscoveryManifestFormat",
+            "value": "InvalidDiscoveryManifestFormat",
+            "description": "Invalid discovery manifest format"
+          },
+          {
+            "name": "SpecialFileNotFound",
+            "value": "SpecialFileNotFound",
+            "description": "The special file doesn't exist"
+          },
+          {
+            "name": "InvalidSpecialFileFormat",
+            "value": "InvalidSpecialFileFormat",
+            "description": "The special file has an invalid format"
+          },
+          {
+            "name": "DataPoolDoesNotExist",
+            "value": "DataPoolDoesNotExist",
+            "description": "Data pool doesn't exist"
+          },
+          {
+            "name": "WorkspaceDoesNotExist",
+            "value": "WorkspaceDoesNotExist",
+            "description": "Workspace doesn't exist"
+          },
+          {
+            "name": "InvalidDiskFolderStructure",
+            "value": "InvalidDiskFolderStructure",
+            "description": "Invalid disk structure"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The operation has failed with unknown error"
+          }
+        ]
+      }
+    },
+    "DataManagement.Ingestion.Discoveries.KnownDiscoveryOperationTypes": {
+      "type": "string",
+      "description": "The supported actions on discovery",
+      "enum": [
+        "CompleteDiscovery",
+        "FinalizeFileList",
+        "AbortDiscovery"
+      ],
+      "x-ms-enum": {
+        "name": "KnownDiscoveryOperationTypes",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "CompleteDiscovery",
+            "value": "CompleteDiscovery",
+            "description": "The process of completing the discovery"
+          },
+          {
+            "name": "FinalizeFileList",
+            "value": "FinalizeFileList",
+            "description": "The process of finalizing the file list of the discovery"
+          },
+          {
+            "name": "AbortDiscovery",
+            "value": "AbortDiscovery",
+            "description": "The process of cancelling the discovery"
+          }
+        ]
+      }
+    },
+    "DataManagement.Ingestion.Discoveries.KnownDiscoveryStatuses": {
+      "type": "string",
+      "description": "The status of the discovery",
+      "enum": [
+        "Created",
+        "GeneratingSpecialFilesUploadInfo",
+        "GeneratedSpecialFilesUploadInfo",
+        "Completing",
+        "Completed",
+        "Aborting",
+        "Aborted",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "KnownDiscoveryStatuses",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Created",
+            "value": "Created",
+            "description": "The discovery process has been initiated"
+          },
+          {
+            "name": "GeneratingSpecialFilesUploadInfo",
+            "value": "GeneratingSpecialFilesUploadInfo",
+            "description": "The system is analyzing the discovery manifest file uploaded by the client and generating the upload information for uploading special files."
+          },
+          {
+            "name": "GeneratedSpecialFilesUploadInfo",
+            "value": "GeneratedSpecialFilesUploadInfo",
+            "description": "The system has analyzed the discovery manifest file and generated the upload information for uploading special files."
+          },
+          {
+            "name": "Completing",
+            "value": "Completing",
+            "description": "The system is processing the special files uploaded by the client"
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "The system has finished the analysis of special files"
+          },
+          {
+            "name": "Aborting",
+            "value": "Aborting",
+            "description": "The system is cancelling the discovery process"
+          },
+          {
+            "name": "Aborted",
+            "value": "Aborted",
+            "description": "The discovery process has been aborted"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The discovery process has been failed"
+          }
+        ]
+      }
+    },
+    "DataManagement.Ingestion.Uploads.KnownUploadOperationErrorCodes": {
+      "type": "string",
+      "enum": [
+        "Succeeded",
+        "UploadManifestNotFound",
+        "InvalidUploadManifestFormat",
+        "InvalidDiskFolderStructure",
+        "InvalidSpecialFileFormat",
+        "DataPoolMismatch",
+        "SpecialFileNotFound",
+        "MissingDataFiles",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "KnownUploadOperationErrorCodes",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has succeeded"
+          },
+          {
+            "name": "UploadManifestNotFound",
+            "value": "UploadManifestNotFound",
+            "description": "Upload manifest file doesn't exist"
+          },
+          {
+            "name": "InvalidUploadManifestFormat",
+            "value": "InvalidUploadManifestFormat",
+            "description": "Invalid upload manifest format"
+          },
+          {
+            "name": "InvalidDiskFolderStructure",
+            "value": "InvalidDiskFolderStructure",
+            "description": "Invalid disk structure"
+          },
+          {
+            "name": "InvalidSpecialFileFormat",
+            "value": "InvalidSpecialFileFormat",
+            "description": "One or more special files was of an invalid format"
+          },
+          {
+            "name": "DataPoolMismatch",
+            "value": "DataPoolMismatch",
+            "description": "One or more special files assigned the measurement to a different data pool than that of the upload."
+          },
+          {
+            "name": "SpecialFileNotFound",
+            "value": "SpecialFileNotFound",
+            "description": "One or more special files doesn't exist"
+          },
+          {
+            "name": "MissingDataFiles",
+            "value": "MissingDataFiles",
+            "description": "Expected data files are missing from one or more shards"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The operation has failed with unknown error"
+          }
+        ]
+      }
+    },
+    "DataManagement.Ingestion.Uploads.KnownUploadOperationTypes": {
+      "type": "string",
+      "description": "The supported operations of the upload",
+      "enum": [
+        "FinalizeFileList",
+        "ShardFiles",
+        "CompleteUpload",
+        "AbortUpload"
+      ],
+      "x-ms-enum": {
+        "name": "KnownUploadOperationTypes",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "FinalizeFileList",
+            "value": "FinalizeFileList",
+            "description": "The process of finalizing the file list of the upload"
+          },
+          {
+            "name": "ShardFiles",
+            "value": "ShardFiles",
+            "description": "The process of sharding the files for the upload"
+          },
+          {
+            "name": "CompleteUpload",
+            "value": "CompleteUpload",
+            "description": "The process of completing the upload"
+          },
+          {
+            "name": "AbortUpload",
+            "value": "AbortUpload",
+            "description": "The process of cancelling the upload"
+          }
+        ]
+      }
+    },
+    "DataManagement.Ingestion.Uploads.KnownUploadStatuses": {
+      "type": "string",
+      "description": "The state of the upload",
+      "enum": [
+        "Created",
+        "GeneratingSpecialFilesUploadInfo",
+        "GeneratedSpecialFilesUploadInfo",
+        "GeneratingDataFilesUploadInfo",
+        "GeneratedDataFilesUploadInfo",
+        "Completing",
+        "Completed",
+        "Aborting",
+        "Aborted",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "KnownUploadStatuses",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Created",
+            "value": "Created",
+            "description": "The upload process has been initiated. The client should upload the upload manifest file using the SAS-signed upload URI provided by the system"
+          },
+          {
+            "name": "GeneratingSpecialFilesUploadInfo",
+            "value": "GeneratingSpecialFilesUploadInfo",
+            "description": "The system is analyzing the upload manifest file uploaded by the client and generating the upload information for uploading special files."
+          },
+          {
+            "name": "GeneratedSpecialFilesUploadInfo",
+            "value": "GeneratedSpecialFilesUploadInfo",
+            "description": "The system has analyzed the upload manifest file and generated the upload information for uploading special files."
+          },
+          {
+            "name": "GeneratingDataFilesUploadInfo",
+            "value": "GeneratingDataFilesUploadInfo",
+            "description": "The system is sharding the files and generating the upload information for uploading data files."
+          },
+          {
+            "name": "GeneratedDataFilesUploadInfo",
+            "value": "GeneratedDataFilesUploadInfo",
+            "description": "The system has sharded the files and generated the upload information for uploading data files. The client should upload the measurement files using the SAS-signed upload URIs provided by the system."
+          },
+          {
+            "name": "Completing",
+            "value": "Completing",
+            "description": "The system is completing the upload process (creating measurements etc.)"
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "The system completed the upload process"
+          },
+          {
+            "name": "Aborting",
+            "value": "Aborting",
+            "description": "The system is cancelling the upload process"
+          },
+          {
+            "name": "Aborted",
+            "value": "Aborted",
+            "description": "The system cancelled the upload process"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The system marked the upload process as failed"
+          }
+        ]
+      }
+    },
+    "DataManagement.Ingestion.Uploads.UploadClients": {
+      "type": "string",
+      "enum": [
+        "UploadClient",
+        "UploadSpecialFilesClient",
+        "UploadDataFilesClient",
+        "UploadMeasurementsClient"
+      ],
+      "x-ms-enum": {
+        "name": "UploadClients",
+        "modelAsString": false
+      }
+    },
+    "Discovery": {
+      "type": "object",
+      "properties": {
+        "discoveryId": {
+          "type": "string",
+          "description": "The discovery identifier.",
+          "minLength": 1,
+          "maxLength": 36
+        },
+        "externalPackageId": {
+          "type": "string",
+          "description": "ID of the external package (for example, the disk which contained data) which was used upon the creation of upload",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "manifestUploadUri": {
+          "type": "string",
+          "description": "SAS signed URI for uploading or reading the discovery manifest file on Azure Storage.\nNote, if the discovery status is 'Created' then the URI is signed with 'Write' permissions, otherwise with 'Read' permission.\nThis URI expires in 24 hours.",
+          "format": "uri",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/DiscoveryStatus",
+          "description": "The discovery status.",
+          "readOnly": true
+        }
+      },
+      "description": "A discovery resource.",
+      "required": [
+        "discoveryId"
+      ]
+    },
+    "DiscoveryActionCustomResponseProperties": {
+      "type": "object",
+      "properties": {
+        "discoveryId": {
+          "type": "string",
+          "description": "The discovery identifier.",
+          "minLength": 1,
+          "maxLength": 36
+        }
+      },
+      "description": "Discovery action response properties",
+      "required": [
+        "discoveryId"
+      ]
+    },
+    "DiscoveryCreationParameters": {
+      "type": "object",
+      "properties": {
+        "externalPackageId": {
+          "type": "string",
+          "description": "ID of the external package (for example, the disk which contained data) which was used upon the creation of upload",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "Discovery resource creation parameters."
+    },
+    "DiscoveryIdentifier": {
+      "type": "object",
+      "properties": {
+        "discoveryId": {
+          "type": "string",
+          "description": "The discovery identifier.",
+          "minLength": 1,
+          "maxLength": 36
+        }
+      },
+      "description": "Internal - the model for internal use",
+      "required": [
+        "discoveryId"
+      ]
+    },
+    "DiscoveryLroResponse": {
+      "type": "object",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "The operation Id.",
+          "minLength": 1,
+          "maxLength": 36
+        },
+        "status": {
+          "$ref": "#/definitions/LongRunningOperationStatus",
+          "description": "The operation status."
+        },
+        "operationType": {
+          "$ref": "#/definitions/DiscoveryOperationType",
+          "description": "The operation type."
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The operation error."
+        }
+      },
+      "description": "Discovery long running operation response.",
+      "required": [
+        "operationId",
+        "status"
+      ]
+    },
+    "DiscoveryOperationErrorCode": {
+      "type": "string",
+      "description": "Known discovery error codes.",
+      "enum": [
+        "Succeeded",
+        "DiscoveryManifestNotFound",
+        "InvalidDiscoveryManifestFormat",
+        "SpecialFileNotFound",
+        "InvalidSpecialFileFormat",
+        "DataPoolDoesNotExist",
+        "WorkspaceDoesNotExist",
+        "InvalidDiskFolderStructure",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "DiscoveryOperationErrorCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has succeeded"
+          },
+          {
+            "name": "DiscoveryManifestNotFound",
+            "value": "DiscoveryManifestNotFound",
+            "description": "Discovery manifest file doesn't exist"
+          },
+          {
+            "name": "InvalidDiscoveryManifestFormat",
+            "value": "InvalidDiscoveryManifestFormat",
+            "description": "Invalid discovery manifest format"
+          },
+          {
+            "name": "SpecialFileNotFound",
+            "value": "SpecialFileNotFound",
+            "description": "The special file doesn't exist"
+          },
+          {
+            "name": "InvalidSpecialFileFormat",
+            "value": "InvalidSpecialFileFormat",
+            "description": "The special file has an invalid format"
+          },
+          {
+            "name": "DataPoolDoesNotExist",
+            "value": "DataPoolDoesNotExist",
+            "description": "Data pool doesn't exist"
+          },
+          {
+            "name": "WorkspaceDoesNotExist",
+            "value": "WorkspaceDoesNotExist",
+            "description": "Workspace doesn't exist"
+          },
+          {
+            "name": "InvalidDiskFolderStructure",
+            "value": "InvalidDiskFolderStructure",
+            "description": "Invalid disk structure"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The operation has failed with unknown error"
+          }
+        ]
+      }
+    },
+    "DiscoveryOperationType": {
+      "type": "string",
+      "description": "Known discovery operation types.",
+      "enum": [
+        "CompleteDiscovery",
+        "FinalizeFileList",
+        "AbortDiscovery"
+      ],
+      "x-ms-enum": {
+        "name": "DiscoveryOperationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CompleteDiscovery",
+            "value": "CompleteDiscovery",
+            "description": "The process of completing the discovery"
+          },
+          {
+            "name": "FinalizeFileList",
+            "value": "FinalizeFileList",
+            "description": "The process of finalizing the file list of the discovery"
+          },
+          {
+            "name": "AbortDiscovery",
+            "value": "AbortDiscovery",
+            "description": "The process of cancelling the discovery"
+          }
+        ]
+      }
+    },
+    "DiscoverySpecialFile": {
+      "type": "object",
+      "properties": {
+        "clientFileName": {
+          "type": "string",
+          "description": "Client file name."
+        },
+        "fileUploadUri": {
+          "type": "string",
+          "description": "File name on storage."
+        }
+      },
+      "description": "A discovery special file resource.",
+      "required": [
+        "clientFileName",
+        "fileUploadUri"
+      ]
+    },
+    "DiscoverySpecialFilesResponse": {
+      "type": "object",
+      "properties": {
+        "discoveryId": {
+          "type": "string",
+          "description": "The discovery identifier.",
+          "minLength": 1,
+          "maxLength": 36
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FileUploadInformation"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "FileUploadInformation[]",
+          "description": "List of the special files",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      },
+      "description": "Describes the list of special files to be uploaded",
+      "required": [
+        "discoveryId",
+        "files"
+      ]
+    },
+    "DiscoveryStatus": {
+      "type": "string",
+      "description": "Known discovery statuses.",
+      "enum": [
+        "Created",
+        "GeneratingSpecialFilesUploadInfo",
+        "GeneratedSpecialFilesUploadInfo",
+        "Completing",
+        "Completed",
+        "Aborting",
+        "Aborted",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "DiscoveryStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Created",
+            "value": "Created",
+            "description": "The discovery process has been initiated"
+          },
+          {
+            "name": "GeneratingSpecialFilesUploadInfo",
+            "value": "GeneratingSpecialFilesUploadInfo",
+            "description": "The system is analyzing the discovery manifest file uploaded by the client and generating the upload information for uploading special files."
+          },
+          {
+            "name": "GeneratedSpecialFilesUploadInfo",
+            "value": "GeneratedSpecialFilesUploadInfo",
+            "description": "The system has analyzed the discovery manifest file and generated the upload information for uploading special files."
+          },
+          {
+            "name": "Completing",
+            "value": "Completing",
+            "description": "The system is processing the special files uploaded by the client"
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "The system has finished the analysis of special files"
+          },
+          {
+            "name": "Aborting",
+            "value": "Aborting",
+            "description": "The system is cancelling the discovery process"
+          },
+          {
+            "name": "Aborted",
+            "value": "Aborted",
+            "description": "The discovery process has been aborted"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The discovery process has been failed"
+          }
+        ]
+      }
+    },
+    "DiscoveryUpload": {
+      "type": "object",
+      "properties": {
+        "uploadId": {
+          "type": "string",
+          "description": "Upload identifier.",
+          "minLength": 1,
+          "maxLength": 36
+        },
+        "manifestDownloadUri": {
+          "type": "string",
+          "description": "SAS signed URI for downloading the manifest file from Azure Storage.\nThe manifest file contains list of all files in the group.\nThis URI expires in 24 hours.",
+          "format": "uri"
+        },
+        "resourceEndpoint": {
+          "type": "string",
+          "description": "The endpoint uri of the owning resource",
+          "format": "uri",
+          "readOnly": true
+        }
+      },
+      "description": "A discovery upload resource.",
+      "required": [
+        "uploadId",
+        "manifestDownloadUri"
+      ]
+    },
+    "FailLongRunningOperationRequestParams": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error details."
+        }
+      },
+      "description": "The long running operation failure request parameters.",
+      "required": [
+        "error"
+      ]
+    },
+    "FileUploadInformation": {
+      "type": "object",
+      "properties": {
+        "clientFileName": {
+          "type": "string",
+          "description": "File name specified by the client"
+        },
+        "fileUploadUri": {
+          "type": "string",
+          "description": "SAS signed URI for uploading file to Azure Storage.\nThis URI expires in 24 hours.",
+          "format": "uri"
+        }
+      },
+      "description": "File upload information",
+      "required": [
+        "clientFileName",
+        "fileUploadUri"
+      ]
+    },
+    "GetUploadManifestUriResponse": {
+      "type": "object",
+      "properties": {
+        "uploadId": {
+          "type": "string",
+          "description": "The upload identifier.",
+          "minLength": 1,
+          "maxLength": 36
+        },
+        "manifestUploadUri": {
+          "type": "string",
+          "description": "SAS signed URI for uploading the manifest file to Azure Storage.\nThis URI expires in 24 hours.",
+          "format": "uri",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "resourceEndpoint": {
+          "type": "string",
+          "description": "The endpoint uri of the owning resource",
+          "format": "uri",
+          "readOnly": true
+        }
+      },
+      "description": "Provides upload manifest URI on Azure Storage.",
+      "required": [
+        "uploadId",
+        "manifestUploadUri"
+      ]
+    },
+    "LongRunningOperation": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/LongRunningOperationStatus",
+          "description": "The operation status."
+        },
+        "operationType": {
+          "type": "string",
+          "description": "The operation type."
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The operation error."
+        },
+        "operationId": {
+          "type": "string",
+          "description": "The operation Id.",
+          "minLength": 1,
+          "maxLength": 36
+        }
+      },
+      "description": "A long running operation resource.",
+      "required": [
+        "status",
+        "operationId"
+      ]
+    },
+    "LongRunningOperationIdHeader": {
+      "type": "object",
+      "properties": {},
+      "description": "Client specific long running operation identifier.\nThis identifier will serve as idempotence key to ensure idempotensy of the long running operation."
+    },
+    "LongRunningOperationStatus": {
+      "type": "string",
+      "description": "The async operation status",
+      "enum": [
+        "Created",
+        "InProgress",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "LongRunningOperationStatus",
+        "modelAsString": true
+      }
+    },
+    "LongRunningOperationWithResponseHeaders": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/LongRunningOperationStatus",
+          "description": "The operation status."
+        },
+        "operationType": {
+          "type": "string",
+          "description": "The operation type."
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The operation error."
+        },
+        "operationId": {
+          "type": "string",
+          "description": "The operation Id.",
+          "minLength": 1,
+          "maxLength": 36
+        }
+      },
+      "description": "Standard Azure LRO response headers.",
+      "required": [
+        "status",
+        "operationId"
+      ]
+    },
+    "PagedDiscoverySpecialFile": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiscoverySpecialFile"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "DataManagement.Ingestion.Discoveries.DiscoverySpecialFile[]",
+          "description": "The DiscoverySpecialFile items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "format": "uri",
+          "x-cadl-name": "Rest.ResourceLocation<DataManagement.Ingestion.Discoveries.DiscoverySpecialFile>"
+        }
+      },
+      "description": "Paged collection of DiscoverySpecialFile items",
+      "required": [
+        "value"
+      ]
+    },
+    "PagedDiscoveryUpload": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiscoveryUpload"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "DataManagement.Ingestion.Discoveries.DiscoveryUpload[]",
+          "description": "The DiscoveryUpload items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "format": "uri",
+          "x-cadl-name": "Rest.ResourceLocation<DataManagement.Ingestion.Discoveries.DiscoveryUpload>"
+        }
+      },
+      "description": "Paged collection of DiscoveryUpload items",
+      "required": [
+        "value"
+      ]
+    },
+    "PagedUploadDataFile": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UploadDataFile"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "DataManagement.Ingestion.Uploads.UploadDataFile[]",
+          "description": "The UploadDataFile items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "format": "uri",
+          "x-cadl-name": "Rest.ResourceLocation<DataManagement.Ingestion.Uploads.UploadDataFile>"
+        }
+      },
+      "description": "Paged collection of UploadDataFile items",
+      "required": [
+        "value"
+      ]
+    },
+    "PagedUploadResultMeasurement": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UploadResultMeasurement"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "DataManagement.Ingestion.Uploads.UploadResultMeasurement[]",
+          "description": "The UploadResultMeasurement items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "format": "uri",
+          "x-cadl-name": "Rest.ResourceLocation<DataManagement.Ingestion.Uploads.UploadResultMeasurement>"
+        }
+      },
+      "description": "Paged collection of UploadResultMeasurement items",
+      "required": [
+        "value"
+      ]
+    },
+    "PagedUploadSpecialFile": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UploadSpecialFile"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "DataManagement.Ingestion.Uploads.UploadSpecialFile[]",
+          "description": "The UploadSpecialFile items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "format": "uri",
+          "x-cadl-name": "Rest.ResourceLocation<DataManagement.Ingestion.Uploads.UploadSpecialFile>"
+        }
+      },
+      "description": "Paged collection of UploadSpecialFile items",
+      "required": [
+        "value"
+      ]
+    },
+    "SupportedHttpStatusCode": {
+      "type": "string",
+      "description": "The supported status codes.",
+      "enum": [
+        "OK",
+        "Accepted",
+        "NoContent",
+        "PartialContent",
+        "BadRequest",
+        "NotFound",
+        "Conflict"
+      ],
+      "x-ms-enum": {
+        "name": "SupportedHttpStatusCode",
+        "modelAsString": true
+      }
+    },
+    "Upload": {
+      "type": "object",
+      "properties": {
+        "externalPackageId": {
+          "type": "string",
+          "description": "ID of the external package (for example, the disk which contained data) which was used upon the creation of upload.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "discoveryId": {
+          "type": "string",
+          "description": "The discovery identifier.",
+          "minLength": 1,
+          "maxLength": 36,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "manifestUploadUri": {
+          "type": "string",
+          "description": "SAS signed URI for uploading or reading the upload manifest file on Azure Storage.\nNote, if the upload status is 'Created' then the URI is signed with 'Write' permissions, otherwise with 'Read' permission.\nThis URI expires in 24 hours.",
+          "format": "uri",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/UploadStatus",
+          "description": "The upload state",
+          "type": "string",
+          "enum": [
+            "Created",
+            "GeneratingSpecialFilesUploadInfo",
+            "GeneratedSpecialFilesUploadInfo",
+            "GeneratingDataFilesUploadInfo",
+            "GeneratedDataFilesUploadInfo",
+            "Completing",
+            "Completed",
+            "Aborting",
+            "Aborted",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "UploadStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Created",
+                "value": "Created",
+                "description": "The upload process has been initiated. The client should upload the upload manifest file using the SAS-signed upload URI provided by the system"
+              },
+              {
+                "name": "GeneratingSpecialFilesUploadInfo",
+                "value": "GeneratingSpecialFilesUploadInfo",
+                "description": "The system is analyzing the upload manifest file uploaded by the client and generating the upload information for uploading special files."
+              },
+              {
+                "name": "GeneratedSpecialFilesUploadInfo",
+                "value": "GeneratedSpecialFilesUploadInfo",
+                "description": "The system has analyzed the upload manifest file and generated the upload information for uploading special files."
+              },
+              {
+                "name": "GeneratingDataFilesUploadInfo",
+                "value": "GeneratingDataFilesUploadInfo",
+                "description": "The system is sharding the files and generating the upload information for uploading data files."
+              },
+              {
+                "name": "GeneratedDataFilesUploadInfo",
+                "value": "GeneratedDataFilesUploadInfo",
+                "description": "The system has sharded the files and generated the upload information for uploading data files. The client should upload the measurement files using the SAS-signed upload URIs provided by the system."
+              },
+              {
+                "name": "Completing",
+                "value": "Completing",
+                "description": "The system is completing the upload process (creating measurements etc.)"
+              },
+              {
+                "name": "Completed",
+                "value": "Completed",
+                "description": "The system completed the upload process"
+              },
+              {
+                "name": "Aborting",
+                "value": "Aborting",
+                "description": "The system is cancelling the upload process"
+              },
+              {
+                "name": "Aborted",
+                "value": "Aborted",
+                "description": "The system cancelled the upload process"
+              },
+              {
+                "name": "Failed",
+                "value": "Failed",
+                "description": "The system marked the upload process as failed"
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "resourceEndpoint": {
+          "type": "string",
+          "description": "The endpoint uri of the owning resource",
+          "format": "uri",
+          "readOnly": true
+        }
+      },
+      "description": "An upload resource."
+    },
+    "UploadCreationParameters": {
+      "type": "object",
+      "properties": {
+        "externalPackageId": {
+          "type": "string",
+          "description": "ID of the external package (for example, the disk which contained data) which was used upon the creation of upload.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "discoveryId": {
+          "type": "string",
+          "description": "The discovery identifier.",
+          "minLength": 1,
+          "maxLength": 36,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "Upload resource creation parameters"
+    },
+    "UploadDataFile": {
+      "type": "object",
+      "properties": {
+        "clientFileName": {
+          "type": "string",
+          "description": "File name specified by the client"
+        },
+        "fileUploadUri": {
+          "type": "string",
+          "description": "SAS signed URI for uploading file to Azure Storage.\nThis URI expires in 24 hours.",
+          "format": "uri"
+        }
+      },
+      "description": "Data file resource.",
+      "required": [
+        "clientFileName",
+        "fileUploadUri"
+      ]
+    },
+    "UploadFilesRequest": {
+      "type": "object",
+      "properties": {
+        "clientFileNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "List of client file names for which the upload URIs are requested",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      },
+      "description": "Parameters to the upload URIs retrieval request",
+      "required": [
+        "clientFileNames"
+      ]
+    },
+    "UploadFilesResponse": {
+      "type": "object",
+      "properties": {
+        "uploadId": {
+          "type": "string",
+          "description": "The upload identifier.",
+          "minLength": 1,
+          "maxLength": 36
+        },
+        "resourceEndpoint": {
+          "type": "string",
+          "description": "The endpoint uri of the owning resource",
+          "format": "uri",
+          "readOnly": true
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FileUploadInformation"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "FileUploadInformation[]",
+          "description": "List of SAS-signed file upload URIs",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      },
+      "description": "A response providing the list of upload Uris for the files to be uploaded"
+    },
+    "UploadIdentifier": {
+      "type": "object",
+      "properties": {},
+      "description": "Internal - the model for internal use"
+    },
+    "UploadIdentifierAndEndpoint": {
+      "type": "object",
+      "properties": {
+        "uploadId": {
+          "type": "string",
+          "description": "The upload identifier.",
+          "minLength": 1,
+          "maxLength": 36
+        },
+        "resourceEndpoint": {
+          "type": "string",
+          "description": "The endpoint uri of the owning resource",
+          "format": "uri",
+          "readOnly": true
+        }
+      },
+      "description": "Upload resource response.",
+      "required": [
+        "uploadId"
+      ]
+    },
+    "UploadLroResponse": {
+      "type": "object",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "The operation Id.",
+          "minLength": 1,
+          "maxLength": 36
+        },
+        "status": {
+          "$ref": "#/definitions/LongRunningOperationStatus",
+          "description": "The operation status."
+        },
+        "operationType": {
+          "$ref": "#/definitions/UploadOperationType",
+          "description": "The operation type."
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The operation error."
+        }
+      },
+      "description": "The long running operation response",
+      "required": [
+        "operationId",
+        "status"
+      ]
+    },
+    "UploadOperationErrorCode": {
+      "type": "string",
+      "description": "Known upload types.",
+      "enum": [
+        "Succeeded",
+        "UploadManifestNotFound",
+        "InvalidUploadManifestFormat",
+        "InvalidDiskFolderStructure",
+        "InvalidSpecialFileFormat",
+        "DataPoolMismatch",
+        "SpecialFileNotFound",
+        "MissingDataFiles",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "UploadOperationErrorCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has succeeded"
+          },
+          {
+            "name": "UploadManifestNotFound",
+            "value": "UploadManifestNotFound",
+            "description": "Upload manifest file doesn't exist"
+          },
+          {
+            "name": "InvalidUploadManifestFormat",
+            "value": "InvalidUploadManifestFormat",
+            "description": "Invalid upload manifest format"
+          },
+          {
+            "name": "InvalidDiskFolderStructure",
+            "value": "InvalidDiskFolderStructure",
+            "description": "Invalid disk structure"
+          },
+          {
+            "name": "InvalidSpecialFileFormat",
+            "value": "InvalidSpecialFileFormat",
+            "description": "One or more special files was of an invalid format"
+          },
+          {
+            "name": "DataPoolMismatch",
+            "value": "DataPoolMismatch",
+            "description": "One or more special files assigned the measurement to a different data pool than that of the upload."
+          },
+          {
+            "name": "SpecialFileNotFound",
+            "value": "SpecialFileNotFound",
+            "description": "One or more special files doesn't exist"
+          },
+          {
+            "name": "MissingDataFiles",
+            "value": "MissingDataFiles",
+            "description": "Expected data files are missing from one or more shards"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The operation has failed with unknown error"
+          }
+        ]
+      }
+    },
+    "UploadOperationType": {
+      "type": "string",
+      "description": "Known upload operation types.",
+      "enum": [
+        "FinalizeFileList",
+        "ShardFiles",
+        "CompleteUpload",
+        "AbortUpload"
+      ],
+      "x-ms-enum": {
+        "name": "UploadOperationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "FinalizeFileList",
+            "value": "FinalizeFileList",
+            "description": "The process of finalizing the file list of the upload"
+          },
+          {
+            "name": "ShardFiles",
+            "value": "ShardFiles",
+            "description": "The process of sharding the files for the upload"
+          },
+          {
+            "name": "CompleteUpload",
+            "value": "CompleteUpload",
+            "description": "The process of completing the upload"
+          },
+          {
+            "name": "AbortUpload",
+            "value": "AbortUpload",
+            "description": "The process of cancelling the upload"
+          }
+        ]
+      }
+    },
+    "UploadResultMeasurement": {
+      "type": "object",
+      "properties": {
+        "measurementId": {
+          "type": "string",
+          "description": "Measurement identifier."
+        }
+      },
+      "description": "A measurement resource created as result of the upload.",
+      "required": [
+        "measurementId"
+      ]
+    },
+    "UploadResultsResponse": {
+      "type": "object",
+      "properties": {
+        "uploadId": {
+          "type": "string",
+          "description": "The upload identifier.",
+          "minLength": 1,
+          "maxLength": 36
+        },
+        "resourceEndpoint": {
+          "type": "string",
+          "description": "The endpoint uri of the owning resource",
+          "format": "uri",
+          "readOnly": true
+        },
+        "measurementIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "The measurement IDs that been created by the upload"
+        }
+      },
+      "description": "A response providing the results of an upload",
+      "required": [
+        "uploadId",
+        "measurementIds"
+      ]
+    },
+    "UploadSpecialFile": {
+      "type": "object",
+      "properties": {
+        "clientFileName": {
+          "type": "string",
+          "description": "File name specified by the client"
+        },
+        "fileUploadUri": {
+          "type": "string",
+          "description": "SAS signed URI for uploading file to Azure Storage.\nThis URI expires in 24 hours.",
+          "format": "uri"
+        }
+      },
+      "description": "Special file resource.",
+      "required": [
+        "clientFileName",
+        "fileUploadUri"
+      ]
+    },
+    "UploadSpecialFilesResponse": {
+      "type": "object",
+      "properties": {
+        "uploadId": {
+          "type": "string",
+          "description": "The upload identifier.",
+          "minLength": 1,
+          "maxLength": 36
+        },
+        "resourceEndpoint": {
+          "type": "string",
+          "description": "The endpoint uri of the owning resource",
+          "format": "uri",
+          "readOnly": true
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FileUploadInformation"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "FileUploadInformation[]",
+          "description": "List of the special files",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      },
+      "description": "A response describing the list of special files to be uploaded",
+      "required": [
+        "uploadId",
+        "files"
+      ]
+    },
+    "UploadStatus": {
+      "type": "string",
+      "description": "Known upload types.",
+      "enum": [
+        "Created",
+        "GeneratingSpecialFilesUploadInfo",
+        "GeneratedSpecialFilesUploadInfo",
+        "GeneratingDataFilesUploadInfo",
+        "GeneratedDataFilesUploadInfo",
+        "Completing",
+        "Completed",
+        "Aborting",
+        "Aborted",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "UploadStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Created",
+            "value": "Created",
+            "description": "The upload process has been initiated. The client should upload the upload manifest file using the SAS-signed upload URI provided by the system"
+          },
+          {
+            "name": "GeneratingSpecialFilesUploadInfo",
+            "value": "GeneratingSpecialFilesUploadInfo",
+            "description": "The system is analyzing the upload manifest file uploaded by the client and generating the upload information for uploading special files."
+          },
+          {
+            "name": "GeneratedSpecialFilesUploadInfo",
+            "value": "GeneratedSpecialFilesUploadInfo",
+            "description": "The system has analyzed the upload manifest file and generated the upload information for uploading special files."
+          },
+          {
+            "name": "GeneratingDataFilesUploadInfo",
+            "value": "GeneratingDataFilesUploadInfo",
+            "description": "The system is sharding the files and generating the upload information for uploading data files."
+          },
+          {
+            "name": "GeneratedDataFilesUploadInfo",
+            "value": "GeneratedDataFilesUploadInfo",
+            "description": "The system has sharded the files and generated the upload information for uploading data files. The client should upload the measurement files using the SAS-signed upload URIs provided by the system."
+          },
+          {
+            "name": "Completing",
+            "value": "Completing",
+            "description": "The system is completing the upload process (creating measurements etc.)"
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "The system completed the upload process"
+          },
+          {
+            "name": "Aborting",
+            "value": "Aborting",
+            "description": "The system is cancelling the upload process"
+          },
+          {
+            "name": "Aborted",
+            "value": "Aborted",
+            "description": "The system cancelled the upload process"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The system marked the upload process as failed"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "description": "The API version to use for this operation.",
+      "minLength": 1,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "LongRunningOperationIdHeader": {
+      "name": "operation-id",
+      "in": "header",
+      "required": false,
+      "description": "The long running operation identifier. Operation-Id should be valid UUID string.",
+      "format": "uuid",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

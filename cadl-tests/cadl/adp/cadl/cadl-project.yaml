@@ -1,0 +1,4 @@
+emitters:
+    "@azure-tools/cadl-autorest": true
+    "@azure-tools/cadl-java":
+      namespace: com.azure.adp
