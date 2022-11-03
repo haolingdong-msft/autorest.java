@@ -49,10 +49,9 @@ import {
   HttpOperationResponse,
   HttpServer,
   isStatusCode,
-  HttpOperation,
   ServiceAuthentication,
   StatusCode,
-  getAllHttpServices,
+  getHttpOperation,
 } from "@cadl-lang/rest/http";
 import { getVersion } from "@cadl-lang/versioning";
 import { fail } from "assert";
@@ -64,7 +63,6 @@ import {
   BooleanSchema,
   ByteArraySchema,
   ChoiceValue,
-  CodeModel,
   ConstantSchema,
   ConstantValue,
   DateTimeSchema,
@@ -91,12 +89,20 @@ import {
   Security,
   OAuth2SecurityScheme,
   KeySecurityScheme,
+  OperationGroup,
 } from "@autorest/codemodel";
+import { CodeModel } from "./common/code-model.js";
+import { Client as CodeModelClient } from "./common/client.js";
 import { ConvenienceApi, Operation as CodeModelOperation, OperationLink, Request } from "./common/operation.js";
 import { SchemaContext, SchemaUsage } from "./common/schemas/usage.js";
 import { ChoiceSchema, SealedChoiceSchema } from "./common/schemas/choice.js";
 import { isPollingLocation, getPagedResult, getOperationLinks } from "@azure-tools/cadl-azure-core";
-import { getConvenienceAPIName } from "@azure-tools/cadl-dpg";
+import {
+  getConvenienceAPIName,
+  listClients,
+  listOperationGroups,
+  listOperationsInOperationGroup,
+} from "@azure-tools/cadl-dpg";
 
 export class CodeModelBuilder {
   private program: Program;
@@ -181,9 +187,7 @@ export class CodeModelBuilder {
   }
 
   public build(): CodeModel {
-    ignoreDiagnostics(getAllHttpServices(this.program)).map((service) =>
-      service.operations.map((it) => this.processRoute(it)),
-    );
+    this.processClients();
 
     this.codeModel.schemas.objects?.forEach((it) => this.propagateSchemaUsage(it));
 
@@ -270,14 +274,49 @@ export class CodeModelBuilder {
     }
   }
 
-  private processRoute(op: HttpOperation) {
-    const groupName = op.container.name;
-    const operationGroup = this.codeModel.getOperationGroup(groupName);
-    const opId = `${groupName}_${op.operation.name}`;
+  private processClients() {
+    const clients = listClients(this.program);
+    for (const client of clients) {
+      const codeModelClient = new CodeModelClient(client.name, this.getDoc(client.type), {
+        summary: this.getSummary(client.type),
 
-    const operation = new CodeModelOperation(op.operation.name, this.getDoc(op.operation), {
+        // at present, use global security definition
+        security: this.codeModel.security,
+      });
+
+      const operationGroups = listOperationGroups(this.program, client);
+
+      const operationWithoutGroup = listOperationsInOperationGroup(this.program, client);
+      let codeModelGroup = new OperationGroup("");
+      for (const operation of operationWithoutGroup) {
+        codeModelGroup.addOperation(this.processRoute("", operation));
+      }
+      if (codeModelGroup.operations?.length > 0) {
+        codeModelClient.operationGroups.push(codeModelGroup);
+      }
+
+      for (const operationGroup of operationGroups) {
+        const operations = listOperationsInOperationGroup(this.program, operationGroup);
+        codeModelGroup = new OperationGroup(operationGroup.type.name);
+        for (const operation of operations) {
+          codeModelGroup.addOperation(this.processRoute(operationGroup.type.name, operation));
+        }
+        codeModelClient.operationGroups.push(codeModelGroup);
+      }
+
+      this.codeModel.clients.push(codeModelClient);
+    }
+  }
+
+  private processRoute(groupName: string, operation: Operation): CodeModelOperation {
+    const op = ignoreDiagnostics(getHttpOperation(this.program, operation));
+
+    const operationGroup = this.codeModel.getOperationGroup(groupName);
+    const opId = groupName ? `${groupName}_${operation.name}` : `${operation.name}`;
+
+    const codeModelOperation = new CodeModelOperation(operation.name, this.getDoc(operation), {
       operationId: opId,
-      summary: this.getSummary(op.operation),
+      summary: this.getSummary(operation),
       apiVersions: [
         {
           version: this.version,
@@ -285,15 +324,15 @@ export class CodeModelBuilder {
       ],
     });
 
-    const convenienceApiName = this.getConvenienceApiName(op);
+    const convenienceApiName = this.getConvenienceApiName(operation);
     if (convenienceApiName) {
-      operation.convenienceApi = new ConvenienceApi(convenienceApiName);
+      codeModelOperation.convenienceApi = new ConvenienceApi(convenienceApiName);
     }
 
     // cache for later reference from operationLinks
-    this.operationCache.set(op.operation, operation);
+    this.operationCache.set(operation, codeModelOperation);
 
-    operation.addRequest(
+    codeModelOperation.addRequest(
       new Request({
         protocol: {
           http: {
@@ -306,20 +345,20 @@ export class CodeModelBuilder {
     );
 
     // host
-    this.hostParameters.forEach((it) => operation.addParameter(it));
+    this.hostParameters.forEach((it) => codeModelOperation.addParameter(it));
     // parameters
-    op.parameters.parameters.map((it) => this.processParameter(operation, it));
+    op.parameters.parameters.map((it) => this.processParameter(codeModelOperation, it));
     // Accept header
-    this.addAcceptHeaderParameter(operation, op.responses);
+    this.addAcceptHeaderParameter(codeModelOperation, op.responses);
     // body
     if (op.parameters.bodyParameter) {
-      this.processParameterBody(operation, op.parameters.bodyParameter);
+      this.processParameterBody(codeModelOperation, op.parameters.bodyParameter);
     } else if (op.parameters.bodyType) {
       let bodyType = this.getEffectiveSchemaType(op.parameters.bodyType);
 
       if (bodyType.kind === "Model") {
         // try use resource type as round-trip model
-        const resourceType = getResourceOperation(this.program, op.operation)?.resourceType;
+        const resourceType = getResourceOperation(this.program, operation)?.resourceType;
         if (resourceType && op.responses && op.responses.length > 0) {
           const resp = op.responses[0];
           if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
@@ -332,17 +371,19 @@ export class CodeModelBuilder {
           }
         }
 
-        this.processParameterBody(operation, bodyType);
+        this.processParameterBody(codeModelOperation, bodyType);
       }
     }
 
     // responses
-    op.responses.map((it) => this.processResponse(operation, it));
+    op.responses.map((it) => this.processResponse(codeModelOperation, it));
 
-    this.processRouteForPaged(operation, op.responses);
-    this.processRouteForLongRunning(operation, op.operation, op.responses);
+    this.processRouteForPaged(codeModelOperation, op.responses);
+    this.processRouteForLongRunning(codeModelOperation, operation, op.responses);
 
-    operationGroup.addOperation(operation);
+    operationGroup.addOperation(codeModelOperation);
+
+    return codeModelOperation;
   }
 
   private processRouteForPaged(op: CodeModelOperation, responses: HttpOperationResponse[]) {
@@ -1201,19 +1242,19 @@ export class CodeModelBuilder {
     }
   }
 
-  private getConvenienceApiName(op: HttpOperation): string | undefined {
+  private getConvenienceApiName(op: Operation): string | undefined {
     // check @convenienceMethod
-    let convenienceApiName = getConvenienceAPIName(this.program, op.operation);
+    let convenienceApiName = getConvenienceAPIName(this.program, op);
     if (!convenienceApiName) {
       // check @extension with x-ms-convenient-api=true
-      const extensionDecorators = op.operation.decorators.filter((it) => it.decorator.name === "$extension");
+      const extensionDecorators = op.decorators.filter((it) => it.decorator.name === "$extension");
       for (const extensionDecorator of extensionDecorators) {
         if (extensionDecorator.args.length == 2) {
           const name = extensionDecorator.args[0].value;
           const value = extensionDecorator.args[1].value;
 
           if (name === "x-ms-convenient-api" && value === true) {
-            convenienceApiName = op.operation.name;
+            convenienceApiName = op.name;
             break;
           }
         }

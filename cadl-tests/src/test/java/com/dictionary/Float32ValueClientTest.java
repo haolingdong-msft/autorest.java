@@ -11,7 +11,7 @@ import java.util.Map;
 
 class Float32ValueClientTest {
 
-    Float32ValueClient client = new Float32ValueClientBuilder().buildClient();
+    Float32ValueClient client = new DictionaryClientBuilder().buildFloat32ValueClient();
 
     @Test
     void get() {
@@ -24,5 +24,6 @@ class Float32ValueClientTest {
     void put() {
         Map<String, Double> map = new HashMap<>();
         map.put("k1", 42.42);
+        client.put(map);
     }
 }
