@@ -86,6 +86,7 @@ export async function $onEmit(program: Program, options: EmitterOptions) {
 
     const output = await promisify(execFile)("java", [
       `-DemitterOptions=${emitterOptions}`,
+      "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,quiet=y,address=5005",
       "-jar",
       jarFileName,
       codeModelFileName,
