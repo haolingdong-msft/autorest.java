@@ -5,7 +5,7 @@ $AZURE_ARGUMENTS = "--version=$AUTOREST_CORE_VERSION --java --use=. --output-fol
 $PROTOCOL_ARGUMENTS = "--version=$AUTOREST_CORE_VERSION --java --use=. --output-folder=protocol-tests --data-plane --generate-samples"
 $PROTOCOL_RESILIENCE_ARGUMENTS = "--version=$AUTOREST_CORE_VERSION --java --use=. --data-plane"
 $SWAGGER_PATH = "node_modules/@microsoft.azure/autorest.testserver/swagger"
-$PARALLELIZATION = 3
+$PARALLELIZATION = 1
 if ($IsWindows) {
     $PARALLELIZATION = (Get-CIMInstance -Class 'CIM_Processor').NumberOfCores - 1
 }
@@ -16,15 +16,15 @@ $generateScript = {
     $generateOutput = Invoke-Expression "autorest $_"
     $global:ExitCode = $global:ExitCode -bor $LASTEXITCODE
 
-    if ($global:ExitCode -ne 0) {
-        exit 1
-    }
     Write-Host "
 ========================
 autorest $_
 ========================
 $([String]::Join("`n", $generateOutput))
     "
+    if ($global:ExitCode -ne 0) {
+        exit $global:ExitCode
+    }
 }
 
 java -version
@@ -51,7 +51,7 @@ if (Test-Path ./vanilla-tests/src/main) {
     "$VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/head.json --namespace=fixtures.head",
     "$VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/head-exceptions.json --namespace=fixtures.headexceptions",
     "$VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/header.json --namespace=fixtures.header",
-    "$VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/header.json --namespace=fixtures.nonamedresponsetypes --generic-response-type",
+    "$VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/header.json --namespace=fixtures.nonamedresponsetypes --generic-response-type --no-custom-headers",
     "$VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/body-dictionary.json --namespace=fixtures.bodydictionary --generate-sync-async-clients --generate-send-request-method",
     "$VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/body-duration.json --namespace=fixtures.bodyduration",
     "$VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/body-integer.json --namespace=fixtures.bodyinteger",

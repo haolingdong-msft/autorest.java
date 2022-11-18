@@ -103,6 +103,7 @@ import {
   listOperationGroups,
   listOperationsInOperationGroup,
 } from "@azure-tools/cadl-dpg";
+import { DevOptions } from "./emitter.js";
 
 export class CodeModelBuilder {
   private program: Program;
@@ -111,6 +112,8 @@ export class CodeModelBuilder {
   private baseUri: string;
   private hostParameters: Parameter[];
 
+  private devOptions: DevOptions;
+
   private codeModel: CodeModel;
 
   private schemaCache = new ProcessingCache((type: Type, name: string) => this.processSchemaImpl(type, name));
@@ -118,7 +121,8 @@ export class CodeModelBuilder {
 
   private specialHeaderNames = new Set(["repeatability-request-id", "repeatability-first-sent"]);
 
-  public constructor(program1: Program) {
+  public constructor(program1: Program, devOptions: DevOptions | undefined) {
+    this.devOptions = devOptions ?? {};
     this.program = program1;
     const serviceNamespace = getServiceNamespace(this.program);
     if (serviceNamespace === undefined) {
@@ -199,25 +203,46 @@ export class CodeModelBuilder {
   private processHost(server: HttpServer | undefined) {
     if (server) {
       server.parameters.forEach((it) => {
-        const schema = this.processSchema(it.type, it.name);
-        const parameter = new Parameter(it.name, this.getDoc(it), schema, {
-          implementation: ImplementationLocation.Client,
-          origin: "modelerfour:synthesized/host",
-          required: true,
-          protocol: {
-            http: new HttpParameter(ParameterLocation.Uri),
-          },
-          clientDefaultValue: this.getDefaultValue(it.default),
-          language: {
-            default: {
-              serializedName: it.name,
-            },
-          },
-        });
+        let parameter;
 
-        // TODO hack on "ApiVersion"
         if (it.name === "ApiVersion") {
-          parameter.origin = "modelerfour:synthesized/api-version";
+          // TODO hack on "ApiVersion"
+          const schema = this.codeModel.schemas.add(
+            new ConstantSchema(it.name, `api-version: ${this.version}`, {
+              valueType: this.stringSchema,
+              value: new ConstantValue(this.version),
+            }),
+          );
+          parameter = new Parameter(it.name, this.getDoc(it), schema, {
+            implementation: ImplementationLocation.Client,
+            origin: "modelerfour:synthesized/api-version",
+            required: true,
+            protocol: {
+              http: new HttpParameter(ParameterLocation.Uri),
+            },
+            clientDefaultValue: this.getDefaultValue(it.default),
+            language: {
+              default: {
+                serializedName: it.name,
+              },
+            },
+          });
+        } else {
+          const schema = this.processSchema(it.type, it.name);
+          parameter = new Parameter(it.name, this.getDoc(it), schema, {
+            implementation: ImplementationLocation.Client,
+            origin: "modelerfour:synthesized/host",
+            required: true,
+            protocol: {
+              http: new HttpParameter(ParameterLocation.Uri),
+            },
+            clientDefaultValue: this.getDefaultValue(it.default),
+            language: {
+              default: {
+                serializedName: it.name,
+              },
+            },
+          });
         }
 
         return this.hostParameters.push(this.codeModel.addGlobalParameter(parameter));
@@ -335,6 +360,9 @@ export class CodeModelBuilder {
       const convenienceApiName = this.getConvenienceApiName(operation);
       if (convenienceApiName) {
         codeModelOperation.convenienceApi = new ConvenienceApi(convenienceApiName);
+      } else if (this.devOptions["generate-convenience-apis"]) {
+        // devOptions, add convenienceApi
+        codeModelOperation.convenienceApi = new ConvenienceApi(operation.name);
       }
     }
 
@@ -1246,7 +1274,7 @@ export class CodeModelBuilder {
     } else {
       const visibility = getVisibility(this.program, target);
       if (visibility) {
-        return !visibility.includes("write");
+        return !visibility.includes("write") && !visibility.includes("create") && !visibility.includes("update");
       } else {
         return false;
       }
@@ -1255,23 +1283,7 @@ export class CodeModelBuilder {
 
   private getConvenienceApiName(op: Operation): string | undefined {
     // check @convenienceMethod
-    let convenienceApiName = getConvenienceAPIName(this.program, op);
-    if (!convenienceApiName) {
-      // check @extension with x-ms-convenient-api=true
-      const extensionDecorators = op.decorators.filter((it) => it.decorator.name === "$extension");
-      for (const extensionDecorator of extensionDecorators) {
-        if (extensionDecorator.args.length == 2) {
-          const name = extensionDecorator.args[0].value;
-          const value = extensionDecorator.args[1].value;
-
-          if (name === "x-ms-convenient-api" && value === true) {
-            convenienceApiName = op.name;
-            break;
-          }
-        }
-      }
-    }
-    return convenienceApiName;
+    return getConvenienceAPIName(this.program, op);
   }
 
   private _stringSchema?: StringSchema;
