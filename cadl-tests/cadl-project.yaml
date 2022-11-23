@@ -2,6 +2,7 @@ emitters:
   "@azure-tools/cadl-autorest": true
   "@azure-tools/cadl-java":
     partial-update: true
+    namer: true
     dev-options:
       generate-code-model: true
       generate-convenience-apis: true
