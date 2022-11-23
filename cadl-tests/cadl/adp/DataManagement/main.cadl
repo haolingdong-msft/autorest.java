@@ -2,11 +2,11 @@ import "@cadl-lang/rest";
 import "@cadl-lang/openapi";
 import "@azure-tools/cadl-autorest";
 import "@azure-tools/cadl-azure-core";
-import "@cadl-api-spec/adp-shared";
 
+import "../Adp.Shared";
 import "./ingestion";
-import "./classification";
-import "./measurement";
+// import "./classification";
+// import "./measurement";
 
 using Cadl.Http;
 

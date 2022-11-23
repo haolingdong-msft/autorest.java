@@ -16,10 +16,10 @@
   },
   "scripts": {
     "lint": "cadl compile . --warn-as-error --import @cadl-lang/library-linter --no-emit",
-    "build": "npm run formatCadl && npx cadl compile . && npm run validateSpecDataManagementPublic && npm run generateDataManagementPublicClient",
+    "build": "npm run formatAll && npx cadl compile . && npm run validateSpecDataManagementPublic && npm run generateDataManagementPublicClient",
     "publish": "npm run publishDataManagementPublic",
     "buildDataManagementPublicApi": "pwsh ../src/scripts/compile.ps1 -IsPublicApi -InputCadl . -OutputPath %npm_package_config_DataManagementOutputDirectory% -OutputFile %npm_package_config_DataManagementPublicOutputFile%",
-    "publishDataManagementPublic": "pwsh ../src/scripts/publish.ps1 %npm_package_config_verbose% -SourcePath %npm_package_config_DataManagementOutputDirectory%/%npm_package_config_DataManagementPublicOutputFile% -OutputPath %npm_package_config_PublishDataManagementPublicOutputFileName% -PathToAzureApiReviewRepository %npm_package_config_PathToAzureApiReviewRepository%",
+    "publishDataManagementPublic": "pwsh ../src/scripts/publish.ps1 %npm_package_config_verbose% -SourceOpenApiSpecPath %npm_package_config_DataManagementOutputDirectory%/%npm_package_config_DataManagementPublicOutputFile% -OutputOpenApiSpecPath %npm_package_config_PublishDataManagementPublicOutputFileName% -PathToAzureApiReviewRepository %npm_package_config_PathToAzureApiReviewRepository%",
     "generateDataManagementPublicClient": "pwsh ../src/scripts/generate-autorest-client.ps1 -InputOpenApiSpecFile %npm_package_config_DataManagementOutputDirectory%/%npm_package_config_DataManagementPublicOutputFile% -OutputPath %npm_package_config_PublicClientPath%/generated -Namespace %npm_package_config_PublicClientNamespace% -AutorestManifestFile %npm_package_config_AutorestManifestFile%",
     "validateSpecDataManagementPublic": "pwsh ../src/scripts/validate-spec.ps1 -OpenApiSpecFile %npm_package_config_DataManagementOutputDirectory%/%npm_package_config_DataManagementPublicOutputFile% && pwsh ../src/scripts/validate-examples.ps1 -OpenApiSpecFile %npm_package_config_DataManagementOutputDirectory%/%npm_package_config_DataManagementPublicOutputFile%",
     "generateExamplesDataManagementPublic": "pwsh ../src/scripts/generate-examples.ps1 -OpenApiSpecFile %npm_package_config_DataManagementOutputDirectory%/%npm_package_config_DataManagementPublicOutputFile%",
@@ -37,10 +37,8 @@
     "@cadl-lang/rest": "latest",
     "@cadl-lang/versioning": "latest",
     "@azure-tools/cadl-autorest": "latest",
-    "@azure-tools/cadl-azure-core": "latest"
-  },
-  "peerDependencies": {
-    "@cadl-api-spec/adp-shared": "file:../Adp.Shared"
+    "@azure-tools/cadl-azure-core": "latest",
+    "@azure-tools/cadl-java": "file:/../../../../cadl-extension/azure-tools-cadl-java-0.1.1.tgz"
   },
   "devDependencies": {
     "@cadl-lang/compiler": "latest",

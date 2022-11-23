@@ -1,0 +1,38 @@
+import "./main.cadl";
+import "@azure-tools/cadl-dpg";
+
+using Azure.DPG;
+
+namespace Customizations;
+
+@client({
+    name: "AdpCustomizeClient",
+    service: Adp,
+})
+interface AdpDiscoveryClient {
+    // Discovery
+    createOrReplaceDiscovery is Adp.DataManagement.DiscoveryOperations.createOrReplace;
+    getDiscovery is Adp.DataManagement.DiscoveryOperations.get;
+    completeDiscovery is Adp.DataManagement.DiscoveryOperations.complete;
+    cancelDiscovery is Adp.DataManagement.DiscoveryOperations.cancel;
+
+    generateDiscoverySpecialFiles is Adp.DataManagement.DiscoverySpecialFileOperations.generate;
+    listWritableUrisSpecialFiles is Adp.DataManagement.DiscoverySpecialFileOperations.listWritableUris;
+
+    listUploadDetail is Adp.DataManagement.DiscoveryResultUploadOperations.list;
+
+    // Upload
+    // createOrReplaceUploads is Adp.DataManagement.UploadOperations.createOrReplace;
+    // getUploads is Adp.DataManagement.UploadOperations.get;
+    // completeUploads is Adp.DataManagement.UploadOperations.complete;
+    // cancelUploads is Adp.DataManagement.UploadOperations.cancel;
+
+    // listUploadSpecialFiles is Adp.DataManagement.UploadSpecialFileOperations.list;
+    // generateUploadSpecialFiles is Adp.DataManagement.UploadSpecialFileOperations.generate;
+    // listWritableUrisUploadSpecialFiles is Adp.DataManagement.UploadSpecialFileOperations.listWritableUris;
+
+    // listWritableUriUploadDataFiles is Adp.DataManagement.UploadDataFileOperations.listWritableUris;
+    // generateUploadDataFiles is Adp.DataManagement.UploadDataFileOperations.generate;
+
+    // listMeasurements is Adp.DataManagement.UploadResultMeasurementOperations.list;
+}

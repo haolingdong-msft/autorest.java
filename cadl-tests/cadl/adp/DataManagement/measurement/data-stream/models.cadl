@@ -338,8 +338,7 @@ model DataStreamFile {
   fileUri: uri;
 
   @doc("UTC date and time indicating the start of file recording")
-  @format("date")
-  externalTimeStamp: string;
+  externalTimeStamp: zonedDateTime;
 
   @doc("Size in bytes")
   size: int64;
