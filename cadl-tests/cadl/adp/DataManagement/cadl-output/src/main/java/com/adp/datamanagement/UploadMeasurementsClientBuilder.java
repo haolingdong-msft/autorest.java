@@ -4,7 +4,7 @@
 
 package com.adp.datamanagement;
 
-import com.adp.datamanagement.implementation.DataManagementClientImpl;
+import com.adp.datamanagement.implementation.UploadMeasurementsClientImpl;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
@@ -41,13 +41,13 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-/** A builder for creating a new instance of the DataManagementClient type. */
-@ServiceClientBuilder(serviceClients = {DataManagementClient.class, DataManagementAsyncClient.class})
-public final class DataManagementClientBuilder
-        implements HttpTrait<DataManagementClientBuilder>,
-                ConfigurationTrait<DataManagementClientBuilder>,
-                TokenCredentialTrait<DataManagementClientBuilder>,
-                EndpointTrait<DataManagementClientBuilder> {
+/** A builder for creating a new instance of the UploadMeasurementsClient type. */
+@ServiceClientBuilder(serviceClients = {UploadMeasurementsClient.class, UploadMeasurementsAsyncClient.class})
+public final class UploadMeasurementsClientBuilder
+        implements HttpTrait<UploadMeasurementsClientBuilder>,
+                ConfigurationTrait<UploadMeasurementsClientBuilder>,
+                TokenCredentialTrait<UploadMeasurementsClientBuilder>,
+                EndpointTrait<UploadMeasurementsClientBuilder> {
     @Generated private static final String SDK_NAME = "name";
 
     @Generated private static final String SDK_VERSION = "version";
@@ -59,9 +59,9 @@ public final class DataManagementClientBuilder
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 
-    /** Create an instance of the DataManagementClientBuilder. */
+    /** Create an instance of the UploadMeasurementsClientBuilder. */
     @Generated
-    public DataManagementClientBuilder() {
+    public UploadMeasurementsClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
 
@@ -73,7 +73,7 @@ public final class DataManagementClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public DataManagementClientBuilder pipeline(HttpPipeline pipeline) {
+    public UploadMeasurementsClientBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
         return this;
     }
@@ -86,7 +86,7 @@ public final class DataManagementClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public DataManagementClientBuilder httpClient(HttpClient httpClient) {
+    public UploadMeasurementsClientBuilder httpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         return this;
     }
@@ -99,7 +99,7 @@ public final class DataManagementClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public DataManagementClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
+    public UploadMeasurementsClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
         this.httpLogOptions = httpLogOptions;
         return this;
     }
@@ -112,7 +112,7 @@ public final class DataManagementClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public DataManagementClientBuilder clientOptions(ClientOptions clientOptions) {
+    public UploadMeasurementsClientBuilder clientOptions(ClientOptions clientOptions) {
         this.clientOptions = clientOptions;
         return this;
     }
@@ -125,7 +125,7 @@ public final class DataManagementClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public DataManagementClientBuilder retryOptions(RetryOptions retryOptions) {
+    public UploadMeasurementsClientBuilder retryOptions(RetryOptions retryOptions) {
         this.retryOptions = retryOptions;
         return this;
     }
@@ -133,7 +133,7 @@ public final class DataManagementClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public DataManagementClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+    public UploadMeasurementsClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
         Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
@@ -147,7 +147,7 @@ public final class DataManagementClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public DataManagementClientBuilder configuration(Configuration configuration) {
+    public UploadMeasurementsClientBuilder configuration(Configuration configuration) {
         this.configuration = configuration;
         return this;
     }
@@ -160,7 +160,7 @@ public final class DataManagementClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public DataManagementClientBuilder credential(TokenCredential tokenCredential) {
+    public UploadMeasurementsClientBuilder credential(TokenCredential tokenCredential) {
         this.tokenCredential = tokenCredential;
         return this;
     }
@@ -173,7 +173,7 @@ public final class DataManagementClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public DataManagementClientBuilder endpoint(String endpoint) {
+    public UploadMeasurementsClientBuilder endpoint(String endpoint) {
         this.endpoint = endpoint;
         return this;
     }
@@ -187,10 +187,10 @@ public final class DataManagementClientBuilder
      * Sets Service version.
      *
      * @param serviceVersion the serviceVersion value.
-     * @return the DataManagementClientBuilder.
+     * @return the UploadMeasurementsClientBuilder.
      */
     @Generated
-    public DataManagementClientBuilder serviceVersion(DataManagementServiceVersion serviceVersion) {
+    public UploadMeasurementsClientBuilder serviceVersion(DataManagementServiceVersion serviceVersion) {
         this.serviceVersion = serviceVersion;
         return this;
     }
@@ -204,26 +204,26 @@ public final class DataManagementClientBuilder
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
      *
      * @param retryPolicy the retryPolicy value.
-     * @return the DataManagementClientBuilder.
+     * @return the UploadMeasurementsClientBuilder.
      */
     @Generated
-    public DataManagementClientBuilder retryPolicy(RetryPolicy retryPolicy) {
+    public UploadMeasurementsClientBuilder retryPolicy(RetryPolicy retryPolicy) {
         this.retryPolicy = retryPolicy;
         return this;
     }
 
     /**
-     * Builds an instance of DataManagementClientImpl with the provided parameters.
+     * Builds an instance of UploadMeasurementsClientImpl with the provided parameters.
      *
-     * @return an instance of DataManagementClientImpl.
+     * @return an instance of UploadMeasurementsClientImpl.
      */
     @Generated
-    private DataManagementClientImpl buildInnerClient() {
+    private UploadMeasurementsClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         DataManagementServiceVersion localServiceVersion =
                 (serviceVersion != null) ? serviceVersion : DataManagementServiceVersion.getLatest();
-        DataManagementClientImpl client =
-                new DataManagementClientImpl(
+        UploadMeasurementsClientImpl client =
+                new UploadMeasurementsClientImpl(
                         localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, localServiceVersion);
         return client;
     }
@@ -273,22 +273,22 @@ public final class DataManagementClientBuilder
     }
 
     /**
-     * Builds an instance of DataManagementAsyncClient class.
+     * Builds an instance of UploadMeasurementsAsyncClient class.
      *
-     * @return an instance of DataManagementAsyncClient.
+     * @return an instance of UploadMeasurementsAsyncClient.
      */
     @Generated
-    public DataManagementAsyncClient buildAsyncClient() {
-        return new DataManagementAsyncClient(buildInnerClient());
+    public UploadMeasurementsAsyncClient buildAsyncClient() {
+        return new UploadMeasurementsAsyncClient(buildInnerClient());
     }
 
     /**
-     * Builds an instance of DataManagementClient class.
+     * Builds an instance of UploadMeasurementsClient class.
      *
-     * @return an instance of DataManagementClient.
+     * @return an instance of UploadMeasurementsClient.
      */
     @Generated
-    public DataManagementClient buildClient() {
-        return new DataManagementClient(new DataManagementAsyncClient(buildInnerClient()));
+    public UploadMeasurementsClient buildClient() {
+        return new UploadMeasurementsClient(new UploadMeasurementsAsyncClient(buildInnerClient()));
     }
 }

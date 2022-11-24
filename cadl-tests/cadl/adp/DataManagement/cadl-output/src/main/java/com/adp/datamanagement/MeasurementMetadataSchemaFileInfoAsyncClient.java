@@ -4,6 +4,7 @@
 
 package com.adp.datamanagement;
 
+import com.adp.datamanagement.implementation.MeasurementMetadataSchemaFileInfoClientImpl;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
@@ -15,49 +16,47 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the synchronous DataManagementClient type. */
-@ServiceClient(builder = DataManagementClientBuilder.class)
-public final class DataManagementClient {
-    @Generated private final DataManagementAsyncClient client;
+/** Initializes a new instance of the asynchronous MeasurementMetadataSchemaFileInfoClient type. */
+@ServiceClient(builder = MeasurementMetadataSchemaFileInfoClientBuilder.class, isAsync = true)
+public final class MeasurementMetadataSchemaFileInfoAsyncClient {
+    @Generated private final MeasurementMetadataSchemaFileInfoClientImpl serviceClient;
 
     /**
-     * Initializes an instance of DataManagementClient class.
+     * Initializes an instance of MeasurementMetadataSchemaFileInfoAsyncClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    DataManagementClient(DataManagementAsyncClient client) {
-        this.client = client;
+    MeasurementMetadataSchemaFileInfoAsyncClient(MeasurementMetadataSchemaFileInfoClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
-     * Get the details of an LRO.
+     * Returns the measurement metadata schema file information.
      *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
      * {
-     *     operationId: String (Required)
-     *     status: String(Created/InProgress/Succeeded/Failed/Canceled) (Required)
-     *     operationType: String (Optional)
-     *     error: ResponseError (Optional)
-     *     resultUri: String (Optional)
-     *     etag: String (Required)
+     *     schemaFileName: String (Optional)
+     *     schemaFileUri: String (Required)
      * }
      * }</pre>
      *
-     * @param operationId The unique ID of the operation.
+     * @param measurementId The measurement identifier.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the details of an LRO along with {@link Response}.
+     * @return measurement metadata schema file information model along with {@link Response} on successful completion
+     *     of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getStatusWithResponse(String operationId, RequestOptions requestOptions) {
-        return this.client.getStatusWithResponse(operationId, requestOptions).block();
+    public Mono<Response<BinaryData>> getWithResponse(String measurementId, RequestOptions requestOptions) {
+        return this.serviceClient.getWithResponseAsync(measurementId, requestOptions);
     }
 }

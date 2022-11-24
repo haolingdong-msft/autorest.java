@@ -4,7 +4,7 @@
 
 package com.adp.datamanagement;
 
-import com.adp.datamanagement.implementation.DataManagementClientImpl;
+import com.adp.datamanagement.implementation.DataStreamStorageClientImpl;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
@@ -41,13 +41,13 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-/** A builder for creating a new instance of the DataManagementClient type. */
-@ServiceClientBuilder(serviceClients = {DataManagementClient.class, DataManagementAsyncClient.class})
-public final class DataManagementClientBuilder
-        implements HttpTrait<DataManagementClientBuilder>,
-                ConfigurationTrait<DataManagementClientBuilder>,
-                TokenCredentialTrait<DataManagementClientBuilder>,
-                EndpointTrait<DataManagementClientBuilder> {
+/** A builder for creating a new instance of the DataStreamStorageClient type. */
+@ServiceClientBuilder(serviceClients = {DataStreamStorageClient.class, DataStreamStorageAsyncClient.class})
+public final class DataStreamStorageClientBuilder
+        implements HttpTrait<DataStreamStorageClientBuilder>,
+                ConfigurationTrait<DataStreamStorageClientBuilder>,
+                TokenCredentialTrait<DataStreamStorageClientBuilder>,
+                EndpointTrait<DataStreamStorageClientBuilder> {
     @Generated private static final String SDK_NAME = "name";
 
     @Generated private static final String SDK_VERSION = "version";
@@ -59,9 +59,9 @@ public final class DataManagementClientBuilder
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 
-    /** Create an instance of the DataManagementClientBuilder. */
+    /** Create an instance of the DataStreamStorageClientBuilder. */
     @Generated
-    public DataManagementClientBuilder() {
+    public DataStreamStorageClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
 
@@ -73,7 +73,7 @@ public final class DataManagementClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public DataManagementClientBuilder pipeline(HttpPipeline pipeline) {
+    public DataStreamStorageClientBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
         return this;
     }
@@ -86,7 +86,7 @@ public final class DataManagementClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public DataManagementClientBuilder httpClient(HttpClient httpClient) {
+    public DataStreamStorageClientBuilder httpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         return this;
     }
@@ -99,7 +99,7 @@ public final class DataManagementClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public DataManagementClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
+    public DataStreamStorageClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
         this.httpLogOptions = httpLogOptions;
         return this;
     }
@@ -112,7 +112,7 @@ public final class DataManagementClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public DataManagementClientBuilder clientOptions(ClientOptions clientOptions) {
+    public DataStreamStorageClientBuilder clientOptions(ClientOptions clientOptions) {
         this.clientOptions = clientOptions;
         return this;
     }
@@ -125,7 +125,7 @@ public final class DataManagementClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public DataManagementClientBuilder retryOptions(RetryOptions retryOptions) {
+    public DataStreamStorageClientBuilder retryOptions(RetryOptions retryOptions) {
         this.retryOptions = retryOptions;
         return this;
     }
@@ -133,7 +133,7 @@ public final class DataManagementClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public DataManagementClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+    public DataStreamStorageClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
         Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
@@ -147,7 +147,7 @@ public final class DataManagementClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public DataManagementClientBuilder configuration(Configuration configuration) {
+    public DataStreamStorageClientBuilder configuration(Configuration configuration) {
         this.configuration = configuration;
         return this;
     }
@@ -160,7 +160,7 @@ public final class DataManagementClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public DataManagementClientBuilder credential(TokenCredential tokenCredential) {
+    public DataStreamStorageClientBuilder credential(TokenCredential tokenCredential) {
         this.tokenCredential = tokenCredential;
         return this;
     }
@@ -173,7 +173,7 @@ public final class DataManagementClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public DataManagementClientBuilder endpoint(String endpoint) {
+    public DataStreamStorageClientBuilder endpoint(String endpoint) {
         this.endpoint = endpoint;
         return this;
     }
@@ -187,10 +187,10 @@ public final class DataManagementClientBuilder
      * Sets Service version.
      *
      * @param serviceVersion the serviceVersion value.
-     * @return the DataManagementClientBuilder.
+     * @return the DataStreamStorageClientBuilder.
      */
     @Generated
-    public DataManagementClientBuilder serviceVersion(DataManagementServiceVersion serviceVersion) {
+    public DataStreamStorageClientBuilder serviceVersion(DataManagementServiceVersion serviceVersion) {
         this.serviceVersion = serviceVersion;
         return this;
     }
@@ -204,26 +204,26 @@ public final class DataManagementClientBuilder
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
      *
      * @param retryPolicy the retryPolicy value.
-     * @return the DataManagementClientBuilder.
+     * @return the DataStreamStorageClientBuilder.
      */
     @Generated
-    public DataManagementClientBuilder retryPolicy(RetryPolicy retryPolicy) {
+    public DataStreamStorageClientBuilder retryPolicy(RetryPolicy retryPolicy) {
         this.retryPolicy = retryPolicy;
         return this;
     }
 
     /**
-     * Builds an instance of DataManagementClientImpl with the provided parameters.
+     * Builds an instance of DataStreamStorageClientImpl with the provided parameters.
      *
-     * @return an instance of DataManagementClientImpl.
+     * @return an instance of DataStreamStorageClientImpl.
      */
     @Generated
-    private DataManagementClientImpl buildInnerClient() {
+    private DataStreamStorageClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         DataManagementServiceVersion localServiceVersion =
                 (serviceVersion != null) ? serviceVersion : DataManagementServiceVersion.getLatest();
-        DataManagementClientImpl client =
-                new DataManagementClientImpl(
+        DataStreamStorageClientImpl client =
+                new DataStreamStorageClientImpl(
                         localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, localServiceVersion);
         return client;
     }
@@ -273,22 +273,22 @@ public final class DataManagementClientBuilder
     }
 
     /**
-     * Builds an instance of DataManagementAsyncClient class.
+     * Builds an instance of DataStreamStorageAsyncClient class.
      *
-     * @return an instance of DataManagementAsyncClient.
+     * @return an instance of DataStreamStorageAsyncClient.
      */
     @Generated
-    public DataManagementAsyncClient buildAsyncClient() {
-        return new DataManagementAsyncClient(buildInnerClient());
+    public DataStreamStorageAsyncClient buildAsyncClient() {
+        return new DataStreamStorageAsyncClient(buildInnerClient());
     }
 
     /**
-     * Builds an instance of DataManagementClient class.
+     * Builds an instance of DataStreamStorageClient class.
      *
-     * @return an instance of DataManagementClient.
+     * @return an instance of DataStreamStorageClient.
      */
     @Generated
-    public DataManagementClient buildClient() {
-        return new DataManagementClient(new DataManagementAsyncClient(buildInnerClient()));
+    public DataStreamStorageClient buildClient() {
+        return new DataStreamStorageClient(new DataStreamStorageAsyncClient(buildInnerClient()));
     }
 }

@@ -44,9 +44,211 @@
     },
     {
       "name": "Upload"
+    },
+    {
+      "name": "Classification Schema"
+    },
+    {
+      "name": "Measurement"
+    },
+    {
+      "name": "Measurement Classification"
+    },
+    {
+      "name": "Data Stream"
+    },
+    {
+      "name": "Data Stream Classification"
     }
   ],
   "paths": {
+    "/classificationSchemas": {
+      "post": {
+        "tags": [
+          "Classification Schema"
+        ],
+        "operationId": "ClassificationSchemaOperations_Create",
+        "description": "Creates new classification schema.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Adp.LongRunningOperationIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "description": "Parameter of type 'ClassificationSchemaCreationParameters' in the body.",
+            "schema": {
+              "$ref": "#/definitions/Adp.ClassificationSchemaCreationParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Adp.ClassificationSchema"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "description": "The location of an instance of LongRunningOperation",
+                "type": "string",
+                "format": "uri"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/DefaultLroResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code for specific error that occurred.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/CustomErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Classification Schema"
+        ],
+        "operationId": "ClassificationSchemaOperations_List",
+        "description": "List all classification schemas.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedClassificationSchema"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/classificationSchemas/{name}": {
+      "get": {
+        "tags": [
+          "Classification Schema"
+        ],
+        "operationId": "ClassificationSchemaOperations_Get",
+        "description": "Get classification schema by name.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "Classification schema identifier.",
+            "minLength": 1,
+            "maxLength": 256,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Adp.ClassificationSchema"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Classification Schema"
+        ],
+        "operationId": "ClassificationSchemaOperations_Delete",
+        "description": "Deletes the classification schema and all related classification assignments (instances).",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "Classification schema identifier.",
+            "minLength": 1,
+            "maxLength": 256,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Adp.LongRunningOperationIdHeader"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "description": "The location of an instance of LongRunningOperation",
+                "type": "string",
+                "format": "uri"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/DefaultLroResponse"
+            }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code for specific error that occurred.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/CustomErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/discoveries/{discoveryId}": {
       "put": {
         "tags": [
@@ -383,6 +585,1860 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PagedDiscoveryUpload"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/measurements": {
+      "get": {
+        "tags": [
+          "Measurement"
+        ],
+        "operationId": "MeasurementOperations_List",
+        "description": "Lists the measurements in a workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedMeasurement"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/measurements/{measurementId}": {
+      "get": {
+        "tags": [
+          "Measurement"
+        ],
+        "operationId": "MeasurementOperations_Get",
+        "description": "Get measurement by ID.",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Adp.Measurement"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Measurement"
+        ],
+        "operationId": "MeasurementOperations_Delete",
+        "description": "Deletes the measurement.",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Adp.LongRunningOperationIdHeader"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "description": "The location of an instance of LongRunningOperation",
+                "type": "string",
+                "format": "uri"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/DefaultLroResponse"
+            }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code for specific error that occurred.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/CustomErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/measurements/{measurementId}/classifications": {
+      "post": {
+        "tags": [
+          "Measurement Classification"
+        ],
+        "operationId": "MeasurementClassificationOperations_Create",
+        "description": "Assigns classification to the measurement.",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Adp.LongRunningOperationIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "description": "Parameter of type 'MeasurementClassificationCreationParameters' in the body.",
+            "schema": {
+              "$ref": "#/definitions/Adp.MeasurementClassificationCreationParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Adp.MeasurementClassification"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "description": "The location of an instance of LongRunningOperation",
+                "type": "string",
+                "format": "uri"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/DefaultLroResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code for specific error that occurred.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/CustomErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Measurement Classification"
+        ],
+        "operationId": "MeasurementClassificationOperations_List",
+        "description": "Lists the classifications assigned to the measurement.",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedMeasurementClassification"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/measurements/{measurementId}/classifications/{schemaName}": {
+      "get": {
+        "tags": [
+          "Measurement Classification"
+        ],
+        "operationId": "MeasurementClassificationOperations_Get",
+        "description": "Get measurement classification by schema name.",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "description": "Classification schema name.",
+            "minLength": 1,
+            "maxLength": 256,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Adp.MeasurementClassification"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Measurement Classification"
+        ],
+        "operationId": "MeasurementClassificationOperations_Delete",
+        "description": "Unassign the classification from the measurement.",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "description": "Classification schema name.",
+            "minLength": 1,
+            "maxLength": 256,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Adp.LongRunningOperationIdHeader"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "description": "The location of an instance of LongRunningOperation",
+                "type": "string",
+                "format": "uri"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/DefaultLroResponse"
+            }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code for specific error that occurred.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/CustomErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/measurements/{measurementId}/dataStreams": {
+      "post": {
+        "tags": [
+          "Data Stream"
+        ],
+        "operationId": "DataStreamOperations_Create",
+        "description": "Creates new data-stream resource.",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Adp.LongRunningOperationIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "description": "Parameter of type 'DataStreamCreationParameters' in the body.",
+            "schema": {
+              "$ref": "#/definitions/Adp.DataStreamCreationParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Adp.DataStream"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "description": "The location of an instance of LongRunningOperation",
+                "type": "string",
+                "format": "uri"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/DefaultLroResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code for specific error that occurred.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/CustomErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Data Stream"
+        ],
+        "operationId": "DataStreamOperations_List",
+        "description": "Lists the existing data-streams.\nSupports the following filter expressions:\n- filter=\"type=[System | Raw | Derived]\"",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDataStream"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/measurements/{measurementId}/dataStreams/{dataStreamId}": {
+      "get": {
+        "tags": [
+          "Data Stream"
+        ],
+        "operationId": "DataStreamOperations_Get",
+        "description": "Get data-stream by identifier.",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "name": "dataStreamId",
+            "in": "path",
+            "required": true,
+            "description": "The data stream identifier",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Adp.DataStream"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/measurements/{measurementId}/dataStreams/{dataStreamId}:clearContent": {
+      "post": {
+        "tags": [
+          "Data Stream"
+        ],
+        "operationId": "DataStreamOperations_ClearContent",
+        "description": "Clear the data-stream content.",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "name": "dataStreamId",
+            "in": "path",
+            "required": true,
+            "description": "The data stream identifier",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Adp.LongRunningOperationIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Adp.DataStream"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "description": "The location of an instance of LongRunningOperation",
+                "type": "string",
+                "format": "uri"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/DefaultLroResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code for specific error that occurred.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/CustomErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/measurements/{measurementId}/dataStreams/{dataStreamId}:stageFiles": {
+      "post": {
+        "tags": [
+          "Data Stream"
+        ],
+        "operationId": "DataStreamOperations_StageFiles",
+        "description": "Returns SAS-signed upload URIs for files that need to be uploaded to Azure Storage.\nThis URI expires in 24 hours.",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "name": "dataStreamId",
+            "in": "path",
+            "required": true,
+            "description": "The data stream identifier",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "description": "Parameter of type 'UploadDerivedDataStreamFilesRequest' in the body.",
+            "schema": {
+              "$ref": "#/definitions/Adp.UploadDerivedDataStreamFilesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Adp.UploadDerivedDataStreamFilesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/measurements/{measurementId}/dataStreams/{dataStreamId}:complete": {
+      "post": {
+        "tags": [
+          "Data Stream"
+        ],
+        "operationId": "DataStreamOperations_Complete",
+        "description": "Marks a data stream as completed",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "name": "dataStreamId",
+            "in": "path",
+            "required": true,
+            "description": "The data stream identifier",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Adp.LongRunningOperationIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Adp.DataStream"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "description": "The location of an instance of LongRunningOperation",
+                "type": "string",
+                "format": "uri"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/DefaultLroResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code for specific error that occurred.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/CustomErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/measurements/{measurementId}/dataStreams/{dataStreamId}:fail": {
+      "post": {
+        "tags": [
+          "Data Stream"
+        ],
+        "operationId": "DataStreamOperations_Fail",
+        "description": "Marks a data stream as failed",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "name": "dataStreamId",
+            "in": "path",
+            "required": true,
+            "description": "The data stream identifier",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Adp.LongRunningOperationIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Adp.DataStream"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "description": "The location of an instance of LongRunningOperation",
+                "type": "string",
+                "format": "uri"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/DefaultLroResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code for specific error that occurred.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/CustomErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/measurements/{measurementId}/dataStreams/{dataStreamId}/classifications": {
+      "post": {
+        "tags": [
+          "Data Stream Classification"
+        ],
+        "operationId": "DataStreamClassificationOperations_Create",
+        "description": "Assigns the classification to the data-stream.",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "name": "dataStreamId",
+            "in": "path",
+            "required": true,
+            "description": "The data stream identifier",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Adp.LongRunningOperationIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "description": "Parameter of type 'DataStreamClassificationCreationParameters' in the body.",
+            "schema": {
+              "$ref": "#/definitions/Adp.DataStreamClassificationCreationParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Adp.DataStreamClassification"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "description": "The location of an instance of LongRunningOperation",
+                "type": "string",
+                "format": "uri"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/DefaultLroResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code for specific error that occurred.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/CustomErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Data Stream Classification"
+        ],
+        "operationId": "DataStreamClassificationOperations_List",
+        "description": "Lists the classifications assigned to the data-stream.",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "name": "dataStreamId",
+            "in": "path",
+            "required": true,
+            "description": "The data stream identifier",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDataStreamClassification"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/measurements/{measurementId}/dataStreams/{dataStreamId}/classifications/{schemaName}": {
+      "get": {
+        "tags": [
+          "Data Stream Classification"
+        ],
+        "operationId": "DataStreamClassificationOperations_Get",
+        "description": "Get classification by schema name.",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "name": "dataStreamId",
+            "in": "path",
+            "required": true,
+            "description": "The data stream identifier",
+            "type": "string"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "description": "Classification schema name.",
+            "minLength": 1,
+            "maxLength": 256,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Adp.DataStreamClassification"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Data Stream Classification"
+        ],
+        "operationId": "DataStreamClassificationOperations_Delete",
+        "description": "Unassign the classification from the data-stream.",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "name": "dataStreamId",
+            "in": "path",
+            "required": true,
+            "description": "The data stream identifier",
+            "type": "string"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "required": true,
+            "description": "Classification schema name.",
+            "minLength": 1,
+            "maxLength": 256,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Adp.LongRunningOperationIdHeader"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "description": "The location of an instance of LongRunningOperation",
+                "type": "string",
+                "format": "uri"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/DefaultLroResponse"
+            }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code for specific error that occurred.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/CustomErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/measurements/{measurementId}/dataStreams/{dataStreamId}/files": {
+      "get": {
+        "tags": [
+          "Data Stream"
+        ],
+        "operationId": "DataStreamFileOperations_List",
+        "description": "Returns SAS signed URIs for reading special files from Azure Storage.",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "name": "dataStreamId",
+            "in": "path",
+            "required": true,
+            "description": "The data stream identifier",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDataStreamFile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/measurements/{measurementId}/dataStreams/{dataStreamId}/logs:getWritableUri": {
+      "post": {
+        "tags": [
+          "Data Stream"
+        ],
+        "operationId": "DataStreamLogsContainerOperations_GetWritableUri",
+        "description": "Returns SAS signed URI of the data-stream logs folder that allow uploading log files to Azure Storage.\nThe SAS token expires in 24 hours.",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "name": "dataStreamId",
+            "in": "path",
+            "required": true,
+            "description": "The data stream identifier",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Adp.DataStreamLogsContainerBase"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/measurements/{measurementId}/dataStreams/{dataStreamId}/storage": {
+      "put": {
+        "tags": [
+          "Data Stream"
+        ],
+        "operationId": "DataStreamsStorageOperations_Create",
+        "description": "Create or replace storage information of the data-stream.\nReturns the data-stream storage resource with SAS signed URIs that allow uploading to Azure Storage.\nThe SAS token expires in 24 hours.",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "name": "dataStreamId",
+            "in": "path",
+            "required": true,
+            "description": "The data stream identifier",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "description": "Parameter of type 'StorageCreationParameters' in the body.",
+            "schema": {
+              "$ref": "#/definitions/Adp.StorageCreationParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Adp.StorageBase"
+            }
+          },
+          "201": {
+            "description": "A StorageBase resource was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/Adp.StorageBase"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/measurements/{measurementId}/dataStreams/{dataStreamId}/storage:getWritableUris": {
+      "post": {
+        "tags": [
+          "Data Stream"
+        ],
+        "operationId": "DataStreamsStorageOperations_GetWritableUris",
+        "description": "Returns the data-stream storage resource with SAS signed URIs that allow uploading to Azure Storage.\nThe SAS token expires in 24 hours.",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "name": "dataStreamId",
+            "in": "path",
+            "required": true,
+            "description": "The data stream identifier",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Adp.StorageBase"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/measurements/{measurementId}/dataStreams/{dataStreamId}/tags": {
+      "get": {
+        "tags": [
+          "Data Stream"
+        ],
+        "operationId": "DataStreamTagsOperations_Get",
+        "description": "Returns set of the data-stream tags.",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "name": "dataStreamId",
+            "in": "path",
+            "required": true,
+            "description": "The data stream identifier",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Adp.TagSet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Data Stream"
+        ],
+        "operationId": "DataStreamTagsOperations_Create",
+        "description": "Create or replace all tags at once.",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "name": "dataStreamId",
+            "in": "path",
+            "required": true,
+            "description": "The data stream identifier",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "description": "Parameter of type 'TagSetCreationParameters' in the body.",
+            "schema": {
+              "$ref": "#/definitions/Adp.TagSetCreationParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Adp.TagSetBase"
+            }
+          },
+          "201": {
+            "description": "A TagSetBase resource was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/Adp.TagSetBase"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/measurements/{measurementId}/dataStreams:findByLineage": {
+      "post": {
+        "tags": [
+          "Data Stream"
+        ],
+        "operationId": "DataStreamOperations_FindByLineage",
+        "description": "Lists the data-streams by lineage.",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "description": "Parameter of type 'FindDataStreamByLineageRequestParameters' in the body.",
+            "schema": {
+              "$ref": "#/definitions/Adp.FindDataStreamByLineageRequestParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDataStream"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/measurements/{measurementId}/dataStreams:findByTags": {
+      "post": {
+        "tags": [
+          "Data Stream"
+        ],
+        "operationId": "DataStreamOperations_FindByTags",
+        "description": "Lists the data-streams by tags.",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "description": "Parameter of type 'FindDataStreamByTagsRequestParameters' in the body.",
+            "schema": {
+              "$ref": "#/definitions/Adp.FindDataStreamByTagsRequestParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDataStream"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/measurements/{measurementId}/dataStreams:getLineageGraphsByLineage": {
+      "post": {
+        "tags": [
+          "Data Stream"
+        ],
+        "operationId": "DataStreamOperations_GetLineageGraphsByLineage",
+        "description": "Lists the data-streams by lineage graph.",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "description": "Parameter of type 'FindDataStreamByLineageGraphRequestParameters' in the body.",
+            "schema": {
+              "$ref": "#/definitions/Adp.FindDataStreamByLineageGraphRequestParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDataStreamsGraphListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/measurements/{measurementId}/metadata": {
+      "get": {
+        "tags": [
+          "Measurement"
+        ],
+        "operationId": "MeasurementMetadataOperations_Get",
+        "description": "Returns the measurement metadata.",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Adp.MeasurementMetadataBase"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/measurements/{measurementId}/metadataFileInfo:complete": {
+      "post": {
+        "tags": [
+          "Measurement"
+        ],
+        "operationId": "MeasurementMetadataFileInfoOperations_Complete",
+        "description": "Initiates a process that replaces the measurement's metadata file",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Adp.LongRunningOperationIdHeader"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "description": "Parameter of type 'CompleteUploadMetadataFileRequest' in the body.",
+            "schema": {
+              "$ref": "#/definitions/Adp.CompleteUploadMetadataFileRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "ETag": {
+                "description": "The entity tag for the response.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Adp.MeasurementMetadataFileInfoBase"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "description": "The location of an instance of LongRunningOperation",
+                "type": "string",
+                "format": "uri"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/DefaultLroResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/measurements/{measurementId}/metadataFileInfo:getWritableUri": {
+      "post": {
+        "tags": [
+          "Measurement"
+        ],
+        "operationId": "MeasurementMetadataFileInfoOperations_GetWritableUri",
+        "description": "Returns SAS signed URI that allows uploading temporary measurement metadata file to Azure Storage.\nThis URI expires in 24 hours.",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "ETag": {
+                "description": "The entity tag for the response.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Adp.MeasurementMetadataFileInfoBase"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/measurements/{measurementId}/metadataSchemaFileInfo": {
+      "get": {
+        "tags": [
+          "Measurement"
+        ],
+        "operationId": "MeasurementMetadataSchemaFileInfoOperations_Get",
+        "description": "Returns the measurement metadata schema file information.",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Adp.MeasurementMetadataSchemaFileInfoBase"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/measurements/{measurementId}/processingResults": {
+      "get": {
+        "tags": [
+          "Measurement"
+        ],
+        "operationId": "MeasurementProcessingResultsOperations_Get",
+        "description": "Returns the measurement processing result.",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Adp.MeasurementProcessingResultsBase"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/measurements/{measurementId}/stateMachines": {
+      "get": {
+        "tags": [
+          "Measurement"
+        ],
+        "operationId": "MeasurementStateMachineOperations_List",
+        "description": "List state machines instance for the measurement.",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedStateMachine"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/measurements/{measurementId}/stateMachines/{id}": {
+      "get": {
+        "tags": [
+          "Measurement"
+        ],
+        "operationId": "MeasurementStateMachineOperations_Get",
+        "description": "Returns the state machine instance for the measurement.",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The state machine identifier.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Adp.StateMachine"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/measurements/{measurementId}/stateMachines/{id}:act": {
+      "post": {
+        "tags": [
+          "Measurement"
+        ],
+        "operationId": "MeasurementStateMachineOperations_Act",
+        "description": "Initiates process of applying an action on the measurement.",
+        "parameters": [
+          {
+            "name": "measurementId",
+            "in": "path",
+            "required": true,
+            "description": "The measurement identifier.",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The state machine identifier.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Adp.LongRunningOperationIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "description": "Parameter of type 'StateMachineAction' in the body.",
+            "schema": {
+              "$ref": "#/definitions/Adp.StateMachineAction"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Adp.StateMachine"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "description": "The location of an instance of LongRunningOperation",
+                "type": "string",
+                "format": "uri"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/DefaultLroResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "Error code for specific error that occurred.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/CustomErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/measurements:findByIds": {
+      "post": {
+        "tags": [
+          "Measurement"
+        ],
+        "operationId": "MeasurementOperations_FindByIds",
+        "description": "Lists the measurements in a workspace that are in the given measurement IDs list.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "description": "Parameter of type 'MeasurementListRequestParameters' in the body.",
+            "schema": {
+              "$ref": "#/definitions/Adp.MeasurementListRequestParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedMeasurement"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/measurements:queryMeasurementsWithMetadata": {
+      "post": {
+        "tags": [
+          "Measurement"
+        ],
+        "operationId": "MeasurementOperations_QueryMeasurementsWithMetadata",
+        "description": "Lists the measurements in a workspace with extended metadata.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedMeasurementWithMetadata"
             }
           },
           "default": {
@@ -935,6 +2991,517 @@
     }
   },
   "definitions": {
+    "Adp.ClassificationSchema": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Classification schema identifier.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "schemaDefinition": {
+          "type": "string",
+          "description": "Classification schema definition (JSON schema as string).",
+          "minLength": 2,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "The entity tag for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      },
+      "description": "Classification schema resource model.",
+      "required": [
+        "name",
+        "schemaDefinition",
+        "etag"
+      ]
+    },
+    "Adp.ClassificationSchemaCreationParameters": {
+      "type": "object",
+      "properties": {
+        "schemaDefinition": {
+          "type": "string",
+          "description": "Classification schema definition (JSON schema as string).",
+          "minLength": 2,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "ClassificationSchema resource creation parameters.",
+      "required": [
+        "schemaDefinition"
+      ]
+    },
+    "Adp.CompleteUploadMetadataFileRequest": {
+      "type": "object",
+      "properties": {
+        "pendingFileETag": {
+          "type": "string",
+          "description": "The ETag of the uploaded metadata file"
+        }
+      },
+      "description": "Request parameters for the complete upload metadata file API",
+      "required": [
+        "pendingFileETag"
+      ]
+    },
+    "Adp.DataStream": {
+      "type": "object",
+      "properties": {
+        "dataStreamId": {
+          "type": "string",
+          "description": "The data stream identifier"
+        },
+        "resourceEndpoint": {
+          "$ref": "#/definitions/uri",
+          "description": "The endpoint uri of the owning resource",
+          "readOnly": true
+        },
+        "lineage": {
+          "$ref": "#/definitions/Adp.DataStreamLineage",
+          "description": "The data stream lineage information",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/Adp.DataStreamStatus",
+          "description": "The data stream status",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "type": {
+          "$ref": "#/definitions/Adp.DataStreamType",
+          "description": "The data stream type",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "The entity tag for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      },
+      "description": "A data-stream resource",
+      "required": [
+        "dataStreamId",
+        "lineage",
+        "status",
+        "type",
+        "etag"
+      ]
+    },
+    "Adp.DataStreamClassification": {
+      "type": "object",
+      "properties": {
+        "schemaName": {
+          "type": "string",
+          "description": "Classification schema name.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "classificationObject": {
+          "type": "string",
+          "description": "Classification object model (JSON as string)",
+          "minLength": 2,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "The entity tag for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      },
+      "description": "The data-stream classification.",
+      "required": [
+        "schemaName",
+        "classificationObject",
+        "etag"
+      ]
+    },
+    "Adp.DataStreamClassificationCreationParameters": {
+      "type": "object",
+      "properties": {
+        "schemaName": {
+          "type": "string",
+          "description": "Classification schema name.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "classificationObject": {
+          "type": "string",
+          "description": "Classification object model (JSON as string)",
+          "minLength": 2,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "DataStreamClassification resource creation parameters.",
+      "required": [
+        "schemaName",
+        "classificationObject"
+      ]
+    },
+    "Adp.DataStreamCreationParameters": {
+      "type": "object",
+      "properties": {
+        "lineage": {
+          "$ref": "#/definitions/Adp.DataStreamLineage",
+          "description": "The data stream lineage information",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      },
+      "description": "DataStream resource creation parameters",
+      "required": [
+        "lineage"
+      ]
+    },
+    "Adp.DataStreamFile": {
+      "type": "object",
+      "properties": {
+        "clientFileName": {
+          "type": "string",
+          "description": "Client file name."
+        },
+        "fileUri": {
+          "$ref": "#/definitions/uri",
+          "description": "SAS signed URI for downloading the file from Azure Storage.\nThis URI expires in 24 hours."
+        },
+        "externalTimeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC date and time indicating the start of file recording"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Size in bytes"
+        }
+      },
+      "description": "Data-stream file list.",
+      "required": [
+        "clientFileName",
+        "fileUri",
+        "externalTimeStamp",
+        "size"
+      ]
+    },
+    "Adp.DataStreamInput": {
+      "type": "object",
+      "properties": {
+        "sourceDataStreamId": {
+          "type": "string",
+          "description": "The source data-stream identifier"
+        },
+        "channels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Collection of the data stream's channels"
+        }
+      },
+      "description": "Data-stream input definition.",
+      "required": [
+        "sourceDataStreamId"
+      ]
+    },
+    "Adp.DataStreamLineage": {
+      "type": "object",
+      "properties": {
+        "producerMetadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "The data stream's metadata"
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Adp.DataStreamInput"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "Adp.DataStreamInput[]",
+          "description": "The data stream's inputs"
+        }
+      },
+      "description": "Data stream lineage information",
+      "required": [
+        "producerMetadata",
+        "inputs"
+      ]
+    },
+    "Adp.DataStreamLogsContainerBase": {
+      "type": "object",
+      "properties": {
+        "logFolderUri": {
+          "$ref": "#/definitions/uri",
+          "description": "SAS signed URI for accessing the logs container on Azure Storage.\nThis URI expires in 24 hours."
+        }
+      },
+      "description": "Data-stream logs folder",
+      "required": [
+        "logFolderUri"
+      ]
+    },
+    "Adp.DataStreamRollingInformation": {
+      "type": "object",
+      "properties": {
+        "strategy": {
+          "$ref": "#/definitions/Adp.DataStreamRollingStrategy",
+          "description": "Data stream rolling strategy"
+        },
+        "unit": {
+          "$ref": "#/definitions/Adp.DataStreamRollingUnit",
+          "description": "Data stream rolling unit"
+        },
+        "value": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Data stream rolling value",
+          "minimum": 0
+        }
+      },
+      "description": "Data stream rolling information",
+      "required": [
+        "strategy",
+        "unit",
+        "value"
+      ]
+    },
+    "Adp.DataStreamRollingStrategy": {
+      "type": "string",
+      "description": "Data stream rolling strategy",
+      "enum": [
+        "Time",
+        "Size"
+      ],
+      "x-ms-enum": {
+        "name": "DataStreamRollingStrategy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Time",
+            "value": "Time"
+          },
+          {
+            "name": "Size",
+            "value": "Size"
+          }
+        ]
+      }
+    },
+    "Adp.DataStreamRollingUnit": {
+      "type": "string",
+      "description": "Data stream rolling unit",
+      "enum": [
+        "Seconds",
+        "Minutes",
+        "kB",
+        "MB",
+        "GB"
+      ],
+      "x-ms-enum": {
+        "name": "DataStreamRollingUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Seconds",
+            "value": "Seconds"
+          },
+          {
+            "name": "Minutes",
+            "value": "Minutes"
+          },
+          {
+            "name": "kB",
+            "value": "kB"
+          },
+          {
+            "name": "MB",
+            "value": "MB"
+          },
+          {
+            "name": "GB",
+            "value": "GB"
+          }
+        ]
+      }
+    },
+    "Adp.DataStreamShardAccessInformation": {
+      "type": "object",
+      "properties": {
+        "shardFolderUri": {
+          "$ref": "#/definitions/uri",
+          "description": "SAS signed URI for reading the shard folder content from Azure Storage.\nThis URI expires in 24 hours."
+        },
+        "manifestFileUri": {
+          "$ref": "#/definitions/uri",
+          "description": "SAS signed URI for reading the shard manifest file from Azure Storage.\nThis URI expires in 24 hours."
+        }
+      },
+      "description": "The access information to the data stream shard",
+      "required": [
+        "shardFolderUri",
+        "manifestFileUri"
+      ]
+    },
+    "Adp.DataStreamStatus": {
+      "type": "string",
+      "description": "Data stream state",
+      "enum": [
+        "Created",
+        "Completing",
+        "Completed",
+        "Failed",
+        "Failing",
+        "Clearing",
+        "Cleared"
+      ],
+      "x-ms-enum": {
+        "name": "DataStreamStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Created",
+            "value": "Created"
+          },
+          {
+            "name": "Completing",
+            "value": "Completing"
+          },
+          {
+            "name": "Completed",
+            "value": "Completed"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "Failing",
+            "value": "Failing"
+          },
+          {
+            "name": "Clearing",
+            "value": "Clearing"
+          },
+          {
+            "name": "Cleared",
+            "value": "Cleared"
+          }
+        ]
+      }
+    },
+    "Adp.DataStreamType": {
+      "type": "string",
+      "description": "Data stream type",
+      "enum": [
+        "System",
+        "Raw",
+        "Derived"
+      ],
+      "x-ms-enum": {
+        "name": "DataStreamType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "System",
+            "value": "System"
+          },
+          {
+            "name": "Raw",
+            "value": "Raw"
+          },
+          {
+            "name": "Derived",
+            "value": "Derived"
+          }
+        ]
+      }
+    },
+    "Adp.DataStreamsGraph": {
+      "type": "object",
+      "properties": {
+        "dataStreamByProcessingObjectId": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Adp.DataStream"
+          },
+          "x-cadl-name": "Record<Adp.DataStream>",
+          "description": "Dictionary of data stream by processing object id"
+        }
+      },
+      "description": "Graph of matched data streams by processing objects graph",
+      "required": [
+        "dataStreamByProcessingObjectId"
+      ]
+    },
+    "Adp.DataStreamsGraphListResponse": {
+      "type": "object",
+      "properties": {
+        "dataStreamsGraphs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Adp.DataStreamsGraph"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "Adp.DataStreamsGraph[]",
+          "description": "List of data streams matched graphs"
+        }
+      },
+      "description": "List of graphs of matched data streams by processing objects graph",
+      "required": [
+        "dataStreamsGraphs"
+      ]
+    },
+    "Adp.DerivedDataStreamFileInformation": {
+      "type": "object",
+      "properties": {
+        "clientFileName": {
+          "type": "string",
+          "description": "The file name as provided by the client"
+        },
+        "recordingTimestampUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The file recording UTC timestamp as provided by the client"
+        }
+      },
+      "description": "Information about a file",
+      "required": [
+        "clientFileName"
+      ]
+    },
     "Adp.Discovery": {
       "type": "object",
       "properties": {
@@ -1186,6 +3753,81 @@
         "manifestUri"
       ]
     },
+    "Adp.FileUploadInformation": {
+      "type": "object",
+      "properties": {
+        "clientFileName": {
+          "type": "string",
+          "description": "File name specified by the client"
+        },
+        "fileUri": {
+          "$ref": "#/definitions/uri",
+          "description": "SAS signed URI for uploading (write) file to Azure Storage.\nThis URI expires in 24 hours."
+        }
+      },
+      "description": "File upload information",
+      "required": [
+        "clientFileName",
+        "fileUri"
+      ]
+    },
+    "Adp.FindDataStreamByLineageGraphRequestParameters": {
+      "type": "object",
+      "properties": {
+        "processingObjects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Adp.ProcessingObject"
+          },
+          "x-cadl-name": "Adp.ProcessingObject[]",
+          "description": "The processing objects"
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Adp.ProcessingObjectEdge"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "Adp.ProcessingObjectEdge[]",
+          "description": "The processing objects edges"
+        }
+      },
+      "description": "Processing objects graph",
+      "required": [
+        "processingObjects",
+        "edges"
+      ]
+    },
+    "Adp.FindDataStreamByLineageRequestParameters": {
+      "type": "object",
+      "properties": {
+        "lineage": {
+          "$ref": "#/definitions/Adp.DataStreamLineage",
+          "description": "The data-stream lineage to search for"
+        }
+      },
+      "description": "Data stream search by lineage query parameters",
+      "required": [
+        "lineage"
+      ]
+    },
+    "Adp.FindDataStreamByTagsRequestParameters": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "The list of tags to search for"
+        }
+      },
+      "description": "Data stream search by tags parameters",
+      "required": [
+        "tags"
+      ]
+    },
     "Adp.LongRunningOperationStatus": {
       "type": "string",
       "description": "The async operation status",
@@ -1255,6 +3897,583 @@
         "operationId",
         "status",
         "etag"
+      ]
+    },
+    "Adp.Measurement": {
+      "type": "object",
+      "properties": {
+        "measurementId": {
+          "type": "string",
+          "description": "The measurement identifier."
+        },
+        "location": {
+          "type": "string",
+          "description": "The storage account location which contains the measurement"
+        },
+        "ingestTimestampUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC time the measurement was ingested at"
+        },
+        "resourceEndpoint": {
+          "$ref": "#/definitions/uri",
+          "description": "The endpoint uri of the owning resource",
+          "readOnly": true
+        },
+        "externalPackageId": {
+          "type": "string",
+          "description": " The ID of the external package (for example, the disk which contained data) as specified by the customer upon data ingestion"
+        },
+        "uploadId": {
+          "type": "string",
+          "description": "ID of the upload process which caused the creation of this measurement"
+        },
+        "discoveryId": {
+          "type": "string",
+          "description": "ID of the discovery process which caused the creation of this measurement"
+        },
+        "recordTimestampUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC time the measurement was recorded at"
+        },
+        "etag": {
+          "type": "string",
+          "description": "The entity tag for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      },
+      "description": "A measurement resource",
+      "required": [
+        "measurementId",
+        "location",
+        "etag"
+      ]
+    },
+    "Adp.MeasurementClassification": {
+      "type": "object",
+      "properties": {
+        "schemaName": {
+          "type": "string",
+          "description": "Classification schema name.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "classificationObject": {
+          "type": "string",
+          "description": "Classification object model (JSON as string)",
+          "minLength": 2,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "The entity tag for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      },
+      "description": "Measurement classification",
+      "required": [
+        "schemaName",
+        "classificationObject",
+        "etag"
+      ]
+    },
+    "Adp.MeasurementClassificationCreationParameters": {
+      "type": "object",
+      "properties": {
+        "schemaName": {
+          "type": "string",
+          "description": "Classification schema name.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "classificationObject": {
+          "type": "string",
+          "description": "Classification object model (JSON as string)",
+          "minLength": 2,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "MeasurementClassification resource creation parameters.",
+      "required": [
+        "schemaName",
+        "classificationObject"
+      ]
+    },
+    "Adp.MeasurementListRequestParameters": {
+      "type": "object",
+      "properties": {
+        "measurementIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "The measurement IDs list"
+        }
+      },
+      "description": "A wrapper for the List of measurements IDs",
+      "required": [
+        "measurementIds"
+      ]
+    },
+    "Adp.MeasurementMetadataBase": {
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "The measurement metadata dictionary"
+        }
+      },
+      "description": "Measurement metadata without resource identifier.",
+      "required": [
+        "metadata"
+      ]
+    },
+    "Adp.MeasurementMetadataFileInfoBase": {
+      "type": "object",
+      "properties": {
+        "metadataFileName": {
+          "type": "string",
+          "description": "The measurement's metadata file name"
+        },
+        "metadataFileUri": {
+          "$ref": "#/definitions/uri",
+          "description": "SAS signed URI to measurement metadata file.\nIf file already exists on storage then ETag of this file will be returned in the response header.\nThis URI expires in 24 hours."
+        }
+      },
+      "description": "Measurement metadata file information model.",
+      "required": [
+        "metadataFileName",
+        "metadataFileUri"
+      ]
+    },
+    "Adp.MeasurementMetadataSchemaFileInfoBase": {
+      "type": "object",
+      "properties": {
+        "schemaFileName": {
+          "type": "string",
+          "description": "Measurement schema file name."
+        },
+        "schemaFileUri": {
+          "$ref": "#/definitions/uri",
+          "description": "SAS signed URI for downloading the measurement metadata schema file from Azure Storage.\nThis URI expires in 24 hours."
+        }
+      },
+      "description": "Measurement metadata schema file information model.",
+      "required": [
+        "schemaFileUri"
+      ]
+    },
+    "Adp.MeasurementProcessingResultsBase": {
+      "type": "object",
+      "properties": {
+        "validationPassed": {
+          "type": "boolean",
+          "description": "The measurement's validity"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Adp.MeasurementRuleValidationResult"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "Adp.MeasurementRuleValidationResult[]",
+          "description": "The measurement's rule validation results"
+        }
+      },
+      "description": "The measurement's validation result"
+    },
+    "Adp.MeasurementRuleValidationResult": {
+      "type": "object",
+      "properties": {
+        "ruleCategory": {
+          "type": "string",
+          "description": "Measurement validation rule category"
+        },
+        "ruleName": {
+          "type": "string",
+          "description": "Measurement validation rule name"
+        },
+        "details": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "Measurement validation rule metadata"
+        },
+        "validationPassed": {
+          "type": "boolean",
+          "description": "Measurement validation rule evaluation result"
+        },
+        "validationError": {
+          "type": "string",
+          "description": "Measurement validation error message"
+        }
+      },
+      "description": "The result of evaluation of measurement validation rule"
+    },
+    "Adp.MeasurementWithMetadata": {
+      "type": "object",
+      "properties": {
+        "measurementId": {
+          "type": "string",
+          "description": "The measurement identifier."
+        },
+        "location": {
+          "type": "string",
+          "description": "The storage account location which contains the measurement"
+        },
+        "ingestTimestampUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC time the measurement was ingested at"
+        },
+        "resourceEndpoint": {
+          "$ref": "#/definitions/uri",
+          "description": "The endpoint uri of the owning resource",
+          "readOnly": true
+        },
+        "externalPackageId": {
+          "type": "string",
+          "description": " The ID of the external package (for example, the disk which contained data) as specified by the customer upon data ingestion"
+        },
+        "uploadId": {
+          "type": "string",
+          "description": "ID of the upload process which caused the creation of this measurement"
+        },
+        "discoveryId": {
+          "type": "string",
+          "description": "ID of the discovery process which caused the creation of this measurement"
+        },
+        "recordTimestampUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC time the measurement was recorded at"
+        },
+        "etag": {
+          "type": "string",
+          "description": "The entity tag for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "The measurement metadata dictionary"
+        }
+      },
+      "description": "Custom query data set: Measurement and metadata.",
+      "required": [
+        "measurementId",
+        "location",
+        "etag",
+        "metadata"
+      ]
+    },
+    "Adp.ProcessingObject": {
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "The processing object metadata"
+        },
+        "id": {
+          "type": "string",
+          "description": "A request unique ID to identify processing objects in graph"
+        }
+      },
+      "description": "Processing object node information in a processing objects Graph",
+      "required": [
+        "metadata",
+        "id"
+      ]
+    },
+    "Adp.ProcessingObjectEdge": {
+      "type": "object",
+      "properties": {
+        "sourceId": {
+          "type": "string",
+          "description": "The source processing object ID"
+        },
+        "targetId": {
+          "type": "string",
+          "description": "The target processing object ID"
+        }
+      },
+      "description": "Processing objects edge",
+      "required": [
+        "sourceId",
+        "targetId"
+      ]
+    },
+    "Adp.StateMachine": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The state machine identifier."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the state machine"
+        },
+        "availableActionNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Type of the state machine"
+        }
+      },
+      "description": "State machine",
+      "required": [
+        "id",
+        "type",
+        "availableActionNames"
+      ]
+    },
+    "Adp.StateMachineAction": {
+      "type": "object",
+      "properties": {
+        "actionName": {
+          "type": "string",
+          "description": "The state machine action name."
+        }
+      },
+      "description": "State machine action name.",
+      "required": [
+        "actionName"
+      ]
+    },
+    "Adp.StorageBase": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Storage type.",
+          "enum": [
+            "shardedStorage",
+            "storage"
+          ],
+          "x-ms-enum": {
+            "name": "string",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ShardedStorage",
+                "value": "shardedStorage"
+              },
+              {
+                "name": "Storage",
+                "value": "storage"
+              }
+            ]
+          }
+        },
+        "rollingInformation": {
+          "$ref": "#/definitions/Adp.DataStreamRollingInformation",
+          "description": "The data stream rolling information",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "manifestUri": {
+          "$ref": "#/definitions/uri",
+          "description": "SAS signed URI for downloading the data stream storage manifest file from Azure Storage.\nThis URI expires in 24 hours.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "dataFolderUri": {
+          "$ref": "#/definitions/uri",
+          "description": "SAS signed URI for accessing the data stream data stored on the Azure Storage.\nThis URI expires in 24 hours.",
+          "readOnly": true
+        },
+        "shards": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Adp.DataStreamShardAccessInformation"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "Adp.DataStreamShardAccessInformation[]",
+          "description": "The list of shards associated with the data stream",
+          "minItems": 1,
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "The entity tag for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      },
+      "description": "Common data-stream storage model.",
+      "required": [
+        "type",
+        "manifestUri",
+        "shards",
+        "etag"
+      ]
+    },
+    "Adp.StorageCreationParameters": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Storage type.",
+          "enum": [
+            "shardedStorage",
+            "storage"
+          ],
+          "x-ms-enum": {
+            "name": "string",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ShardedStorage",
+                "value": "shardedStorage"
+              },
+              {
+                "name": "Storage",
+                "value": "storage"
+              }
+            ]
+          }
+        },
+        "rollingInformation": {
+          "$ref": "#/definitions/Adp.DataStreamRollingInformation",
+          "description": "The data stream rolling information",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      },
+      "description": "Storage resource creation parameters",
+      "required": [
+        "type"
+      ]
+    },
+    "Adp.Tag": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Tag identifier"
+        },
+        "value": {
+          "type": "string",
+          "description": "Tag value."
+        }
+      },
+      "description": "Tag element.",
+      "required": [
+        "key",
+        "value"
+      ]
+    },
+    "Adp.TagSet": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The data stream tag set identifier.\nNot in use as this is a singleton resource. Tags could be set or returned as singleton set.\nTODO: check with CADL team how to define a singleton child resource without key."
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Adp.Tag"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "Adp.Tag[]",
+          "description": "Set of data-stream tags.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "A data-stream tags.",
+      "required": [
+        "id",
+        "tags"
+      ]
+    },
+    "Adp.TagSetBase": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Adp.Tag"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "Adp.Tag[]",
+          "description": "Set of data-stream tags.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "Tag set.",
+      "required": [
+        "tags"
+      ]
+    },
+    "Adp.TagSetCreationParameters": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Adp.Tag"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "Adp.Tag[]",
+          "description": "Set of data-stream tags.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "Storage resource creation parameters",
+      "required": [
+        "tags"
       ]
     },
     "Adp.Upload": {
@@ -1350,6 +4569,42 @@
       "required": [
         "clientFileName",
         "fileUri"
+      ]
+    },
+    "Adp.UploadDerivedDataStreamFilesRequest": {
+      "type": "object",
+      "properties": {
+        "files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Adp.DerivedDataStreamFileInformation"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "Adp.DerivedDataStreamFileInformation[]",
+          "description": "The information of the files that are to be uploaded"
+        }
+      },
+      "description": "Data stream file upload parameters",
+      "required": [
+        "files"
+      ]
+    },
+    "Adp.UploadDerivedDataStreamFilesResponse": {
+      "type": "object",
+      "properties": {
+        "files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Adp.FileUploadInformation"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "Adp.FileUploadInformation[]",
+          "description": "Per-file upload instructions"
+        }
+      },
+      "description": "Data stream file upload request parameters",
+      "required": [
+        "files"
       ]
     },
     "Adp.UploadLroResponse": {
@@ -1596,6 +4851,23 @@
         "error"
       ]
     },
+    "Azure.Core.Foundations.Extensions.DefaultLroType": {
+      "type": "string",
+      "description": "for internal use",
+      "enum": [
+        "default"
+      ],
+      "x-ms-enum": {
+        "name": "DefaultLroType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Default",
+            "value": "default"
+          }
+        ]
+      }
+    },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
       "properties": {
@@ -1624,6 +4896,181 @@
       "description": "Error response with 'x-ms-error-code' header.",
       "required": [
         "error"
+      ]
+    },
+    "DefaultLroResponse": {
+      "type": "object",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "The operation Id.",
+          "minLength": 1,
+          "maxLength": 36
+        },
+        "status": {
+          "$ref": "#/definitions/Adp.LongRunningOperationStatus",
+          "description": "The operation status.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "operationType": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Extensions.DefaultLroType",
+          "description": "The operation type.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The operation error.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "resultUri": {
+          "$ref": "#/definitions/uri",
+          "description": "The operation final result URI. Will be returned if the operation succeeds via `Location` header in response.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "The entity tag for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      },
+      "required": [
+        "operationId",
+        "status",
+        "etag"
+      ]
+    },
+    "PagedClassificationSchema": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Adp.ClassificationSchema"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "Adp.ClassificationSchema[]",
+          "description": "The ClassificationSchema items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "format": "uri",
+          "x-cadl-name": "Rest.ResourceLocation<Adp.ClassificationSchema>"
+        }
+      },
+      "description": "Paged collection of ClassificationSchema items",
+      "required": [
+        "value"
+      ]
+    },
+    "PagedDataStream": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Adp.DataStream"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "Adp.DataStream[]",
+          "description": "The DataStream items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "format": "uri",
+          "x-cadl-name": "Rest.ResourceLocation<Adp.DataStream>"
+        }
+      },
+      "description": "Paged collection of DataStream items",
+      "required": [
+        "value"
+      ]
+    },
+    "PagedDataStreamClassification": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Adp.DataStreamClassification"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "Adp.DataStreamClassification[]",
+          "description": "The DataStreamClassification items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "format": "uri",
+          "x-cadl-name": "Rest.ResourceLocation<Adp.DataStreamClassification>"
+        }
+      },
+      "description": "Paged collection of DataStreamClassification items",
+      "required": [
+        "value"
+      ]
+    },
+    "PagedDataStreamFile": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Adp.DataStreamFile"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "Adp.DataStreamFile[]",
+          "description": "The DataStreamFile items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "format": "uri",
+          "x-cadl-name": "Rest.ResourceLocation<Adp.DataStreamFile>"
+        }
+      },
+      "description": "Paged collection of DataStreamFile items",
+      "required": [
+        "value"
+      ]
+    },
+    "PagedDataStreamsGraphListResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Adp.DataStreamsGraphListResponse"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "Adp.DataStreamsGraphListResponse[]",
+          "description": "The DataStreamsGraphListResponse items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "format": "uri",
+          "x-cadl-name": "Rest.ResourceLocation<Adp.DataStreamsGraphListResponse>"
+        }
+      },
+      "description": "Paged collection of DataStreamsGraphListResponse items",
+      "required": [
+        "value"
       ]
     },
     "PagedDiscoverySpecialFile": {
@@ -1670,6 +5117,101 @@
         }
       },
       "description": "Paged collection of DiscoveryUpload items",
+      "required": [
+        "value"
+      ]
+    },
+    "PagedMeasurement": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Adp.Measurement"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "Adp.Measurement[]",
+          "description": "The Measurement items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "format": "uri",
+          "x-cadl-name": "Rest.ResourceLocation<Adp.Measurement>"
+        }
+      },
+      "description": "Paged collection of Measurement items",
+      "required": [
+        "value"
+      ]
+    },
+    "PagedMeasurementClassification": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Adp.MeasurementClassification"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "Adp.MeasurementClassification[]",
+          "description": "The MeasurementClassification items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "format": "uri",
+          "x-cadl-name": "Rest.ResourceLocation<Adp.MeasurementClassification>"
+        }
+      },
+      "description": "Paged collection of MeasurementClassification items",
+      "required": [
+        "value"
+      ]
+    },
+    "PagedMeasurementWithMetadata": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Adp.MeasurementWithMetadata"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "Adp.MeasurementWithMetadata[]",
+          "description": "The MeasurementWithMetadata items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "format": "uri",
+          "x-cadl-name": "Rest.ResourceLocation<Adp.MeasurementWithMetadata>"
+        }
+      },
+      "description": "Paged collection of MeasurementWithMetadata items",
+      "required": [
+        "value"
+      ]
+    },
+    "PagedStateMachine": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Adp.StateMachine"
+          },
+          "x-cadl-name": "Adp.StateMachine[]",
+          "description": "The StateMachine items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "format": "uri",
+          "x-cadl-name": "Rest.ResourceLocation<Adp.StateMachine>"
+        }
+      },
+      "description": "Paged collection of StateMachine items",
       "required": [
         "value"
       ]
@@ -1758,6 +5300,14 @@
       "required": false,
       "description": "The long running operation identifier. Operation-Id should be valid UUID string.",
       "format": "uuid",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.FilterQueryParameter": {
+      "name": "filter",
+      "in": "query",
+      "required": false,
+      "description": "Filter the result list using the given expression.",
       "type": "string",
       "x-ms-parameter-location": "method"
     },

@@ -16,48 +16,54 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 
-/** Initializes a new instance of the synchronous DataManagementClient type. */
-@ServiceClient(builder = DataManagementClientBuilder.class)
-public final class DataManagementClient {
-    @Generated private final DataManagementAsyncClient client;
+/** Initializes a new instance of the synchronous MeasurementProcessingResultsClient type. */
+@ServiceClient(builder = MeasurementProcessingResultsClientBuilder.class)
+public final class MeasurementProcessingResultsClient {
+    @Generated private final MeasurementProcessingResultsAsyncClient client;
 
     /**
-     * Initializes an instance of DataManagementClient class.
+     * Initializes an instance of MeasurementProcessingResultsClient class.
      *
      * @param client the async client.
      */
     @Generated
-    DataManagementClient(DataManagementAsyncClient client) {
+    MeasurementProcessingResultsClient(MeasurementProcessingResultsAsyncClient client) {
         this.client = client;
     }
 
     /**
-     * Get the details of an LRO.
+     * Returns the measurement processing result.
      *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
      * {
-     *     operationId: String (Required)
-     *     status: String(Created/InProgress/Succeeded/Failed/Canceled) (Required)
-     *     operationType: String (Optional)
-     *     error: ResponseError (Optional)
-     *     resultUri: String (Optional)
-     *     etag: String (Required)
+     *     validationPassed: Boolean (Optional)
+     *     results (Optional): [
+     *          (Optional){
+     *             ruleCategory: String (Optional)
+     *             ruleName: String (Optional)
+     *             details (Optional): {
+     *                 String: String (Optional)
+     *             }
+     *             validationPassed: Boolean (Optional)
+     *             validationError: String (Optional)
+     *         }
+     *     ]
      * }
      * }</pre>
      *
-     * @param operationId The unique ID of the operation.
+     * @param measurementId The measurement identifier.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the details of an LRO along with {@link Response}.
+     * @return tODO: REMOVE - not in use along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getStatusWithResponse(String operationId, RequestOptions requestOptions) {
-        return this.client.getStatusWithResponse(operationId, requestOptions).block();
+    public Response<BinaryData> getWithResponse(String measurementId, RequestOptions requestOptions) {
+        return this.client.getWithResponse(measurementId, requestOptions).block();
     }
 }

@@ -4,6 +4,7 @@
 
 package com.adp.datamanagement;
 
+import com.adp.datamanagement.implementation.UploadMeasurementsClientImpl;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
@@ -12,52 +13,47 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.rest.PagedFlux;
 import com.azure.core.http.rest.RequestOptions;
-import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 
-/** Initializes a new instance of the synchronous DataManagementClient type. */
-@ServiceClient(builder = DataManagementClientBuilder.class)
-public final class DataManagementClient {
-    @Generated private final DataManagementAsyncClient client;
+/** Initializes a new instance of the asynchronous UploadMeasurementsClient type. */
+@ServiceClient(builder = UploadMeasurementsClientBuilder.class, isAsync = true)
+public final class UploadMeasurementsAsyncClient {
+    @Generated private final UploadMeasurementsClientImpl serviceClient;
 
     /**
-     * Initializes an instance of DataManagementClient class.
+     * Initializes an instance of UploadMeasurementsAsyncClient class.
      *
-     * @param client the async client.
+     * @param serviceClient the service client implementation.
      */
     @Generated
-    DataManagementClient(DataManagementAsyncClient client) {
-        this.client = client;
+    UploadMeasurementsAsyncClient(UploadMeasurementsClientImpl serviceClient) {
+        this.serviceClient = serviceClient;
     }
 
     /**
-     * Get the details of an LRO.
+     * List of the measurement identifiers that have been created by the upload.
      *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
      * {
-     *     operationId: String (Required)
-     *     status: String(Created/InProgress/Succeeded/Failed/Canceled) (Required)
-     *     operationType: String (Optional)
-     *     error: ResponseError (Optional)
-     *     resultUri: String (Optional)
-     *     etag: String (Required)
+     *     measurementId: String (Required)
      * }
      * }</pre>
      *
-     * @param operationId The unique ID of the operation.
+     * @param uploadId The upload resource identifier.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the details of an LRO along with {@link Response}.
+     * @return paged collection of UploadResultMeasurement items as paginated response with {@link PagedFlux}.
      */
     @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getStatusWithResponse(String operationId, RequestOptions requestOptions) {
-        return this.client.getStatusWithResponse(operationId, requestOptions).block();
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<BinaryData> list(String uploadId, RequestOptions requestOptions) {
+        return this.serviceClient.listAsync(uploadId, requestOptions);
     }
 }

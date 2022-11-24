@@ -147,17 +147,17 @@ interface DataStreamFileOperations {
   @doc("Returns SAS signed URIs for reading special files from Azure Storage.")
   list is CustomResourceList<DataStreamFile>;
 
-  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom LRO response template the LRO actions."
-  @doc("Initiates the process of generating SAS signed URIs for accessing the data-stream files.")
-  @extension("x-ms-long-running-operation", true)
-  @asyncOperationOptions("location")
-  @pollingOperation(LongRunningOperations.getStatus)
-  generate is CustomLongRunningResourceCollectionAction<
-    DataStreamFile,
-    {},
-    Page<DataStreamFile>,
-    DefaultLroResponse
-  >;
+  // #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom LRO response template the LRO actions."
+  // @doc("Initiates the process of generating SAS signed URIs for accessing the data-stream files.")
+  // @extension("x-ms-long-running-operation", true)
+  // @asyncOperationOptions("location")
+  // @pollingOperation(LongRunningOperations.getStatus)
+  // generate is CustomLongRunningResourceCollectionAction<
+  //   DataStreamFile,
+  //   {},
+  //   Page<DataStreamFile>,
+  //   DefaultLroResponse
+  // >;
 }
 
 #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom operation."

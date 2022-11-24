@@ -4,7 +4,7 @@
 
 package com.adp.datamanagement;
 
-import com.adp.datamanagement.implementation.DataManagementClientImpl;
+import com.adp.datamanagement.implementation.MeasurementProcessingResultsClientImpl;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
@@ -18,48 +18,54 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous DataManagementClient type. */
-@ServiceClient(builder = DataManagementClientBuilder.class, isAsync = true)
-public final class DataManagementAsyncClient {
-    @Generated private final DataManagementClientImpl serviceClient;
+/** Initializes a new instance of the asynchronous MeasurementProcessingResultsClient type. */
+@ServiceClient(builder = MeasurementProcessingResultsClientBuilder.class, isAsync = true)
+public final class MeasurementProcessingResultsAsyncClient {
+    @Generated private final MeasurementProcessingResultsClientImpl serviceClient;
 
     /**
-     * Initializes an instance of DataManagementAsyncClient class.
+     * Initializes an instance of MeasurementProcessingResultsAsyncClient class.
      *
      * @param serviceClient the service client implementation.
      */
     @Generated
-    DataManagementAsyncClient(DataManagementClientImpl serviceClient) {
+    MeasurementProcessingResultsAsyncClient(MeasurementProcessingResultsClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
     /**
-     * Get the details of an LRO.
+     * Returns the measurement processing result.
      *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
      * {
-     *     operationId: String (Required)
-     *     status: String(Created/InProgress/Succeeded/Failed/Canceled) (Required)
-     *     operationType: String (Optional)
-     *     error: ResponseError (Optional)
-     *     resultUri: String (Optional)
-     *     etag: String (Required)
+     *     validationPassed: Boolean (Optional)
+     *     results (Optional): [
+     *          (Optional){
+     *             ruleCategory: String (Optional)
+     *             ruleName: String (Optional)
+     *             details (Optional): {
+     *                 String: String (Optional)
+     *             }
+     *             validationPassed: Boolean (Optional)
+     *             validationError: String (Optional)
+     *         }
+     *     ]
      * }
      * }</pre>
      *
-     * @param operationId The unique ID of the operation.
+     * @param measurementId The measurement identifier.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the details of an LRO along with {@link Response} on successful completion of {@link Mono}.
+     * @return tODO: REMOVE - not in use along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getStatusWithResponse(String operationId, RequestOptions requestOptions) {
-        return this.serviceClient.getStatusWithResponseAsync(operationId, requestOptions);
+    public Mono<Response<BinaryData>> getWithResponse(String measurementId, RequestOptions requestOptions) {
+        return this.serviceClient.getWithResponseAsync(measurementId, requestOptions);
     }
 }

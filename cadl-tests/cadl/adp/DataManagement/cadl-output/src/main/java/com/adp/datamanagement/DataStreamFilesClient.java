@@ -12,52 +12,51 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.RequestOptions;
-import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 
-/** Initializes a new instance of the synchronous DataManagementClient type. */
-@ServiceClient(builder = DataManagementClientBuilder.class)
-public final class DataManagementClient {
-    @Generated private final DataManagementAsyncClient client;
+/** Initializes a new instance of the synchronous DataStreamFilesClient type. */
+@ServiceClient(builder = DataStreamFilesClientBuilder.class)
+public final class DataStreamFilesClient {
+    @Generated private final DataStreamFilesAsyncClient client;
 
     /**
-     * Initializes an instance of DataManagementClient class.
+     * Initializes an instance of DataStreamFilesClient class.
      *
      * @param client the async client.
      */
     @Generated
-    DataManagementClient(DataManagementAsyncClient client) {
+    DataStreamFilesClient(DataStreamFilesAsyncClient client) {
         this.client = client;
     }
 
     /**
-     * Get the details of an LRO.
+     * Returns SAS signed URIs for reading special files from Azure Storage.
      *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
      * {
-     *     operationId: String (Required)
-     *     status: String(Created/InProgress/Succeeded/Failed/Canceled) (Required)
-     *     operationType: String (Optional)
-     *     error: ResponseError (Optional)
-     *     resultUri: String (Optional)
-     *     etag: String (Required)
+     *     clientFileName: String (Required)
+     *     fileUri: String (Required)
+     *     externalTimeStamp: OffsetDateTime (Required)
+     *     size: long (Required)
      * }
      * }</pre>
      *
-     * @param operationId The unique ID of the operation.
+     * @param measurementId The measurement identifier.
+     * @param dataStreamId The data stream identifier.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the details of an LRO along with {@link Response}.
+     * @return paged collection of DataStreamFile items as paginated response with {@link PagedIterable}.
      */
     @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getStatusWithResponse(String operationId, RequestOptions requestOptions) {
-        return this.client.getStatusWithResponse(operationId, requestOptions).block();
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> list(String measurementId, String dataStreamId, RequestOptions requestOptions) {
+        return new PagedIterable<>(this.client.list(measurementId, dataStreamId, requestOptions));
     }
 }

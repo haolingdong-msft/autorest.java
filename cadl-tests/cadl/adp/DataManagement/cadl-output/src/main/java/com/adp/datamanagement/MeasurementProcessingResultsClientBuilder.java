@@ -4,7 +4,7 @@
 
 package com.adp.datamanagement;
 
-import com.adp.datamanagement.implementation.DataManagementClientImpl;
+import com.adp.datamanagement.implementation.MeasurementProcessingResultsClientImpl;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
@@ -41,13 +41,14 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-/** A builder for creating a new instance of the DataManagementClient type. */
-@ServiceClientBuilder(serviceClients = {DataManagementClient.class, DataManagementAsyncClient.class})
-public final class DataManagementClientBuilder
-        implements HttpTrait<DataManagementClientBuilder>,
-                ConfigurationTrait<DataManagementClientBuilder>,
-                TokenCredentialTrait<DataManagementClientBuilder>,
-                EndpointTrait<DataManagementClientBuilder> {
+/** A builder for creating a new instance of the MeasurementProcessingResultsClient type. */
+@ServiceClientBuilder(
+        serviceClients = {MeasurementProcessingResultsClient.class, MeasurementProcessingResultsAsyncClient.class})
+public final class MeasurementProcessingResultsClientBuilder
+        implements HttpTrait<MeasurementProcessingResultsClientBuilder>,
+                ConfigurationTrait<MeasurementProcessingResultsClientBuilder>,
+                TokenCredentialTrait<MeasurementProcessingResultsClientBuilder>,
+                EndpointTrait<MeasurementProcessingResultsClientBuilder> {
     @Generated private static final String SDK_NAME = "name";
 
     @Generated private static final String SDK_VERSION = "version";
@@ -59,9 +60,9 @@ public final class DataManagementClientBuilder
 
     @Generated private final List<HttpPipelinePolicy> pipelinePolicies;
 
-    /** Create an instance of the DataManagementClientBuilder. */
+    /** Create an instance of the MeasurementProcessingResultsClientBuilder. */
     @Generated
-    public DataManagementClientBuilder() {
+    public MeasurementProcessingResultsClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
 
@@ -73,7 +74,7 @@ public final class DataManagementClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public DataManagementClientBuilder pipeline(HttpPipeline pipeline) {
+    public MeasurementProcessingResultsClientBuilder pipeline(HttpPipeline pipeline) {
         this.pipeline = pipeline;
         return this;
     }
@@ -86,7 +87,7 @@ public final class DataManagementClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public DataManagementClientBuilder httpClient(HttpClient httpClient) {
+    public MeasurementProcessingResultsClientBuilder httpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         return this;
     }
@@ -99,7 +100,7 @@ public final class DataManagementClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public DataManagementClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
+    public MeasurementProcessingResultsClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
         this.httpLogOptions = httpLogOptions;
         return this;
     }
@@ -112,7 +113,7 @@ public final class DataManagementClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public DataManagementClientBuilder clientOptions(ClientOptions clientOptions) {
+    public MeasurementProcessingResultsClientBuilder clientOptions(ClientOptions clientOptions) {
         this.clientOptions = clientOptions;
         return this;
     }
@@ -125,7 +126,7 @@ public final class DataManagementClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public DataManagementClientBuilder retryOptions(RetryOptions retryOptions) {
+    public MeasurementProcessingResultsClientBuilder retryOptions(RetryOptions retryOptions) {
         this.retryOptions = retryOptions;
         return this;
     }
@@ -133,7 +134,7 @@ public final class DataManagementClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public DataManagementClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+    public MeasurementProcessingResultsClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
         Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
@@ -147,7 +148,7 @@ public final class DataManagementClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public DataManagementClientBuilder configuration(Configuration configuration) {
+    public MeasurementProcessingResultsClientBuilder configuration(Configuration configuration) {
         this.configuration = configuration;
         return this;
     }
@@ -160,7 +161,7 @@ public final class DataManagementClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public DataManagementClientBuilder credential(TokenCredential tokenCredential) {
+    public MeasurementProcessingResultsClientBuilder credential(TokenCredential tokenCredential) {
         this.tokenCredential = tokenCredential;
         return this;
     }
@@ -173,7 +174,7 @@ public final class DataManagementClientBuilder
     /** {@inheritDoc}. */
     @Generated
     @Override
-    public DataManagementClientBuilder endpoint(String endpoint) {
+    public MeasurementProcessingResultsClientBuilder endpoint(String endpoint) {
         this.endpoint = endpoint;
         return this;
     }
@@ -187,10 +188,10 @@ public final class DataManagementClientBuilder
      * Sets Service version.
      *
      * @param serviceVersion the serviceVersion value.
-     * @return the DataManagementClientBuilder.
+     * @return the MeasurementProcessingResultsClientBuilder.
      */
     @Generated
-    public DataManagementClientBuilder serviceVersion(DataManagementServiceVersion serviceVersion) {
+    public MeasurementProcessingResultsClientBuilder serviceVersion(DataManagementServiceVersion serviceVersion) {
         this.serviceVersion = serviceVersion;
         return this;
     }
@@ -204,26 +205,26 @@ public final class DataManagementClientBuilder
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
      *
      * @param retryPolicy the retryPolicy value.
-     * @return the DataManagementClientBuilder.
+     * @return the MeasurementProcessingResultsClientBuilder.
      */
     @Generated
-    public DataManagementClientBuilder retryPolicy(RetryPolicy retryPolicy) {
+    public MeasurementProcessingResultsClientBuilder retryPolicy(RetryPolicy retryPolicy) {
         this.retryPolicy = retryPolicy;
         return this;
     }
 
     /**
-     * Builds an instance of DataManagementClientImpl with the provided parameters.
+     * Builds an instance of MeasurementProcessingResultsClientImpl with the provided parameters.
      *
-     * @return an instance of DataManagementClientImpl.
+     * @return an instance of MeasurementProcessingResultsClientImpl.
      */
     @Generated
-    private DataManagementClientImpl buildInnerClient() {
+    private MeasurementProcessingResultsClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         DataManagementServiceVersion localServiceVersion =
                 (serviceVersion != null) ? serviceVersion : DataManagementServiceVersion.getLatest();
-        DataManagementClientImpl client =
-                new DataManagementClientImpl(
+        MeasurementProcessingResultsClientImpl client =
+                new MeasurementProcessingResultsClientImpl(
                         localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, localServiceVersion);
         return client;
     }
@@ -273,22 +274,22 @@ public final class DataManagementClientBuilder
     }
 
     /**
-     * Builds an instance of DataManagementAsyncClient class.
+     * Builds an instance of MeasurementProcessingResultsAsyncClient class.
      *
-     * @return an instance of DataManagementAsyncClient.
+     * @return an instance of MeasurementProcessingResultsAsyncClient.
      */
     @Generated
-    public DataManagementAsyncClient buildAsyncClient() {
-        return new DataManagementAsyncClient(buildInnerClient());
+    public MeasurementProcessingResultsAsyncClient buildAsyncClient() {
+        return new MeasurementProcessingResultsAsyncClient(buildInnerClient());
     }
 
     /**
-     * Builds an instance of DataManagementClient class.
+     * Builds an instance of MeasurementProcessingResultsClient class.
      *
-     * @return an instance of DataManagementClient.
+     * @return an instance of MeasurementProcessingResultsClient.
      */
     @Generated
-    public DataManagementClient buildClient() {
-        return new DataManagementClient(new DataManagementAsyncClient(buildInnerClient()));
+    public MeasurementProcessingResultsClient buildClient() {
+        return new MeasurementProcessingResultsClient(new MeasurementProcessingResultsAsyncClient(buildInnerClient()));
     }
 }

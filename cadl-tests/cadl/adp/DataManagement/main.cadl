@@ -5,8 +5,8 @@ import "@azure-tools/cadl-azure-core";
 
 import "../Adp.Shared";
 import "./ingestion";
-// import "./classification";
-// import "./measurement";
+import "./classification";
+import "./measurement";
 
 using Cadl.Http;
 

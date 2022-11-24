@@ -35,10 +35,10 @@ import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the DataManagementClient type. */
-public final class DataManagementClientImpl {
+/** Initializes a new instance of the MeasurementMetadataClient type. */
+public final class MeasurementMetadataClientImpl {
     /** The proxy service used to perform REST calls. */
-    private final DataManagementClientService service;
+    private final MeasurementMetadataClientService service;
 
     /** Server parameter. */
     private final String endpoint;
@@ -89,12 +89,12 @@ public final class DataManagementClientImpl {
     }
 
     /**
-     * Initializes an instance of DataManagementClient client.
+     * Initializes an instance of MeasurementMetadataClient client.
      *
      * @param endpoint Server parameter.
      * @param serviceVersion Service version.
      */
-    public DataManagementClientImpl(String endpoint, DataManagementServiceVersion serviceVersion) {
+    public MeasurementMetadataClientImpl(String endpoint, DataManagementServiceVersion serviceVersion) {
         this(
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
@@ -105,26 +105,26 @@ public final class DataManagementClientImpl {
     }
 
     /**
-     * Initializes an instance of DataManagementClient client.
+     * Initializes an instance of MeasurementMetadataClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint Server parameter.
      * @param serviceVersion Service version.
      */
-    public DataManagementClientImpl(
+    public MeasurementMetadataClientImpl(
             HttpPipeline httpPipeline, String endpoint, DataManagementServiceVersion serviceVersion) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
     /**
-     * Initializes an instance of DataManagementClient client.
+     * Initializes an instance of MeasurementMetadataClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint Server parameter.
      * @param serviceVersion Service version.
      */
-    public DataManagementClientImpl(
+    public MeasurementMetadataClientImpl(
             HttpPipeline httpPipeline,
             SerializerAdapter serializerAdapter,
             String endpoint,
@@ -134,17 +134,18 @@ public final class DataManagementClientImpl {
         this.endpoint = endpoint;
         this.serviceVersion = serviceVersion;
         this.service =
-                RestProxy.create(DataManagementClientService.class, this.httpPipeline, this.getSerializerAdapter());
+                RestProxy.create(
+                        MeasurementMetadataClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
 
     /**
-     * The interface defining all the services for DataManagementClient to be used by the proxy service to perform REST
-     * calls.
+     * The interface defining all the services for MeasurementMetadataClient to be used by the proxy service to perform
+     * REST calls.
      */
     @Host("{endpoint}")
-    @ServiceInterface(name = "DataManagementClient")
-    public interface DataManagementClientService {
-        @Get("/operations/{operationId}")
+    @ServiceInterface(name = "MeasurementMetadataC")
+    public interface MeasurementMetadataClientService {
+        @Get("/measurements/{measurementId}/metadata")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -156,9 +157,9 @@ public final class DataManagementClientImpl {
                 value = ResourceModifiedException.class,
                 code = {409})
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getStatus(
+        Mono<Response<BinaryData>> get(
                 @HostParam("endpoint") String endpoint,
-                @PathParam("operationId") String operationId,
+                @PathParam("measurementId") String measurementId,
                 @QueryParam("api-version") String apiVersion,
                 @HeaderParam("accept") String accept,
                 RequestOptions requestOptions,
@@ -166,37 +167,35 @@ public final class DataManagementClientImpl {
     }
 
     /**
-     * Get the details of an LRO.
+     * Returns the measurement metadata.
      *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
      * {
-     *     operationId: String (Required)
-     *     status: String(Created/InProgress/Succeeded/Failed/Canceled) (Required)
-     *     operationType: String (Optional)
-     *     error: ResponseError (Optional)
-     *     resultUri: String (Optional)
-     *     etag: String (Required)
+     *     metadata (Required): {
+     *         String: String (Required)
+     *     }
      * }
      * }</pre>
      *
-     * @param operationId The unique ID of the operation.
+     * @param measurementId The measurement identifier.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the details of an LRO along with {@link Response} on successful completion of {@link Mono}.
+     * @return measurement metadata without resource identifier along with {@link Response} on successful completion of
+     *     {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getStatusWithResponseAsync(String operationId, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> getWithResponseAsync(String measurementId, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(
                 context ->
-                        service.getStatus(
+                        service.get(
                                 this.getEndpoint(),
-                                operationId,
+                                measurementId,
                                 this.getServiceVersion().getVersion(),
                                 accept,
                                 requestOptions,
@@ -204,31 +203,28 @@ public final class DataManagementClientImpl {
     }
 
     /**
-     * Get the details of an LRO.
+     * Returns the measurement metadata.
      *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
      * {
-     *     operationId: String (Required)
-     *     status: String(Created/InProgress/Succeeded/Failed/Canceled) (Required)
-     *     operationType: String (Optional)
-     *     error: ResponseError (Optional)
-     *     resultUri: String (Optional)
-     *     etag: String (Required)
+     *     metadata (Required): {
+     *         String: String (Required)
+     *     }
      * }
      * }</pre>
      *
-     * @param operationId The unique ID of the operation.
+     * @param measurementId The measurement identifier.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the details of an LRO along with {@link Response}.
+     * @return measurement metadata without resource identifier along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getStatusWithResponse(String operationId, RequestOptions requestOptions) {
-        return getStatusWithResponseAsync(operationId, requestOptions).block();
+    public Response<BinaryData> getWithResponse(String measurementId, RequestOptions requestOptions) {
+        return getWithResponseAsync(measurementId, requestOptions).block();
     }
 }
