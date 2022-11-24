@@ -4,7 +4,6 @@
 package com.adp.datamanagement;
 
 import com.adp.datamanagement.implementation.DiscoveryUploadsClientImpl;
-import com.adp.datamanagement.models.DiscoveryUpload;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
@@ -14,12 +13,8 @@ import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.PagedFlux;
-import com.azure.core.http.rest.PagedResponse;
-import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
-import java.util.stream.Collectors;
-import reactor.core.publisher.Flux;
 
 /** Initializes a new instance of the asynchronous DiscoveryUploadsClient type. */
 @ServiceClient(builder = DiscoveryUploadsClientBuilder.class, isAsync = true)
@@ -62,47 +57,5 @@ public final class DiscoveryUploadsAsyncClient {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> list(String discoveryId, RequestOptions requestOptions) {
         return this.serviceClient.listAsync(discoveryId, requestOptions);
-    }
-
-    /**
-     * List upload detail for the discovery resource.
-     *
-     * @param discoveryId The discovery identifier.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return paged collection of DiscoveryUpload items as paginated response with {@link PagedFlux}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<DiscoveryUpload> list(String discoveryId) {
-        // Generated convenience method for list
-        RequestOptions requestOptions = new RequestOptions();
-        PagedFlux<BinaryData> pagedFluxResponse = list(discoveryId, requestOptions);
-        return PagedFlux.create(
-                () ->
-                        (continuationToken, pageSize) -> {
-                            Flux<PagedResponse<BinaryData>> flux =
-                                    (continuationToken == null)
-                                            ? pagedFluxResponse.byPage().take(1)
-                                            : pagedFluxResponse.byPage(continuationToken).take(1);
-                            return flux.map(
-                                    pagedResponse ->
-                                            new PagedResponseBase<Void, DiscoveryUpload>(
-                                                    pagedResponse.getRequest(),
-                                                    pagedResponse.getStatusCode(),
-                                                    pagedResponse.getHeaders(),
-                                                    pagedResponse.getValue().stream()
-                                                            .map(
-                                                                    protocolMethodData ->
-                                                                            protocolMethodData.toObject(
-                                                                                    DiscoveryUpload.class))
-                                                            .collect(Collectors.toList()),
-                                                    pagedResponse.getContinuationToken(),
-                                                    null));
-                        });
     }
 }

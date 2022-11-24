@@ -4,9 +4,6 @@
 package com.adp.datamanagement;
 
 import com.adp.datamanagement.implementation.DataStreamTagsClientImpl;
-import com.adp.datamanagement.models.TagSet;
-import com.adp.datamanagement.models.TagSetBase;
-import com.adp.datamanagement.models.TagSetCreationParameters;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
@@ -18,7 +15,6 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
 
 /** Initializes a new instance of the asynchronous DataStreamTagsClient type. */
@@ -113,78 +109,5 @@ public final class DataStreamTagsAsyncClient {
     public Mono<Response<BinaryData>> createWithResponse(
             String measurementId, String dataStreamId, RequestOptions requestOptions) {
         return this.serviceClient.createWithResponseAsync(measurementId, dataStreamId, requestOptions);
-    }
-
-    /**
-     * Returns set of the data-stream tags.
-     *
-     * @param measurementId The measurement identifier.
-     * @param dataStreamId The data stream identifier.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a data-stream tags on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<TagSet> get(String measurementId, String dataStreamId) {
-        // Generated convenience method for getWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(measurementId, dataStreamId, requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(TagSet.class));
-    }
-
-    /**
-     * Create or replace all tags at once.
-     *
-     * @param measurementId The measurement identifier.
-     * @param dataStreamId The data stream identifier.
-     * @param body Parameter of type 'TagSetCreationParameters' in the body.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return tag set on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<TagSetBase> create(String measurementId, String dataStreamId, TagSetCreationParameters body) {
-        // Generated convenience method for createWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        if (body != null) {
-            requestOptions.setBody(BinaryData.fromObject(body));
-        }
-        return createWithResponse(measurementId, dataStreamId, requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(TagSetBase.class));
-    }
-
-    /**
-     * Create or replace all tags at once.
-     *
-     * @param measurementId The measurement identifier.
-     * @param dataStreamId The data stream identifier.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return tag set on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<TagSetBase> create(String measurementId, String dataStreamId) {
-        // Generated convenience method for createWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return createWithResponse(measurementId, dataStreamId, requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(TagSetBase.class));
     }
 }

@@ -4,9 +4,6 @@
 package com.adp.datamanagement;
 
 import com.adp.datamanagement.implementation.UploadClientImpl;
-import com.adp.datamanagement.models.LongRunningOperation;
-import com.adp.datamanagement.models.Upload;
-import com.adp.datamanagement.models.UploadCreationParameters;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
@@ -18,7 +15,6 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.PollerFlux;
 import reactor.core.publisher.Mono;
 
@@ -173,163 +169,5 @@ public final class UploadAsyncClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginCancel(String uploadId, RequestOptions requestOptions) {
         return this.serviceClient.beginCancelAsync(uploadId, requestOptions);
-    }
-
-    /**
-     * Creates a new ingestion upload instance.
-     *
-     * @param uploadId The upload resource identifier.
-     * @param body Parameter of type 'UploadCreationParameters' in the body.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an upload resource on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Upload> createOrReplace(String uploadId, UploadCreationParameters body) {
-        // Generated convenience method for createOrReplaceWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        if (body != null) {
-            requestOptions.setBody(BinaryData.fromObject(body));
-        }
-        return createOrReplaceWithResponse(uploadId, requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(Upload.class));
-    }
-
-    /**
-     * Creates a new ingestion upload instance.
-     *
-     * @param uploadId The upload resource identifier.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an upload resource on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Upload> createOrReplace(String uploadId) {
-        // Generated convenience method for createOrReplaceWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return createOrReplaceWithResponse(uploadId, requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(Upload.class));
-    }
-
-    /**
-     * Get discovery by ID.
-     *
-     * @param uploadId The upload resource identifier.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return discovery by ID on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Upload> get(String uploadId) {
-        // Generated convenience method for getWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(uploadId, requestOptions)
-                .flatMap(FluxUtil::toMono)
-                .map(protocolMethodData -> protocolMethodData.toObject(Upload.class));
-    }
-
-    /**
-     * Initiates the process of completing the upload and creating the measurements.
-     *
-     * @param uploadId The upload resource identifier.
-     * @param operationId The long running operation identifier. Operation-Id should be valid UUID string.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of an upload resource.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<LongRunningOperation, Object> beginComplete(String uploadId, String operationId) {
-        // Generated convenience method for beginCompleteWithModel
-        RequestOptions requestOptions = new RequestOptions();
-        if (operationId != null) {
-            requestOptions.setHeader("operation-id", operationId);
-        }
-        return serviceClient.beginCompleteWithModelAsync(uploadId, requestOptions);
-    }
-
-    /**
-     * Initiates the process of completing the upload and creating the measurements.
-     *
-     * @param uploadId The upload resource identifier.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of an upload resource.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<LongRunningOperation, Object> beginComplete(String uploadId) {
-        // Generated convenience method for beginCompleteWithModel
-        RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.beginCompleteWithModelAsync(uploadId, requestOptions);
-    }
-
-    /**
-     * Initiates the process of cancelling the upload.
-     *
-     * @param uploadId The upload resource identifier.
-     * @param operationId The long running operation identifier. Operation-Id should be valid UUID string.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of an upload resource.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<LongRunningOperation, Object> beginCancel(String uploadId, String operationId) {
-        // Generated convenience method for beginCancelWithModel
-        RequestOptions requestOptions = new RequestOptions();
-        if (operationId != null) {
-            requestOptions.setHeader("operation-id", operationId);
-        }
-        return serviceClient.beginCancelWithModelAsync(uploadId, requestOptions);
-    }
-
-    /**
-     * Initiates the process of cancelling the upload.
-     *
-     * @param uploadId The upload resource identifier.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of an upload resource.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<LongRunningOperation, Object> beginCancel(String uploadId) {
-        // Generated convenience method for beginCancelWithModel
-        RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.beginCancelWithModelAsync(uploadId, requestOptions);
     }
 }
