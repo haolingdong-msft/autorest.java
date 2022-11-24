@@ -3,6 +3,7 @@ import "@azure-tools/cadl-dpg";
 
 using Azure.DPG;
 
+@@client(Adp.DataManagement.LongRunningOperations, {name: "LongRunningOperationsClient", service: Adp.DataManagement})
 @@client(Adp.DataManagement.DiscoveryOperations, {name: "DiscoveryOperationsClient", service: Adp.DataManagement})
 @@client(Adp.DataManagement.DiscoverySpecialFileOperations, {name: "DiscoverySpecialFilesClient", service: Adp.DataManagement})
 @@client(Adp.DataManagement.DiscoveryResultUploadOperations, {name: "DiscoveryUploadsClient", service: Adp.DataManagement})

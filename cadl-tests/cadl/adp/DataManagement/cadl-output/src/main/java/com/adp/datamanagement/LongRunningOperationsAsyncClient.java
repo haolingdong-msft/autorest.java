@@ -4,7 +4,8 @@
 
 package com.adp.datamanagement;
 
-import com.adp.datamanagement.implementation.DataManagementClientImpl;
+import com.adp.datamanagement.implementation.LongRunningOperationsClientImpl;
+import com.adp.datamanagement.models.LongRunningOperation;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
@@ -16,20 +17,21 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the asynchronous DataManagementClient type. */
-@ServiceClient(builder = DataManagementClientBuilder.class, isAsync = true)
-public final class DataManagementAsyncClient {
-    @Generated private final DataManagementClientImpl serviceClient;
+/** Initializes a new instance of the asynchronous LongRunningOperationsClient type. */
+@ServiceClient(builder = LongRunningOperationsClientBuilder.class, isAsync = true)
+public final class LongRunningOperationsAsyncClient {
+    @Generated private final LongRunningOperationsClientImpl serviceClient;
 
     /**
-     * Initializes an instance of DataManagementAsyncClient class.
+     * Initializes an instance of LongRunningOperationsAsyncClient class.
      *
      * @param serviceClient the service client implementation.
      */
     @Generated
-    DataManagementAsyncClient(DataManagementClientImpl serviceClient) {
+    LongRunningOperationsAsyncClient(LongRunningOperationsClientImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
@@ -61,5 +63,27 @@ public final class DataManagementAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getStatusWithResponse(String operationId, RequestOptions requestOptions) {
         return this.serviceClient.getStatusWithResponseAsync(operationId, requestOptions);
+    }
+
+    /**
+     * Get the details of an LRO.
+     *
+     * @param operationId The unique ID of the operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the details of an LRO on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<LongRunningOperation> getStatus(String operationId) {
+        // Generated convenience method for getStatusWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getStatusWithResponse(operationId, requestOptions)
+                .flatMap(FluxUtil::toMono)
+                .map(protocolMethodData -> protocolMethodData.toObject(LongRunningOperation.class));
     }
 }

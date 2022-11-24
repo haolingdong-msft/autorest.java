@@ -5,6 +5,7 @@
 package com.adp.datamanagement.implementation;
 
 import com.adp.datamanagement.DataManagementServiceVersion;
+import com.adp.datamanagement.models.LongRunningOperation;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
@@ -711,6 +712,123 @@ public final class DataStreamClientImpl {
     }
 
     /**
+     * Creates new data-stream resource.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>operation-id</td><td>String</td><td>No</td><td>The long running operation identifier. Operation-Id should be valid UUID string.</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     lineage (Required): {
+     *         producerMetadata (Required): {
+     *             String: String (Required)
+     *         }
+     *         inputs (Required): [
+     *              (Required){
+     *                 sourceDataStreamId: String (Required)
+     *                 channels (Optional): [
+     *                     String (Optional)
+     *                 ]
+     *             }
+     *         ]
+     *     }
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * Object
+     * }</pre>
+     *
+     * @param measurementId The measurement identifier.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link PollerFlux} for polling of a data-stream resource.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<LongRunningOperation, Object> beginCreateWithModelAsync(
+            String measurementId, RequestOptions requestOptions) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.createWithResponseAsync(measurementId, requestOptions),
+                new DefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        "{endpoint}".replace("{endpoint}", this.getEndpoint()),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                TypeReference.createInstance(LongRunningOperation.class),
+                TypeReference.createInstance(Object.class));
+    }
+
+    /**
+     * Creates new data-stream resource.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>operation-id</td><td>String</td><td>No</td><td>The long running operation identifier. Operation-Id should be valid UUID string.</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     lineage (Required): {
+     *         producerMetadata (Required): {
+     *             String: String (Required)
+     *         }
+     *         inputs (Required): [
+     *              (Required){
+     *                 sourceDataStreamId: String (Required)
+     *                 channels (Optional): [
+     *                     String (Optional)
+     *                 ]
+     *             }
+     *         ]
+     *     }
+     * }
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * Object
+     * }</pre>
+     *
+     * @param measurementId The measurement identifier.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link SyncPoller} for polling of a data-stream resource.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<LongRunningOperation, Object> beginCreateWithModel(
+            String measurementId, RequestOptions requestOptions) {
+        return this.beginCreateWithModelAsync(measurementId, requestOptions).getSyncPoller();
+    }
+
+    /**
      * Clear the data-stream content.
      *
      * <p><strong>Header Parameters</strong>
@@ -831,6 +949,85 @@ public final class DataStreamClientImpl {
     public SyncPoller<BinaryData, BinaryData> beginClearContent(
             String measurementId, String dataStreamId, RequestOptions requestOptions) {
         return this.beginClearContentAsync(measurementId, dataStreamId, requestOptions).getSyncPoller();
+    }
+
+    /**
+     * Clear the data-stream content.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>operation-id</td><td>String</td><td>No</td><td>The long running operation identifier. Operation-Id should be valid UUID string.</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * Object
+     * }</pre>
+     *
+     * @param measurementId The measurement identifier.
+     * @param dataStreamId The data stream identifier.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link PollerFlux} for polling of a data-stream resource.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<LongRunningOperation, Object> beginClearContentWithModelAsync(
+            String measurementId, String dataStreamId, RequestOptions requestOptions) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.clearContentWithResponseAsync(measurementId, dataStreamId, requestOptions),
+                new DefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        "{endpoint}".replace("{endpoint}", this.getEndpoint()),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                TypeReference.createInstance(LongRunningOperation.class),
+                TypeReference.createInstance(Object.class));
+    }
+
+    /**
+     * Clear the data-stream content.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>operation-id</td><td>String</td><td>No</td><td>The long running operation identifier. Operation-Id should be valid UUID string.</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * Object
+     * }</pre>
+     *
+     * @param measurementId The measurement identifier.
+     * @param dataStreamId The data stream identifier.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link SyncPoller} for polling of a data-stream resource.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<LongRunningOperation, Object> beginClearContentWithModel(
+            String measurementId, String dataStreamId, RequestOptions requestOptions) {
+        return this.beginClearContentWithModelAsync(measurementId, dataStreamId, requestOptions).getSyncPoller();
     }
 
     /**
@@ -1238,6 +1435,85 @@ public final class DataStreamClientImpl {
     }
 
     /**
+     * Marks a data stream as completed.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>operation-id</td><td>String</td><td>No</td><td>The long running operation identifier. Operation-Id should be valid UUID string.</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * Object
+     * }</pre>
+     *
+     * @param measurementId The measurement identifier.
+     * @param dataStreamId The data stream identifier.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link PollerFlux} for polling of a data-stream resource.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<LongRunningOperation, Object> beginCompleteWithModelAsync(
+            String measurementId, String dataStreamId, RequestOptions requestOptions) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.completeWithResponseAsync(measurementId, dataStreamId, requestOptions),
+                new DefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        "{endpoint}".replace("{endpoint}", this.getEndpoint()),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                TypeReference.createInstance(LongRunningOperation.class),
+                TypeReference.createInstance(Object.class));
+    }
+
+    /**
+     * Marks a data stream as completed.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>operation-id</td><td>String</td><td>No</td><td>The long running operation identifier. Operation-Id should be valid UUID string.</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * Object
+     * }</pre>
+     *
+     * @param measurementId The measurement identifier.
+     * @param dataStreamId The data stream identifier.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link SyncPoller} for polling of a data-stream resource.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<LongRunningOperation, Object> beginCompleteWithModel(
+            String measurementId, String dataStreamId, RequestOptions requestOptions) {
+        return this.beginCompleteWithModelAsync(measurementId, dataStreamId, requestOptions).getSyncPoller();
+    }
+
+    /**
      * Marks a data stream as failed.
      *
      * <p><strong>Header Parameters</strong>
@@ -1358,6 +1634,85 @@ public final class DataStreamClientImpl {
     public SyncPoller<BinaryData, BinaryData> beginFail(
             String measurementId, String dataStreamId, RequestOptions requestOptions) {
         return this.beginFailAsync(measurementId, dataStreamId, requestOptions).getSyncPoller();
+    }
+
+    /**
+     * Marks a data stream as failed.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>operation-id</td><td>String</td><td>No</td><td>The long running operation identifier. Operation-Id should be valid UUID string.</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * Object
+     * }</pre>
+     *
+     * @param measurementId The measurement identifier.
+     * @param dataStreamId The data stream identifier.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link PollerFlux} for polling of a data-stream resource.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<LongRunningOperation, Object> beginFailWithModelAsync(
+            String measurementId, String dataStreamId, RequestOptions requestOptions) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.failWithResponseAsync(measurementId, dataStreamId, requestOptions),
+                new DefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        "{endpoint}".replace("{endpoint}", this.getEndpoint()),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                TypeReference.createInstance(LongRunningOperation.class),
+                TypeReference.createInstance(Object.class));
+    }
+
+    /**
+     * Marks a data stream as failed.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>operation-id</td><td>String</td><td>No</td><td>The long running operation identifier. Operation-Id should be valid UUID string.</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * Object
+     * }</pre>
+     *
+     * @param measurementId The measurement identifier.
+     * @param dataStreamId The data stream identifier.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link SyncPoller} for polling of a data-stream resource.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<LongRunningOperation, Object> beginFailWithModel(
+            String measurementId, String dataStreamId, RequestOptions requestOptions) {
+        return this.beginFailWithModelAsync(measurementId, dataStreamId, requestOptions).getSyncPoller();
     }
 
     /**

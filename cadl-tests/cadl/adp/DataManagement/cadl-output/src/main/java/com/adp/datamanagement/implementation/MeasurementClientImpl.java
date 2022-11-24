@@ -5,6 +5,7 @@
 package com.adp.datamanagement.implementation;
 
 import com.adp.datamanagement.DataManagementServiceVersion;
+import com.adp.datamanagement.models.LongRunningOperation;
 import com.azure.core.annotation.Delete;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
@@ -520,6 +521,97 @@ public final class MeasurementClientImpl {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDelete(String measurementId, RequestOptions requestOptions) {
         return this.beginDeleteAsync(measurementId, requestOptions).getSyncPoller();
+    }
+
+    /**
+     * Deletes the measurement.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>operation-id</td><td>String</td><td>No</td><td>The long running operation identifier. Operation-Id should be valid UUID string.</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     operationId: String (Required)
+     *     status: String(Created/InProgress/Succeeded/Failed/Canceled) (Required)
+     *     operationType: String(default) (Optional)
+     *     error: ResponseError (Optional)
+     *     resultUri: String (Optional)
+     *     etag: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param measurementId The measurement identifier.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<LongRunningOperation, Void> beginDeleteWithModelAsync(
+            String measurementId, RequestOptions requestOptions) {
+        return PollerFlux.create(
+                Duration.ofSeconds(1),
+                () -> this.deleteWithResponseAsync(measurementId, requestOptions),
+                new DefaultPollingStrategy<>(
+                        this.getHttpPipeline(),
+                        "{endpoint}".replace("{endpoint}", this.getEndpoint()),
+                        null,
+                        requestOptions != null && requestOptions.getContext() != null
+                                ? requestOptions.getContext()
+                                : Context.NONE),
+                TypeReference.createInstance(LongRunningOperation.class),
+                TypeReference.createInstance(Void.class));
+    }
+
+    /**
+     * Deletes the measurement.
+     *
+     * <p><strong>Header Parameters</strong>
+     *
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>operation-id</td><td>String</td><td>No</td><td>The long running operation identifier. Operation-Id should be valid UUID string.</td></tr>
+     * </table>
+     *
+     * You can add these to a request with {@link RequestOptions#addHeader}
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     operationId: String (Required)
+     *     status: String(Created/InProgress/Succeeded/Failed/Canceled) (Required)
+     *     operationType: String(default) (Optional)
+     *     error: ResponseError (Optional)
+     *     resultUri: String (Optional)
+     *     etag: String (Required)
+     * }
+     * }</pre>
+     *
+     * @param measurementId The measurement identifier.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<LongRunningOperation, Void> beginDeleteWithModel(
+            String measurementId, RequestOptions requestOptions) {
+        return this.beginDeleteWithModelAsync(measurementId, requestOptions).getSyncPoller();
     }
 
     /**

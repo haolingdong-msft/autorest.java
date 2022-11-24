@@ -4,6 +4,7 @@
 
 package com.adp.datamanagement;
 
+import com.adp.datamanagement.models.LongRunningOperation;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
@@ -16,18 +17,18 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 
-/** Initializes a new instance of the synchronous DataManagementClient type. */
-@ServiceClient(builder = DataManagementClientBuilder.class)
-public final class DataManagementClient {
-    @Generated private final DataManagementAsyncClient client;
+/** Initializes a new instance of the synchronous LongRunningOperationsClient type. */
+@ServiceClient(builder = LongRunningOperationsClientBuilder.class)
+public final class LongRunningOperationsClient {
+    @Generated private final LongRunningOperationsAsyncClient client;
 
     /**
-     * Initializes an instance of DataManagementClient class.
+     * Initializes an instance of LongRunningOperationsClient class.
      *
      * @param client the async client.
      */
     @Generated
-    DataManagementClient(DataManagementAsyncClient client) {
+    LongRunningOperationsClient(LongRunningOperationsAsyncClient client) {
         this.client = client;
     }
 
@@ -59,5 +60,25 @@ public final class DataManagementClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getStatusWithResponse(String operationId, RequestOptions requestOptions) {
         return this.client.getStatusWithResponse(operationId, requestOptions).block();
+    }
+
+    /**
+     * Get the details of an LRO.
+     *
+     * @param operationId The unique ID of the operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.exception.HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the details of an LRO.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public LongRunningOperation getStatus(String operationId) {
+        // Generated convenience method for getStatusWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getStatusWithResponse(operationId, requestOptions).getValue().toObject(LongRunningOperation.class);
     }
 }

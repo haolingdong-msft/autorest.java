@@ -35,10 +35,10 @@ import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import reactor.core.publisher.Mono;
 
-/** Initializes a new instance of the DataManagementClient type. */
-public final class DataManagementClientImpl {
+/** Initializes a new instance of the LongRunningOperationsClient type. */
+public final class LongRunningOperationsClientImpl {
     /** The proxy service used to perform REST calls. */
-    private final DataManagementClientService service;
+    private final LongRunningOperationsClientService service;
 
     /** Server parameter. */
     private final String endpoint;
@@ -89,12 +89,12 @@ public final class DataManagementClientImpl {
     }
 
     /**
-     * Initializes an instance of DataManagementClient client.
+     * Initializes an instance of LongRunningOperationsClient client.
      *
      * @param endpoint Server parameter.
      * @param serviceVersion Service version.
      */
-    public DataManagementClientImpl(String endpoint, DataManagementServiceVersion serviceVersion) {
+    public LongRunningOperationsClientImpl(String endpoint, DataManagementServiceVersion serviceVersion) {
         this(
                 new HttpPipelineBuilder()
                         .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy())
@@ -105,26 +105,26 @@ public final class DataManagementClientImpl {
     }
 
     /**
-     * Initializes an instance of DataManagementClient client.
+     * Initializes an instance of LongRunningOperationsClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint Server parameter.
      * @param serviceVersion Service version.
      */
-    public DataManagementClientImpl(
+    public LongRunningOperationsClientImpl(
             HttpPipeline httpPipeline, String endpoint, DataManagementServiceVersion serviceVersion) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
     /**
-     * Initializes an instance of DataManagementClient client.
+     * Initializes an instance of LongRunningOperationsClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint Server parameter.
      * @param serviceVersion Service version.
      */
-    public DataManagementClientImpl(
+    public LongRunningOperationsClientImpl(
             HttpPipeline httpPipeline,
             SerializerAdapter serializerAdapter,
             String endpoint,
@@ -134,16 +134,17 @@ public final class DataManagementClientImpl {
         this.endpoint = endpoint;
         this.serviceVersion = serviceVersion;
         this.service =
-                RestProxy.create(DataManagementClientService.class, this.httpPipeline, this.getSerializerAdapter());
+                RestProxy.create(
+                        LongRunningOperationsClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
 
     /**
-     * The interface defining all the services for DataManagementClient to be used by the proxy service to perform REST
-     * calls.
+     * The interface defining all the services for LongRunningOperationsClient to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("{endpoint}")
-    @ServiceInterface(name = "DataManagementClient")
-    public interface DataManagementClientService {
+    @ServiceInterface(name = "LongRunningOperation")
+    public interface LongRunningOperationsClientService {
         @Get("/operations/{operationId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
