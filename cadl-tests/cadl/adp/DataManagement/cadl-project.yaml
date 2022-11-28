@@ -5,4 +5,4 @@ emitters:
     namer: true
     dev-options:
       generate-code-model: true
-      generate-convenience-apis: false
+      generate-convenience-apis: true

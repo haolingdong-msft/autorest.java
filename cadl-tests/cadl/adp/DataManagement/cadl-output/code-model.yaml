@@ -234,6 +234,7 @@ schemas:
                     description: ''
             usage:
               - output
+              - convenience-api
           serializedName: status
           required: true
           nullable: false
@@ -356,6 +357,7 @@ schemas:
                       readOnly: false
                   usage:
                     - output
+                    - convenience-api
                     - exception
                 serializedName: innererror
                 required: false
@@ -363,6 +365,7 @@ schemas:
                 readOnly: false
             usage:
               - output
+              - convenience-api
               - exception
           serializedName: error
           required: false
@@ -392,6 +395,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
     - *ref_2
     - *ref_3
     - &ref_86
@@ -442,6 +446,7 @@ schemas:
           readOnly: false
       usage:
         - input
+        - convenience-api
     - &ref_92
       language:
         default:
@@ -556,6 +561,7 @@ schemas:
                     description: The discovery process has been failed
             usage:
               - output
+              - convenience-api
           serializedName: status
           required: false
           nullable: false
@@ -572,6 +578,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
     - &ref_97
       language:
         default:
@@ -637,6 +644,7 @@ schemas:
                     description: The process of cancelling the discovery
             usage:
               - output
+              - convenience-api
           serializedName: operationType
           required: false
           nullable: false
@@ -675,6 +683,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
     - &ref_6
       language:
         default:
@@ -708,6 +717,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
     - &ref_104
       language:
         default:
@@ -748,6 +758,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
     - &ref_106
       language:
         default:
@@ -821,6 +832,7 @@ schemas:
                   readOnly: true
               usage:
                 - output
+                - convenience-api
           serializedName: value
           required: true
           nullable: false
@@ -837,6 +849,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
     - *ref_9
     - &ref_107
       language:
@@ -873,6 +886,7 @@ schemas:
           readOnly: false
       usage:
         - input
+        - convenience-api
     - &ref_110
       language:
         default:
@@ -1019,6 +1033,7 @@ schemas:
                     description: The system marked the upload process as failed
             usage:
               - output
+              - convenience-api
           serializedName: status
           required: false
           nullable: false
@@ -1045,6 +1060,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
     - &ref_114
       language:
         default:
@@ -1115,6 +1131,7 @@ schemas:
                     description: The process of cancelling the upload
             usage:
               - output
+              - convenience-api
           serializedName: operationType
           required: false
           nullable: false
@@ -1153,6 +1170,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
     - &ref_118
       language:
         default:
@@ -1213,6 +1231,7 @@ schemas:
                   readOnly: false
               usage:
                 - output
+                - convenience-api
           serializedName: value
           required: true
           nullable: false
@@ -1229,6 +1248,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
     - *ref_11
     - &ref_12
       language:
@@ -1265,6 +1285,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
     - &ref_125
       language:
         default:
@@ -1305,6 +1326,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
     - &ref_127
       language:
         default:
@@ -1351,6 +1373,7 @@ schemas:
                   readOnly: true
               usage:
                 - output
+                - convenience-api
           serializedName: value
           required: true
           nullable: false
@@ -1367,6 +1390,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
     - *ref_15
     - &ref_16
       language:
@@ -1411,6 +1435,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
     - &ref_129
       language:
         default:
@@ -1434,6 +1459,7 @@ schemas:
           readOnly: false
       usage:
         - input
+        - convenience-api
     - &ref_132
       language:
         default:
@@ -1489,6 +1515,7 @@ schemas:
                     description: ''
             usage:
               - output
+              - convenience-api
           serializedName: operationType
           required: false
           nullable: false
@@ -1527,6 +1554,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
     - &ref_135
       language:
         default:
@@ -1567,6 +1595,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
     - &ref_19
       language:
         default:
@@ -1681,6 +1710,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
     - &ref_139
       language:
         default:
@@ -1721,6 +1751,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
     - &ref_140
       language:
         default:
@@ -1870,6 +1901,7 @@ schemas:
                   readOnly: false
               usage:
                 - output
+                - convenience-api
           serializedName: value
           required: true
           nullable: false
@@ -1886,6 +1918,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
     - *ref_22
     - &ref_141
       language:
@@ -1917,6 +1950,7 @@ schemas:
           readOnly: false
       usage:
         - input
+        - convenience-api
     - &ref_144
       language:
         default:
@@ -1940,6 +1974,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
     - &ref_146
       language:
         default:
@@ -2043,12 +2078,14 @@ schemas:
                   readOnly: false
               usage:
                 - output
+                - convenience-api
           serializedName: results
           required: false
           nullable: false
           readOnly: false
       usage:
         - output
+        - convenience-api
     - *ref_25
     - &ref_27
       language:
@@ -2093,6 +2130,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
     - &ref_150
       language:
         default:
@@ -2133,6 +2171,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
     - &ref_151
       language:
         default:
@@ -2156,6 +2195,7 @@ schemas:
           readOnly: false
       usage:
         - input
+        - convenience-api
     - &ref_156
       language:
         default:
@@ -2179,6 +2219,7 @@ schemas:
           readOnly: false
       usage:
         - input
+        - convenience-api
     - &ref_160
       language:
         default:
@@ -2228,6 +2269,7 @@ schemas:
           readOnly: true
       usage:
         - output
+        - convenience-api
     - &ref_163
       language:
         default:
@@ -2265,6 +2307,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
     - &ref_31
       language:
         default:
@@ -2367,6 +2410,7 @@ schemas:
                         readOnly: false
                     usage:
                       - output
+                      - convenience-api
                       - input
                 serializedName: inputs
                 required: true
@@ -2374,6 +2418,7 @@ schemas:
                 readOnly: false
             usage:
               - output
+              - convenience-api
               - input
           serializedName: lineage
           required: true
@@ -2433,6 +2478,7 @@ schemas:
                     description: ''
             usage:
               - output
+              - convenience-api
           serializedName: status
           required: true
           nullable: false
@@ -2471,6 +2517,7 @@ schemas:
                     description: ''
             usage:
               - output
+              - convenience-api
           serializedName: type
           required: true
           nullable: false
@@ -2487,6 +2534,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
     - *ref_29
     - *ref_30
     - &ref_166
@@ -2512,6 +2560,7 @@ schemas:
           readOnly: false
       usage:
         - input
+        - convenience-api
     - &ref_175
       language:
         default:
@@ -2552,6 +2601,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
     - &ref_176
       language:
         default:
@@ -2610,12 +2660,14 @@ schemas:
                   readOnly: false
               usage:
                 - input
+                - convenience-api
           serializedName: files
           required: true
           nullable: false
           readOnly: false
       usage:
         - input
+        - convenience-api
     - *ref_33
     - &ref_180
       language:
@@ -2677,12 +2729,14 @@ schemas:
                   readOnly: false
               usage:
                 - output
+                - convenience-api
           serializedName: files
           required: true
           nullable: false
           readOnly: false
       usage:
         - output
+        - convenience-api
     - *ref_34
     - &ref_187
       language:
@@ -2707,6 +2761,7 @@ schemas:
           readOnly: false
       usage:
         - input
+        - convenience-api
     - &ref_190
       language:
         default:
@@ -2730,6 +2785,7 @@ schemas:
           readOnly: false
       usage:
         - input
+        - convenience-api
     - &ref_193
       language:
         default:
@@ -2790,6 +2846,7 @@ schemas:
                   readOnly: false
               usage:
                 - input
+                - convenience-api
           serializedName: processingObjects
           required: true
           nullable: false
@@ -2839,12 +2896,14 @@ schemas:
                   readOnly: false
               usage:
                 - input
+                - convenience-api
           serializedName: edges
           required: true
           nullable: false
           readOnly: false
       usage:
         - input
+        - convenience-api
     - *ref_35
     - *ref_36
     - &ref_196
@@ -2929,12 +2988,14 @@ schemas:
                           readOnly: false
                       usage:
                         - output
+                        - convenience-api
                   serializedName: dataStreamsGraphs
                   required: true
                   nullable: false
                   readOnly: false
               usage:
                 - output
+                - convenience-api
           serializedName: value
           required: true
           nullable: false
@@ -2951,6 +3012,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
     - *ref_38
     - *ref_39
     - &ref_197
@@ -3019,6 +3081,7 @@ schemas:
                           description: ''
                   usage:
                     - input
+                    - convenience-api
                     - output
                 serializedName: strategy
                 required: true
@@ -3068,6 +3131,7 @@ schemas:
                           description: ''
                   usage:
                     - input
+                    - convenience-api
                     - output
                 serializedName: unit
                 required: true
@@ -3085,6 +3149,7 @@ schemas:
                 readOnly: false
             usage:
               - input
+              - convenience-api
               - output
           serializedName: rollingInformation
           required: false
@@ -3092,6 +3157,7 @@ schemas:
           readOnly: false
       usage:
         - input
+        - convenience-api
     - *ref_41
     - &ref_201
       language:
@@ -3205,6 +3271,7 @@ schemas:
                   readOnly: false
               usage:
                 - output
+                - convenience-api
           serializedName: shards
           required: true
           nullable: false
@@ -3221,6 +3288,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
     - *ref_42
     - &ref_206
       language:
@@ -3295,6 +3363,7 @@ schemas:
                   readOnly: false
               usage:
                 - output
+                - convenience-api
                 - input
           serializedName: tags
           required: true
@@ -3302,6 +3371,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
     - *ref_43
     - &ref_207
       language:
@@ -3326,6 +3396,7 @@ schemas:
           readOnly: false
       usage:
         - input
+        - convenience-api
     - &ref_211
       language:
         default:
@@ -3349,6 +3420,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
     - &ref_214
       language:
         default:
@@ -3429,6 +3501,7 @@ schemas:
                   readOnly: false
               usage:
                 - output
+                - convenience-api
           serializedName: value
           required: true
           nullable: false
@@ -3445,6 +3518,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
     - *ref_47
     - &ref_217
       language:
@@ -3473,6 +3547,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
     - &ref_48
       language:
         default:
@@ -3516,6 +3591,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
     - &ref_221
       language:
         default:
@@ -3549,6 +3625,7 @@ schemas:
           readOnly: false
       usage:
         - input
+        - convenience-api
     - &ref_232
       language:
         default:
@@ -3589,6 +3666,7 @@ schemas:
           readOnly: false
       usage:
         - output
+        - convenience-api
   choices:
     - *ref_5
     - *ref_50
@@ -3649,6 +3727,12 @@ operationGroups:
         operationId: getStatus
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: getStatus
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -3766,6 +3850,12 @@ operationGroups:
         operationId: createOrReplace
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: createOrReplace
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -3865,6 +3955,12 @@ operationGroups:
         operationId: get
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: get
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -3942,6 +4038,12 @@ operationGroups:
         operationId: complete
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: complete
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -4064,6 +4166,12 @@ operationGroups:
         operationId: cancel
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: cancel
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -4188,6 +4296,12 @@ operationGroups:
         operationId: generate
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: generate
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -4310,6 +4424,12 @@ operationGroups:
         operationId: listWritableUris
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: listWritableUris
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -4390,6 +4510,12 @@ operationGroups:
         operationId: list
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: list
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -4469,6 +4595,12 @@ operationGroups:
         operationId: createOrReplace
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: createOrReplace
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -4568,6 +4700,12 @@ operationGroups:
         operationId: get
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: get
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -4645,6 +4783,12 @@ operationGroups:
         operationId: complete
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: complete
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -4767,6 +4911,12 @@ operationGroups:
         operationId: cancel
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: cancel
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -4891,6 +5041,12 @@ operationGroups:
         operationId: list
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: list
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -4972,6 +5128,12 @@ operationGroups:
         operationId: generate
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: generate
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -5094,6 +5256,12 @@ operationGroups:
         operationId: listWritableUris
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: listWritableUris
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -5173,6 +5341,12 @@ operationGroups:
         operationId: generate
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: generate
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -5295,6 +5469,12 @@ operationGroups:
         operationId: listWritableUris
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: listWritableUris
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -5376,6 +5556,12 @@ operationGroups:
         operationId: list
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: list
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -5455,6 +5641,12 @@ operationGroups:
         operationId: get
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: get
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -5530,6 +5722,12 @@ operationGroups:
         operationId: create
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: create
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -5654,6 +5852,12 @@ operationGroups:
         operationId: delete
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: delete
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -5775,6 +5979,12 @@ operationGroups:
         operationId: list
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: list
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -5840,6 +6050,12 @@ operationGroups:
         operationId: get
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: get
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -5915,6 +6131,12 @@ operationGroups:
         operationId: delete
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: delete
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -6036,6 +6258,12 @@ operationGroups:
         operationId: list
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: list
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -6101,6 +6329,12 @@ operationGroups:
         operationId: queryMeasurementsWithMetadata
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: queryMeasurementsWithMetadata
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -6168,6 +6402,12 @@ operationGroups:
         operationId: findByIds
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: findByIds
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -6247,6 +6487,12 @@ operationGroups:
         operationId: get
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: get
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -6322,6 +6568,12 @@ operationGroups:
         operationId: get
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: get
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -6397,6 +6649,12 @@ operationGroups:
         operationId: get
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: get
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -6486,6 +6744,12 @@ operationGroups:
         operationId: list
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: list
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -6565,6 +6829,12 @@ operationGroups:
         operationId: act
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: act
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -6713,6 +6983,12 @@ operationGroups:
         operationId: complete
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: complete
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -6853,6 +7129,12 @@ operationGroups:
         operationId: getWritableUri
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: getWritableUri
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -6934,6 +7216,12 @@ operationGroups:
         operationId: get
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: get
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -7009,6 +7297,12 @@ operationGroups:
         operationId: get
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: get
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -7098,6 +7392,12 @@ operationGroups:
         operationId: create
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: create
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -7232,6 +7532,12 @@ operationGroups:
         operationId: clearContent
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: clearContent
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -7372,6 +7678,12 @@ operationGroups:
         operationId: list
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: list
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -7469,6 +7781,12 @@ operationGroups:
         operationId: stageFiles
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: stageFiles
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -7573,6 +7891,12 @@ operationGroups:
         operationId: complete
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: complete
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -7710,6 +8034,12 @@ operationGroups:
         operationId: fail
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: fail
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -7846,6 +8176,12 @@ operationGroups:
         operationId: findByTags
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: findByTags
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -7939,6 +8275,12 @@ operationGroups:
         operationId: findByLineage
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: findByLineage
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -8032,6 +8374,12 @@ operationGroups:
         operationId: getLineageGraphsByLineage
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: getLineageGraphsByLineage
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -8132,6 +8480,12 @@ operationGroups:
         operationId: create
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: create
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -8250,6 +8604,12 @@ operationGroups:
         operationId: getWritableUris
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: getWritableUris
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -8340,6 +8700,12 @@ operationGroups:
         operationId: get
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: get
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -8429,6 +8795,12 @@ operationGroups:
         operationId: create
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: create
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -8544,6 +8916,12 @@ operationGroups:
         operationId: list
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: list
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -8641,6 +9019,12 @@ operationGroups:
         operationId: getWritableUri
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: getWritableUri
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -8731,6 +9115,12 @@ operationGroups:
         operationId: get
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: get
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -8835,6 +9225,12 @@ operationGroups:
         operationId: create
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: create
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -8986,6 +9382,12 @@ operationGroups:
         operationId: delete
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: delete
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
@@ -9136,6 +9538,12 @@ operationGroups:
         operationId: list
         apiVersions:
           - version: 2022-11-30-preview
+        convenienceApi:
+          language:
+            default:
+              name: list
+              description: ''
+          protocol: {}
         requests:
           - language:
               default:
