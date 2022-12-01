@@ -718,7 +718,7 @@ schemas:
       usage:
         - output
         - convenience-api
-    - &ref_104
+    - &ref_105
       language:
         default:
           name: PagedDiscoverySpecialFile
@@ -759,7 +759,7 @@ schemas:
       usage:
         - output
         - convenience-api
-    - &ref_106
+    - &ref_107
       language:
         default:
           name: PagedDiscoveryUpload
@@ -851,7 +851,7 @@ schemas:
         - output
         - convenience-api
     - *ref_9
-    - &ref_107
+    - &ref_108
       language:
         default:
           name: UploadCreationParameters
@@ -887,7 +887,7 @@ schemas:
       usage:
         - input
         - convenience-api
-    - &ref_110
+    - &ref_111
       language:
         default:
           name: Upload
@@ -1061,7 +1061,7 @@ schemas:
       usage:
         - output
         - convenience-api
-    - &ref_114
+    - &ref_115
       language:
         default:
           name: UploadLroResponse
@@ -1171,7 +1171,7 @@ schemas:
       usage:
         - output
         - convenience-api
-    - &ref_118
+    - &ref_119
       language:
         default:
           name: PagedUploadSpecialFile
@@ -1286,7 +1286,7 @@ schemas:
       usage:
         - output
         - convenience-api
-    - &ref_125
+    - &ref_126
       language:
         default:
           name: PagedUploadDataFile
@@ -1327,7 +1327,7 @@ schemas:
       usage:
         - output
         - convenience-api
-    - &ref_127
+    - &ref_128
       language:
         default:
           name: PagedUploadResultMeasurement
@@ -1436,7 +1436,7 @@ schemas:
       usage:
         - output
         - convenience-api
-    - &ref_129
+    - &ref_130
       language:
         default:
           name: ClassificationSchemaCreationParameters
@@ -1460,7 +1460,7 @@ schemas:
       usage:
         - input
         - convenience-api
-    - &ref_132
+    - &ref_133
       language:
         default:
           name: DefaultLroResponse
@@ -1555,7 +1555,7 @@ schemas:
       usage:
         - output
         - convenience-api
-    - &ref_135
+    - &ref_136
       language:
         default:
           name: PagedClassificationSchema
@@ -1711,7 +1711,7 @@ schemas:
       usage:
         - output
         - convenience-api
-    - &ref_139
+    - &ref_140
       language:
         default:
           name: PagedMeasurement
@@ -1752,7 +1752,7 @@ schemas:
       usage:
         - output
         - convenience-api
-    - &ref_140
+    - &ref_141
       language:
         default:
           name: PagedMeasurementWithMetadata
@@ -1920,7 +1920,7 @@ schemas:
         - output
         - convenience-api
     - *ref_22
-    - &ref_141
+    - &ref_142
       language:
         default:
           name: MeasurementListRequestParameters
@@ -1951,7 +1951,7 @@ schemas:
       usage:
         - input
         - convenience-api
-    - &ref_144
+    - &ref_145
       language:
         default:
           name: MeasurementMetadataBase
@@ -1975,7 +1975,7 @@ schemas:
       usage:
         - output
         - convenience-api
-    - &ref_146
+    - &ref_147
       language:
         default:
           name: MeasurementProcessingResultsBase
@@ -2131,7 +2131,7 @@ schemas:
       usage:
         - output
         - convenience-api
-    - &ref_150
+    - &ref_151
       language:
         default:
           name: PagedStateMachine
@@ -2172,7 +2172,7 @@ schemas:
       usage:
         - output
         - convenience-api
-    - &ref_151
+    - &ref_152
       language:
         default:
           name: StateMachineAction
@@ -2196,7 +2196,7 @@ schemas:
       usage:
         - input
         - convenience-api
-    - &ref_156
+    - &ref_157
       language:
         default:
           name: CompleteUploadMetadataFileRequest
@@ -2220,7 +2220,7 @@ schemas:
       usage:
         - input
         - convenience-api
-    - &ref_160
+    - &ref_161
       language:
         default:
           name: MeasurementMetadataFileInfoBase
@@ -2270,7 +2270,7 @@ schemas:
       usage:
         - output
         - convenience-api
-    - &ref_163
+    - &ref_164
       language:
         default:
           name: MeasurementMetadataSchemaFileInfoBase
@@ -2537,7 +2537,7 @@ schemas:
         - convenience-api
     - *ref_29
     - *ref_30
-    - &ref_166
+    - &ref_167
       language:
         default:
           name: DataStreamCreationParameters
@@ -2561,7 +2561,7 @@ schemas:
       usage:
         - input
         - convenience-api
-    - &ref_175
+    - &ref_176
       language:
         default:
           name: PagedDataStream
@@ -2602,7 +2602,7 @@ schemas:
       usage:
         - output
         - convenience-api
-    - &ref_176
+    - &ref_177
       language:
         default:
           name: UploadDerivedDataStreamFilesRequest
@@ -2669,7 +2669,7 @@ schemas:
         - input
         - convenience-api
     - *ref_33
-    - &ref_180
+    - &ref_181
       language:
         default:
           name: UploadDerivedDataStreamFilesResponse
@@ -2738,7 +2738,7 @@ schemas:
         - output
         - convenience-api
     - *ref_34
-    - &ref_187
+    - &ref_188
       language:
         default:
           name: FindDataStreamByTagsRequestParameters
@@ -2762,7 +2762,7 @@ schemas:
       usage:
         - input
         - convenience-api
-    - &ref_190
+    - &ref_191
       language:
         default:
           name: FindDataStreamByLineageRequestParameters
@@ -2786,7 +2786,7 @@ schemas:
       usage:
         - input
         - convenience-api
-    - &ref_193
+    - &ref_194
       language:
         default:
           name: FindDataStreamByLineageGraphRequestParameters
@@ -2906,7 +2906,7 @@ schemas:
         - convenience-api
     - *ref_35
     - *ref_36
-    - &ref_196
+    - &ref_197
       language:
         default:
           name: PagedDataStreamsGraphListResponse
@@ -3015,7 +3015,7 @@ schemas:
         - convenience-api
     - *ref_38
     - *ref_39
-    - &ref_197
+    - &ref_198
       language:
         default:
           name: StorageCreationParameters
@@ -3159,7 +3159,7 @@ schemas:
         - input
         - convenience-api
     - *ref_41
-    - &ref_201
+    - &ref_202
       language:
         default:
           name: StorageBase
@@ -3290,7 +3290,7 @@ schemas:
         - output
         - convenience-api
     - *ref_42
-    - &ref_206
+    - &ref_207
       language:
         default:
           name: TagSet
@@ -3373,7 +3373,7 @@ schemas:
         - output
         - convenience-api
     - *ref_43
-    - &ref_207
+    - &ref_208
       language:
         default:
           name: TagSetCreationParameters
@@ -3397,7 +3397,7 @@ schemas:
       usage:
         - input
         - convenience-api
-    - &ref_211
+    - &ref_212
       language:
         default:
           name: TagSetBase
@@ -3421,7 +3421,7 @@ schemas:
       usage:
         - output
         - convenience-api
-    - &ref_214
+    - &ref_215
       language:
         default:
           name: PagedDataStreamFile
@@ -3520,7 +3520,7 @@ schemas:
         - output
         - convenience-api
     - *ref_47
-    - &ref_217
+    - &ref_218
       language:
         default:
           name: DataStreamLogsContainerBase
@@ -3592,7 +3592,7 @@ schemas:
       usage:
         - output
         - convenience-api
-    - &ref_221
+    - &ref_222
       language:
         default:
           name: DataStreamClassificationCreationParameters
@@ -3626,7 +3626,7 @@ schemas:
       usage:
         - input
         - convenience-api
-    - &ref_232
+    - &ref_233
       language:
         default:
           name: PagedDataStreamClassification
@@ -3718,7 +3718,7 @@ operationGroups:
     protocol: {}
     $key: ''
     operations:
-      - &ref_98
+      - &ref_99
         language:
           default:
             name: getStatus
@@ -3841,7 +3841,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
             schema: *ref_86
-      - &ref_234
+      - &ref_235
         language:
           default:
             name: createOrReplace
@@ -3946,7 +3946,7 @@ operationGroups:
                 mediaTypes:
                   - application/json
             schema: *ref_86
-      - &ref_235
+      - &ref_98
         language:
           default:
             name: get
@@ -4153,8 +4153,10 @@ operationGroups:
                   - application/json
             schema: *ref_86
         operationLinks:
-          polling:
+          final:
             operation: *ref_98
+          polling:
+            operation: *ref_99
         extensions:
           x-ms-long-running-operation: true
       - &ref_237
@@ -4184,7 +4186,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_99
+          - &ref_100
             language:
               default:
                 name: discoveryId
@@ -4198,7 +4200,7 @@ operationGroups:
             required: true
             nullable: false
           - *ref_88
-          - &ref_100
+          - &ref_101
             language:
               default:
                 name: operationId
@@ -4226,8 +4228,8 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_99
           - *ref_100
+          - *ref_101
         responses:
           - language:
               default:
@@ -4282,7 +4284,7 @@ operationGroups:
             schema: *ref_86
         operationLinks:
           polling:
-            operation: *ref_98
+            operation: *ref_99
         extensions:
           x-ms-long-running-operation: true
       - &ref_238
@@ -4314,7 +4316,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_101
+          - &ref_102
             language:
               default:
                 name: discoveryId
@@ -4327,7 +4329,7 @@ operationGroups:
             implementation: Method
             required: true
             nullable: false
-          - &ref_102
+          - &ref_103
             language:
               default:
                 name: operationId
@@ -4356,8 +4358,8 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_101
           - *ref_102
+          - *ref_103
         responses:
           - language:
               default:
@@ -4406,7 +4408,7 @@ operationGroups:
             schema: *ref_86
         operationLinks:
           polling:
-            operation: *ref_98
+            operation: *ref_99
         extensions:
           x-ms-long-running-operation: true
       - &ref_239
@@ -4443,7 +4445,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_103
+          - &ref_104
             language:
               default:
                 name: discoveryId
@@ -4470,7 +4472,7 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_103
+          - *ref_104
         responses:
           - language:
               default:
@@ -4483,7 +4485,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_104
+            schema: *ref_105
         exceptions:
           - language:
               default:
@@ -4528,7 +4530,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_105
+          - &ref_106
             language:
               default:
                 name: discoveryId
@@ -4555,7 +4557,7 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_105
+          - *ref_106
         responses:
           - language:
               default:
@@ -4568,7 +4570,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_106
+            schema: *ref_107
         exceptions:
           - language:
               default:
@@ -4613,7 +4615,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_108
+          - &ref_109
             language:
               default:
                 name: uploadId
@@ -4639,7 +4641,7 @@ operationGroups:
             implementation: Method
             origin: modelerfour:synthesized/accept
             required: true
-          - &ref_109
+          - &ref_110
             language:
               default:
                 name: body
@@ -4647,12 +4649,12 @@ operationGroups:
             protocol:
               http:
                 in: body
-            schema: *ref_107
+            schema: *ref_108
             implementation: Method
             required: false
         signatureParameters:
-          - *ref_108
           - *ref_109
+          - *ref_110
         responses:
           - language:
               default:
@@ -4665,7 +4667,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_110
+            schema: *ref_111
           - language:
               default:
                 name: createOrReplaceResponse
@@ -4677,7 +4679,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_110
+            schema: *ref_111
         exceptions:
           - language:
               default:
@@ -4718,7 +4720,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_111
+          - &ref_112
             language:
               default:
                 name: uploadId
@@ -4745,7 +4747,7 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_111
+          - *ref_112
         responses:
           - language:
               default:
@@ -4758,7 +4760,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_110
+            schema: *ref_111
         exceptions:
           - language:
               default:
@@ -4801,7 +4803,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_112
+          - &ref_113
             language:
               default:
                 name: uploadId
@@ -4815,7 +4817,7 @@ operationGroups:
             required: true
             nullable: false
           - *ref_88
-          - &ref_113
+          - &ref_114
             language:
               default:
                 name: operationId
@@ -4843,8 +4845,8 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_112
           - *ref_113
+          - *ref_114
         responses:
           - language:
               default:
@@ -4857,7 +4859,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_110
+            schema: *ref_111
           - language:
               default:
                 name: completeResponse
@@ -4877,7 +4879,7 @@ operationGroups:
                         description: The location for monitoring the operation state.
                 mediaTypes:
                   - application/json
-            schema: *ref_114
+            schema: *ref_115
         exceptions:
           - language:
               default:
@@ -4899,7 +4901,7 @@ operationGroups:
             schema: *ref_86
         operationLinks:
           polling:
-            operation: *ref_98
+            operation: *ref_99
         extensions:
           x-ms-long-running-operation: true
       - &ref_244
@@ -4929,7 +4931,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_115
+          - &ref_116
             language:
               default:
                 name: uploadId
@@ -4943,7 +4945,7 @@ operationGroups:
             required: true
             nullable: false
           - *ref_88
-          - &ref_116
+          - &ref_117
             language:
               default:
                 name: operationId
@@ -4971,8 +4973,8 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_115
           - *ref_116
+          - *ref_117
         responses:
           - language:
               default:
@@ -4985,7 +4987,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_110
+            schema: *ref_111
           - language:
               default:
                 name: cancelResponse
@@ -5005,7 +5007,7 @@ operationGroups:
                         description: The location for monitoring the operation state.
                 mediaTypes:
                   - application/json
-            schema: *ref_114
+            schema: *ref_115
         exceptions:
           - language:
               default:
@@ -5027,7 +5029,7 @@ operationGroups:
             schema: *ref_86
         operationLinks:
           polling:
-            operation: *ref_98
+            operation: *ref_99
         extensions:
           x-ms-long-running-operation: true
       - &ref_245
@@ -5059,7 +5061,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_117
+          - &ref_118
             language:
               default:
                 name: uploadId
@@ -5086,7 +5088,7 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_117
+          - *ref_118
         responses:
           - language:
               default:
@@ -5099,7 +5101,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_118
+            schema: *ref_119
         exceptions:
           - language:
               default:
@@ -5146,7 +5148,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_119
+          - &ref_120
             language:
               default:
                 name: uploadId
@@ -5159,7 +5161,7 @@ operationGroups:
             implementation: Method
             required: true
             nullable: false
-          - &ref_120
+          - &ref_121
             language:
               default:
                 name: operationId
@@ -5188,8 +5190,8 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_119
           - *ref_120
+          - *ref_121
         responses:
           - language:
               default:
@@ -5222,7 +5224,7 @@ operationGroups:
                         description: The location for monitoring the operation state.
                 mediaTypes:
                   - application/json
-            schema: *ref_114
+            schema: *ref_115
         exceptions:
           - language:
               default:
@@ -5238,7 +5240,7 @@ operationGroups:
             schema: *ref_86
         operationLinks:
           polling:
-            operation: *ref_98
+            operation: *ref_99
         extensions:
           x-ms-long-running-operation: true
       - &ref_247
@@ -5274,7 +5276,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_121
+          - &ref_122
             language:
               default:
                 name: uploadId
@@ -5301,7 +5303,7 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_121
+          - *ref_122
         responses:
           - language:
               default:
@@ -5314,7 +5316,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_118
+            schema: *ref_119
         exceptions:
           - language:
               default:
@@ -5359,7 +5361,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_122
+          - &ref_123
             language:
               default:
                 name: uploadId
@@ -5372,7 +5374,7 @@ operationGroups:
             implementation: Method
             required: true
             nullable: false
-          - &ref_123
+          - &ref_124
             language:
               default:
                 name: operationId
@@ -5401,8 +5403,8 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_122
           - *ref_123
+          - *ref_124
         responses:
           - language:
               default:
@@ -5435,7 +5437,7 @@ operationGroups:
                         description: The location for monitoring the operation state.
                 mediaTypes:
                   - application/json
-            schema: *ref_114
+            schema: *ref_115
         exceptions:
           - language:
               default:
@@ -5451,7 +5453,7 @@ operationGroups:
             schema: *ref_86
         operationLinks:
           polling:
-            operation: *ref_98
+            operation: *ref_99
         extensions:
           x-ms-long-running-operation: true
       - &ref_249
@@ -5487,7 +5489,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_124
+          - &ref_125
             language:
               default:
                 name: uploadId
@@ -5514,7 +5516,7 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_124
+          - *ref_125
         responses:
           - language:
               default:
@@ -5527,7 +5529,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_125
+            schema: *ref_126
         exceptions:
           - language:
               default:
@@ -5574,7 +5576,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_126
+          - &ref_127
             language:
               default:
                 name: uploadId
@@ -5601,7 +5603,7 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_126
+          - *ref_127
         responses:
           - language:
               default:
@@ -5614,7 +5616,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_127
+            schema: *ref_128
         exceptions:
           - language:
               default:
@@ -5659,7 +5661,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_128
+          - &ref_129
             language:
               default:
                 name: name
@@ -5686,7 +5688,7 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_128
+          - *ref_129
         responses:
           - language:
               default:
@@ -5741,7 +5743,7 @@ operationGroups:
         parameters:
           - *ref_87
           - *ref_88
-          - &ref_130
+          - &ref_131
             language:
               default:
                 name: operationId
@@ -5768,7 +5770,7 @@ operationGroups:
             implementation: Method
             origin: modelerfour:synthesized/accept
             required: true
-          - &ref_131
+          - &ref_132
             language:
               default:
                 name: body
@@ -5778,12 +5780,12 @@ operationGroups:
             protocol:
               http:
                 in: body
-            schema: *ref_129
+            schema: *ref_130
             implementation: Method
             required: false
         signatureParameters:
-          - *ref_130
           - *ref_131
+          - *ref_132
         responses:
           - language:
               default:
@@ -5816,7 +5818,7 @@ operationGroups:
                         description: The location for monitoring the operation state.
                 mediaTypes:
                   - application/json
-            schema: *ref_132
+            schema: *ref_133
         exceptions:
           - language:
               default:
@@ -5838,7 +5840,7 @@ operationGroups:
             schema: *ref_86
         operationLinks:
           polling:
-            operation: *ref_98
+            operation: *ref_99
         extensions:
           x-ms-long-running-operation: true
       - &ref_253
@@ -5870,7 +5872,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_133
+          - &ref_134
             language:
               default:
                 name: name
@@ -5884,7 +5886,7 @@ operationGroups:
             required: true
             nullable: false
           - *ref_88
-          - &ref_134
+          - &ref_135
             language:
               default:
                 name: operationId
@@ -5912,8 +5914,8 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_133
           - *ref_134
+          - *ref_135
         responses:
           - language:
               default:
@@ -5934,7 +5936,7 @@ operationGroups:
                         description: The location for monitoring the operation state.
                 mediaTypes:
                   - application/json
-            schema: *ref_132
+            schema: *ref_133
           - language:
               default:
                 name: deleteResponse
@@ -5967,7 +5969,7 @@ operationGroups:
             schema: *ref_86
         operationLinks:
           polling:
-            operation: *ref_98
+            operation: *ref_99
         extensions:
           x-ms-long-running-operation: true
       - &ref_254
@@ -6023,7 +6025,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_135
+            schema: *ref_136
         exceptions:
           - language:
               default:
@@ -6068,7 +6070,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_136
+          - &ref_137
             language:
               default:
                 name: measurementId
@@ -6095,7 +6097,7 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_136
+          - *ref_137
         responses:
           - language:
               default:
@@ -6149,7 +6151,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_137
+          - &ref_138
             language:
               default:
                 name: measurementId
@@ -6163,7 +6165,7 @@ operationGroups:
             required: true
             nullable: false
           - *ref_88
-          - &ref_138
+          - &ref_139
             language:
               default:
                 name: operationId
@@ -6191,8 +6193,8 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_137
           - *ref_138
+          - *ref_139
         responses:
           - language:
               default:
@@ -6213,7 +6215,7 @@ operationGroups:
                         description: The location for monitoring the operation state.
                 mediaTypes:
                   - application/json
-            schema: *ref_132
+            schema: *ref_133
           - language:
               default:
                 name: deleteResponse
@@ -6246,7 +6248,7 @@ operationGroups:
             schema: *ref_86
         operationLinks:
           polling:
-            operation: *ref_98
+            operation: *ref_99
         extensions:
           x-ms-long-running-operation: true
       - &ref_257
@@ -6302,7 +6304,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_139
+            schema: *ref_140
         exceptions:
           - language:
               default:
@@ -6373,7 +6375,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_140
+            schema: *ref_141
         exceptions:
           - language:
               default:
@@ -6433,7 +6435,7 @@ operationGroups:
             implementation: Method
             origin: modelerfour:synthesized/accept
             required: true
-          - &ref_142
+          - &ref_143
             language:
               default:
                 name: body
@@ -6443,11 +6445,11 @@ operationGroups:
             protocol:
               http:
                 in: body
-            schema: *ref_141
+            schema: *ref_142
             implementation: Method
             required: false
         signatureParameters:
-          - *ref_142
+          - *ref_143
         responses:
           - language:
               default:
@@ -6460,7 +6462,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_139
+            schema: *ref_140
         exceptions:
           - language:
               default:
@@ -6505,7 +6507,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_143
+          - &ref_144
             language:
               default:
                 name: measurementId
@@ -6532,7 +6534,7 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_143
+          - *ref_144
         responses:
           - language:
               default:
@@ -6545,7 +6547,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_144
+            schema: *ref_145
         exceptions:
           - language:
               default:
@@ -6586,7 +6588,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_145
+          - &ref_146
             language:
               default:
                 name: measurementId
@@ -6613,7 +6615,7 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_145
+          - *ref_146
         responses:
           - language:
               default:
@@ -6626,7 +6628,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_146
+            schema: *ref_147
         exceptions:
           - language:
               default:
@@ -6667,7 +6669,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_147
+          - &ref_148
             language:
               default:
                 name: measurementId
@@ -6680,7 +6682,7 @@ operationGroups:
             implementation: Method
             required: true
             nullable: false
-          - &ref_148
+          - &ref_149
             language:
               default:
                 name: id
@@ -6707,8 +6709,8 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_147
           - *ref_148
+          - *ref_149
         responses:
           - language:
               default:
@@ -6762,7 +6764,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_149
+          - &ref_150
             language:
               default:
                 name: measurementId
@@ -6789,7 +6791,7 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_149
+          - *ref_150
         responses:
           - language:
               default:
@@ -6802,7 +6804,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_150
+            schema: *ref_151
         exceptions:
           - language:
               default:
@@ -6847,7 +6849,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_152
+          - &ref_153
             language:
               default:
                 name: measurementId
@@ -6860,7 +6862,7 @@ operationGroups:
             implementation: Method
             required: true
             nullable: false
-          - &ref_153
+          - &ref_154
             language:
               default:
                 name: id
@@ -6874,7 +6876,7 @@ operationGroups:
             required: true
             nullable: false
           - *ref_88
-          - &ref_154
+          - &ref_155
             language:
               default:
                 name: operationId
@@ -6901,7 +6903,7 @@ operationGroups:
             implementation: Method
             origin: modelerfour:synthesized/accept
             required: true
-          - &ref_155
+          - &ref_156
             language:
               default:
                 name: body
@@ -6909,14 +6911,14 @@ operationGroups:
             protocol:
               http:
                 in: body
-            schema: *ref_151
+            schema: *ref_152
             implementation: Method
             required: false
         signatureParameters:
-          - *ref_152
           - *ref_153
           - *ref_154
           - *ref_155
+          - *ref_156
         responses:
           - language:
               default:
@@ -6949,7 +6951,7 @@ operationGroups:
                         description: The location for monitoring the operation state.
                 mediaTypes:
                   - application/json
-            schema: *ref_132
+            schema: *ref_133
         exceptions:
           - language:
               default:
@@ -6971,7 +6973,7 @@ operationGroups:
             schema: *ref_86
         operationLinks:
           polling:
-            operation: *ref_98
+            operation: *ref_99
         extensions:
           x-ms-long-running-operation: true
       - &ref_265
@@ -7001,7 +7003,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_157
+          - &ref_158
             language:
               default:
                 name: measurementId
@@ -7014,7 +7016,7 @@ operationGroups:
             implementation: Method
             required: true
             nullable: false
-          - &ref_158
+          - &ref_159
             language:
               default:
                 name: operationId
@@ -7042,7 +7044,7 @@ operationGroups:
             implementation: Method
             origin: modelerfour:synthesized/accept
             required: true
-          - &ref_159
+          - &ref_160
             language:
               default:
                 name: body
@@ -7052,13 +7054,13 @@ operationGroups:
             protocol:
               http:
                 in: body
-            schema: *ref_156
+            schema: *ref_157
             implementation: Method
             required: false
         signatureParameters:
-          - *ref_157
           - *ref_158
           - *ref_159
+          - *ref_160
         responses:
           - language:
               default:
@@ -7077,7 +7079,7 @@ operationGroups:
                         description: The entity tag for the response.
                 mediaTypes:
                   - application/json
-            schema: *ref_160
+            schema: *ref_161
           - language:
               default:
                 name: completeResponse
@@ -7097,7 +7099,7 @@ operationGroups:
                         description: The location for monitoring the operation state.
                 mediaTypes:
                   - application/json
-            schema: *ref_132
+            schema: *ref_133
         exceptions:
           - language:
               default:
@@ -7113,7 +7115,7 @@ operationGroups:
             schema: *ref_86
         operationLinks:
           polling:
-            operation: *ref_98
+            operation: *ref_99
         extensions:
           x-ms-long-running-operation: true
       - &ref_266
@@ -7147,7 +7149,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_161
+          - &ref_162
             language:
               default:
                 name: measurementId
@@ -7174,7 +7176,7 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_161
+          - *ref_162
         responses:
           - language:
               default:
@@ -7193,7 +7195,7 @@ operationGroups:
                         description: The entity tag for the response.
                 mediaTypes:
                   - application/json
-            schema: *ref_160
+            schema: *ref_161
         exceptions:
           - language:
               default:
@@ -7234,7 +7236,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_162
+          - &ref_163
             language:
               default:
                 name: measurementId
@@ -7261,7 +7263,7 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_162
+          - *ref_163
         responses:
           - language:
               default:
@@ -7274,7 +7276,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_163
+            schema: *ref_164
         exceptions:
           - language:
               default:
@@ -7315,7 +7317,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_164
+          - &ref_165
             language:
               default:
                 name: measurementId
@@ -7328,7 +7330,7 @@ operationGroups:
             implementation: Method
             required: true
             nullable: false
-          - &ref_165
+          - &ref_166
             language:
               default:
                 name: dataStreamId
@@ -7355,8 +7357,8 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_164
           - *ref_165
+          - *ref_166
         responses:
           - language:
               default:
@@ -7410,7 +7412,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_167
+          - &ref_168
             language:
               default:
                 name: measurementId
@@ -7424,7 +7426,7 @@ operationGroups:
             required: true
             nullable: false
           - *ref_88
-          - &ref_168
+          - &ref_169
             language:
               default:
                 name: operationId
@@ -7451,7 +7453,7 @@ operationGroups:
             implementation: Method
             origin: modelerfour:synthesized/accept
             required: true
-          - &ref_169
+          - &ref_170
             language:
               default:
                 name: body
@@ -7459,13 +7461,13 @@ operationGroups:
             protocol:
               http:
                 in: body
-            schema: *ref_166
+            schema: *ref_167
             implementation: Method
             required: false
         signatureParameters:
-          - *ref_167
           - *ref_168
           - *ref_169
+          - *ref_170
         responses:
           - language:
               default:
@@ -7498,7 +7500,7 @@ operationGroups:
                         description: The location for monitoring the operation state.
                 mediaTypes:
                   - application/json
-            schema: *ref_132
+            schema: *ref_133
         exceptions:
           - language:
               default:
@@ -7520,7 +7522,7 @@ operationGroups:
             schema: *ref_86
         operationLinks:
           polling:
-            operation: *ref_98
+            operation: *ref_99
         extensions:
           x-ms-long-running-operation: true
       - &ref_270
@@ -7551,7 +7553,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_170
+          - &ref_171
             language:
               default:
                 name: measurementId
@@ -7564,7 +7566,7 @@ operationGroups:
             implementation: Method
             required: true
             nullable: false
-          - &ref_171
+          - &ref_172
             language:
               default:
                 name: dataStreamId
@@ -7578,7 +7580,7 @@ operationGroups:
             required: true
             nullable: false
           - *ref_88
-          - &ref_172
+          - &ref_173
             language:
               default:
                 name: operationId
@@ -7606,9 +7608,9 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_170
           - *ref_171
           - *ref_172
+          - *ref_173
         responses:
           - language:
               default:
@@ -7641,7 +7643,7 @@ operationGroups:
                         description: The location for monitoring the operation state.
                 mediaTypes:
                   - application/json
-            schema: *ref_132
+            schema: *ref_133
         exceptions:
           - language:
               default:
@@ -7663,7 +7665,7 @@ operationGroups:
             schema: *ref_86
         operationLinks:
           polling:
-            operation: *ref_98
+            operation: *ref_99
         extensions:
           x-ms-long-running-operation: true
       - &ref_271
@@ -7696,7 +7698,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_173
+          - &ref_174
             language:
               default:
                 name: measurementId
@@ -7709,7 +7711,7 @@ operationGroups:
             implementation: Method
             required: true
             nullable: false
-          - &ref_174
+          - &ref_175
             language:
               default:
                 name: filter
@@ -7736,8 +7738,8 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_173
           - *ref_174
+          - *ref_175
         responses:
           - language:
               default:
@@ -7750,7 +7752,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_175
+            schema: *ref_176
         exceptions:
           - language:
               default:
@@ -7800,7 +7802,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_177
+          - &ref_178
             language:
               default:
                 name: measurementId
@@ -7813,7 +7815,7 @@ operationGroups:
             implementation: Method
             required: true
             nullable: false
-          - &ref_178
+          - &ref_179
             language:
               default:
                 name: dataStreamId
@@ -7839,7 +7841,7 @@ operationGroups:
             implementation: Method
             origin: modelerfour:synthesized/accept
             required: true
-          - &ref_179
+          - &ref_180
             language:
               default:
                 name: body
@@ -7849,13 +7851,13 @@ operationGroups:
             protocol:
               http:
                 in: body
-            schema: *ref_176
+            schema: *ref_177
             implementation: Method
             required: false
         signatureParameters:
-          - *ref_177
           - *ref_178
           - *ref_179
+          - *ref_180
         responses:
           - language:
               default:
@@ -7868,7 +7870,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_180
+            schema: *ref_181
         exceptions:
           - language:
               default:
@@ -7910,7 +7912,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_181
+          - &ref_182
             language:
               default:
                 name: measurementId
@@ -7923,7 +7925,7 @@ operationGroups:
             implementation: Method
             required: true
             nullable: false
-          - &ref_182
+          - &ref_183
             language:
               default:
                 name: dataStreamId
@@ -7937,7 +7939,7 @@ operationGroups:
             required: true
             nullable: false
           - *ref_88
-          - &ref_183
+          - &ref_184
             language:
               default:
                 name: operationId
@@ -7965,9 +7967,9 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_181
           - *ref_182
           - *ref_183
+          - *ref_184
         responses:
           - language:
               default:
@@ -8000,7 +8002,7 @@ operationGroups:
                         description: The location for monitoring the operation state.
                 mediaTypes:
                   - application/json
-            schema: *ref_132
+            schema: *ref_133
         exceptions:
           - language:
               default:
@@ -8022,7 +8024,7 @@ operationGroups:
             schema: *ref_86
         operationLinks:
           polling:
-            operation: *ref_98
+            operation: *ref_99
         extensions:
           x-ms-long-running-operation: true
       - &ref_274
@@ -8052,7 +8054,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_184
+          - &ref_185
             language:
               default:
                 name: measurementId
@@ -8065,7 +8067,7 @@ operationGroups:
             implementation: Method
             required: true
             nullable: false
-          - &ref_185
+          - &ref_186
             language:
               default:
                 name: dataStreamId
@@ -8079,7 +8081,7 @@ operationGroups:
             required: true
             nullable: false
           - *ref_88
-          - &ref_186
+          - &ref_187
             language:
               default:
                 name: operationId
@@ -8107,9 +8109,9 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_184
           - *ref_185
           - *ref_186
+          - *ref_187
         responses:
           - language:
               default:
@@ -8142,7 +8144,7 @@ operationGroups:
                         description: The location for monitoring the operation state.
                 mediaTypes:
                   - application/json
-            schema: *ref_132
+            schema: *ref_133
         exceptions:
           - language:
               default:
@@ -8164,7 +8166,7 @@ operationGroups:
             schema: *ref_86
         operationLinks:
           polling:
-            operation: *ref_98
+            operation: *ref_99
         extensions:
           x-ms-long-running-operation: true
       - &ref_275
@@ -8194,7 +8196,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_188
+          - &ref_189
             language:
               default:
                 name: measurementId
@@ -8220,7 +8222,7 @@ operationGroups:
             implementation: Method
             origin: modelerfour:synthesized/accept
             required: true
-          - &ref_189
+          - &ref_190
             language:
               default:
                 name: body
@@ -8230,12 +8232,12 @@ operationGroups:
             protocol:
               http:
                 in: body
-            schema: *ref_187
+            schema: *ref_188
             implementation: Method
             required: false
         signatureParameters:
-          - *ref_188
           - *ref_189
+          - *ref_190
         responses:
           - language:
               default:
@@ -8248,7 +8250,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_175
+            schema: *ref_176
         exceptions:
           - language:
               default:
@@ -8293,7 +8295,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_191
+          - &ref_192
             language:
               default:
                 name: measurementId
@@ -8319,7 +8321,7 @@ operationGroups:
             implementation: Method
             origin: modelerfour:synthesized/accept
             required: true
-          - &ref_192
+          - &ref_193
             language:
               default:
                 name: body
@@ -8329,12 +8331,12 @@ operationGroups:
             protocol:
               http:
                 in: body
-            schema: *ref_190
+            schema: *ref_191
             implementation: Method
             required: false
         signatureParameters:
-          - *ref_191
           - *ref_192
+          - *ref_193
         responses:
           - language:
               default:
@@ -8347,7 +8349,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_175
+            schema: *ref_176
         exceptions:
           - language:
               default:
@@ -8393,7 +8395,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_194
+          - &ref_195
             language:
               default:
                 name: measurementId
@@ -8419,7 +8421,7 @@ operationGroups:
             implementation: Method
             origin: modelerfour:synthesized/accept
             required: true
-          - &ref_195
+          - &ref_196
             language:
               default:
                 name: body
@@ -8429,12 +8431,12 @@ operationGroups:
             protocol:
               http:
                 in: body
-            schema: *ref_193
+            schema: *ref_194
             implementation: Method
             required: false
         signatureParameters:
-          - *ref_194
           - *ref_195
+          - *ref_196
         responses:
           - language:
               default:
@@ -8447,7 +8449,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_196
+            schema: *ref_197
         exceptions:
           - language:
               default:
@@ -8499,7 +8501,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_198
+          - &ref_199
             language:
               default:
                 name: measurementId
@@ -8512,7 +8514,7 @@ operationGroups:
             implementation: Method
             required: true
             nullable: false
-          - &ref_199
+          - &ref_200
             language:
               default:
                 name: dataStreamId
@@ -8538,7 +8540,7 @@ operationGroups:
             implementation: Method
             origin: modelerfour:synthesized/accept
             required: true
-          - &ref_200
+          - &ref_201
             language:
               default:
                 name: body
@@ -8546,13 +8548,13 @@ operationGroups:
             protocol:
               http:
                 in: body
-            schema: *ref_197
+            schema: *ref_198
             implementation: Method
             required: false
         signatureParameters:
-          - *ref_198
           - *ref_199
           - *ref_200
+          - *ref_201
         responses:
           - language:
               default:
@@ -8565,7 +8567,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_201
+            schema: *ref_202
           - language:
               default:
                 name: createResponse
@@ -8577,7 +8579,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_201
+            schema: *ref_202
         exceptions:
           - language:
               default:
@@ -8623,7 +8625,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_202
+          - &ref_203
             language:
               default:
                 name: measurementId
@@ -8636,7 +8638,7 @@ operationGroups:
             implementation: Method
             required: true
             nullable: false
-          - &ref_203
+          - &ref_204
             language:
               default:
                 name: dataStreamId
@@ -8663,8 +8665,8 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_202
           - *ref_203
+          - *ref_204
         responses:
           - language:
               default:
@@ -8677,7 +8679,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_201
+            schema: *ref_202
         exceptions:
           - language:
               default:
@@ -8718,7 +8720,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_204
+          - &ref_205
             language:
               default:
                 name: measurementId
@@ -8731,7 +8733,7 @@ operationGroups:
             implementation: Method
             required: true
             nullable: false
-          - &ref_205
+          - &ref_206
             language:
               default:
                 name: dataStreamId
@@ -8758,8 +8760,8 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_204
           - *ref_205
+          - *ref_206
         responses:
           - language:
               default:
@@ -8772,7 +8774,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_206
+            schema: *ref_207
         exceptions:
           - language:
               default:
@@ -8813,7 +8815,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_208
+          - &ref_209
             language:
               default:
                 name: measurementId
@@ -8826,7 +8828,7 @@ operationGroups:
             implementation: Method
             required: true
             nullable: false
-          - &ref_209
+          - &ref_210
             language:
               default:
                 name: dataStreamId
@@ -8852,7 +8854,7 @@ operationGroups:
             implementation: Method
             origin: modelerfour:synthesized/accept
             required: true
-          - &ref_210
+          - &ref_211
             language:
               default:
                 name: body
@@ -8860,13 +8862,13 @@ operationGroups:
             protocol:
               http:
                 in: body
-            schema: *ref_207
+            schema: *ref_208
             implementation: Method
             required: false
         signatureParameters:
-          - *ref_208
           - *ref_209
           - *ref_210
+          - *ref_211
         responses:
           - language:
               default:
@@ -8879,7 +8881,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_211
+            schema: *ref_212
           - language:
               default:
                 name: createResponse
@@ -8891,7 +8893,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_211
+            schema: *ref_212
         exceptions:
           - language:
               default:
@@ -8934,7 +8936,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_212
+          - &ref_213
             language:
               default:
                 name: measurementId
@@ -8947,7 +8949,7 @@ operationGroups:
             implementation: Method
             required: true
             nullable: false
-          - &ref_213
+          - &ref_214
             language:
               default:
                 name: dataStreamId
@@ -8974,8 +8976,8 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_212
           - *ref_213
+          - *ref_214
         responses:
           - language:
               default:
@@ -8988,7 +8990,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_214
+            schema: *ref_215
         exceptions:
           - language:
               default:
@@ -9038,7 +9040,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_215
+          - &ref_216
             language:
               default:
                 name: measurementId
@@ -9051,7 +9053,7 @@ operationGroups:
             implementation: Method
             required: true
             nullable: false
-          - &ref_216
+          - &ref_217
             language:
               default:
                 name: dataStreamId
@@ -9078,8 +9080,8 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_215
           - *ref_216
+          - *ref_217
         responses:
           - language:
               default:
@@ -9092,7 +9094,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_217
+            schema: *ref_218
         exceptions:
           - language:
               default:
@@ -9134,7 +9136,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_218
+          - &ref_219
             language:
               default:
                 name: measurementId
@@ -9147,7 +9149,7 @@ operationGroups:
             implementation: Method
             required: true
             nullable: false
-          - &ref_219
+          - &ref_220
             language:
               default:
                 name: dataStreamId
@@ -9160,7 +9162,7 @@ operationGroups:
             implementation: Method
             required: true
             nullable: false
-          - &ref_220
+          - &ref_221
             language:
               default:
                 name: schemaName
@@ -9187,9 +9189,9 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_218
           - *ref_219
           - *ref_220
+          - *ref_221
         responses:
           - language:
               default:
@@ -9244,7 +9246,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_222
+          - &ref_223
             language:
               default:
                 name: measurementId
@@ -9257,7 +9259,7 @@ operationGroups:
             implementation: Method
             required: true
             nullable: false
-          - &ref_223
+          - &ref_224
             language:
               default:
                 name: dataStreamId
@@ -9271,7 +9273,7 @@ operationGroups:
             required: true
             nullable: false
           - *ref_88
-          - &ref_224
+          - &ref_225
             language:
               default:
                 name: operationId
@@ -9298,7 +9300,7 @@ operationGroups:
             implementation: Method
             origin: modelerfour:synthesized/accept
             required: true
-          - &ref_225
+          - &ref_226
             language:
               default:
                 name: body
@@ -9308,14 +9310,14 @@ operationGroups:
             protocol:
               http:
                 in: body
-            schema: *ref_221
+            schema: *ref_222
             implementation: Method
             required: false
         signatureParameters:
-          - *ref_222
           - *ref_223
           - *ref_224
           - *ref_225
+          - *ref_226
         responses:
           - language:
               default:
@@ -9348,7 +9350,7 @@ operationGroups:
                         description: The location for monitoring the operation state.
                 mediaTypes:
                   - application/json
-            schema: *ref_132
+            schema: *ref_133
         exceptions:
           - language:
               default:
@@ -9370,7 +9372,7 @@ operationGroups:
             schema: *ref_86
         operationLinks:
           polling:
-            operation: *ref_98
+            operation: *ref_99
         extensions:
           x-ms-long-running-operation: true
       - &ref_286
@@ -9401,7 +9403,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_226
+          - &ref_227
             language:
               default:
                 name: measurementId
@@ -9414,7 +9416,7 @@ operationGroups:
             implementation: Method
             required: true
             nullable: false
-          - &ref_227
+          - &ref_228
             language:
               default:
                 name: dataStreamId
@@ -9427,7 +9429,7 @@ operationGroups:
             implementation: Method
             required: true
             nullable: false
-          - &ref_228
+          - &ref_229
             language:
               default:
                 name: schemaName
@@ -9441,7 +9443,7 @@ operationGroups:
             required: true
             nullable: false
           - *ref_88
-          - &ref_229
+          - &ref_230
             language:
               default:
                 name: operationId
@@ -9469,10 +9471,10 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_226
           - *ref_227
           - *ref_228
           - *ref_229
+          - *ref_230
         responses:
           - language:
               default:
@@ -9493,7 +9495,7 @@ operationGroups:
                         description: The location for monitoring the operation state.
                 mediaTypes:
                   - application/json
-            schema: *ref_132
+            schema: *ref_133
           - language:
               default:
                 name: deleteResponse
@@ -9526,7 +9528,7 @@ operationGroups:
             schema: *ref_86
         operationLinks:
           polling:
-            operation: *ref_98
+            operation: *ref_99
         extensions:
           x-ms-long-running-operation: true
       - &ref_287
@@ -9557,7 +9559,7 @@ operationGroups:
                 uri: '{endpoint}'
         parameters:
           - *ref_87
-          - &ref_230
+          - &ref_231
             language:
               default:
                 name: measurementId
@@ -9570,7 +9572,7 @@ operationGroups:
             implementation: Method
             required: true
             nullable: false
-          - &ref_231
+          - &ref_232
             language:
               default:
                 name: dataStreamId
@@ -9597,8 +9599,8 @@ operationGroups:
             origin: modelerfour:synthesized/accept
             required: true
         signatureParameters:
-          - *ref_230
           - *ref_231
+          - *ref_232
         responses:
           - language:
               default:
@@ -9611,7 +9613,7 @@ operationGroups:
                 headers: []
                 mediaTypes:
                   - application/json
-            schema: *ref_232
+            schema: *ref_233
         exceptions:
           - language:
               default:
@@ -9632,7 +9634,7 @@ operationGroups:
 security:
   authenticationRequired: true
   schemes:
-    - &ref_233
+    - &ref_234
       type: OAuth2
       scopes:
         - https://adp.azure.com/.default
@@ -9645,7 +9647,7 @@ clients:
     security:
       authenticationRequired: true
       schemes:
-        - *ref_233
+        - *ref_234
     operationGroups:
       - language:
           default:
@@ -9654,7 +9656,7 @@ clients:
         protocol: {}
         $key: ''
         operations:
-          - *ref_98
+          - *ref_99
   - language:
       default:
         name: DiscoveryOperationsClient
@@ -9663,7 +9665,7 @@ clients:
     security:
       authenticationRequired: true
       schemes:
-        - *ref_233
+        - *ref_234
     operationGroups:
       - language:
           default:
@@ -9672,8 +9674,8 @@ clients:
         protocol: {}
         $key: ''
         operations:
-          - *ref_234
           - *ref_235
+          - *ref_98
           - *ref_236
           - *ref_237
   - language:
@@ -9684,7 +9686,7 @@ clients:
     security:
       authenticationRequired: true
       schemes:
-        - *ref_233
+        - *ref_234
     operationGroups:
       - language:
           default:
@@ -9703,7 +9705,7 @@ clients:
     security:
       authenticationRequired: true
       schemes:
-        - *ref_233
+        - *ref_234
     operationGroups:
       - language:
           default:
@@ -9721,7 +9723,7 @@ clients:
     security:
       authenticationRequired: true
       schemes:
-        - *ref_233
+        - *ref_234
     operationGroups:
       - language:
           default:
@@ -9742,7 +9744,7 @@ clients:
     security:
       authenticationRequired: true
       schemes:
-        - *ref_233
+        - *ref_234
     operationGroups:
       - language:
           default:
@@ -9762,7 +9764,7 @@ clients:
     security:
       authenticationRequired: true
       schemes:
-        - *ref_233
+        - *ref_234
     operationGroups:
       - language:
           default:
@@ -9781,7 +9783,7 @@ clients:
     security:
       authenticationRequired: true
       schemes:
-        - *ref_233
+        - *ref_234
     operationGroups:
       - language:
           default:
@@ -9799,7 +9801,7 @@ clients:
     security:
       authenticationRequired: true
       schemes:
-        - *ref_233
+        - *ref_234
     operationGroups:
       - language:
           default:
@@ -9820,7 +9822,7 @@ clients:
     security:
       authenticationRequired: true
       schemes:
-        - *ref_233
+        - *ref_234
     operationGroups:
       - language:
           default:
@@ -9842,7 +9844,7 @@ clients:
     security:
       authenticationRequired: true
       schemes:
-        - *ref_233
+        - *ref_234
     operationGroups:
       - language:
           default:
@@ -9860,7 +9862,7 @@ clients:
     security:
       authenticationRequired: true
       schemes:
-        - *ref_233
+        - *ref_234
     operationGroups:
       - language:
           default:
@@ -9878,7 +9880,7 @@ clients:
     security:
       authenticationRequired: true
       schemes:
-        - *ref_233
+        - *ref_234
     operationGroups:
       - language:
           default:
@@ -9898,7 +9900,7 @@ clients:
     security:
       authenticationRequired: true
       schemes:
-        - *ref_233
+        - *ref_234
     operationGroups:
       - language:
           default:
@@ -9917,7 +9919,7 @@ clients:
     security:
       authenticationRequired: true
       schemes:
-        - *ref_233
+        - *ref_234
     operationGroups:
       - language:
           default:
@@ -9935,7 +9937,7 @@ clients:
     security:
       authenticationRequired: true
       schemes:
-        - *ref_233
+        - *ref_234
     operationGroups:
       - language:
           default:
@@ -9962,7 +9964,7 @@ clients:
     security:
       authenticationRequired: true
       schemes:
-        - *ref_233
+        - *ref_234
     operationGroups:
       - language:
           default:
@@ -9981,7 +9983,7 @@ clients:
     security:
       authenticationRequired: true
       schemes:
-        - *ref_233
+        - *ref_234
     operationGroups:
       - language:
           default:
@@ -10000,7 +10002,7 @@ clients:
     security:
       authenticationRequired: true
       schemes:
-        - *ref_233
+        - *ref_234
     operationGroups:
       - language:
           default:
@@ -10018,7 +10020,7 @@ clients:
     security:
       authenticationRequired: true
       schemes:
-        - *ref_233
+        - *ref_234
     operationGroups:
       - language:
           default:
@@ -10036,7 +10038,7 @@ clients:
     security:
       authenticationRequired: true
       schemes:
-        - *ref_233
+        - *ref_234
     operationGroups:
       - language:
           default:
