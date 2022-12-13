@@ -8,6 +8,7 @@ import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.BodyDeclaration;
+import com.github.javaparser.ast.body.CallableDeclaration;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.ast.expr.SimpleName;
@@ -16,8 +17,11 @@ import com.github.javaparser.ast.modules.ModuleDirective;
 import com.github.javaparser.ast.nodeTypes.NodeWithSimpleName;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+
 
 /**
  * Partial update handler. It can handle partial update for .java class files.
@@ -106,7 +110,10 @@ public class PartialUpdateHandler {
             existingFileMembers = existingClazz.getMembers();
         }
 
-        // 3. Check if the file is in scope of partial update:
+        // 3. Verify Generated File, will throw error if there is invalid part found.
+        validateGeneratedClassOrInterface(generatedFileMembers);
+
+        // 4. Check if the file is in scope of partial update:
         // if there is a method has @Generated annotation, then the file is in scope of partial update, otherwise return directly
         boolean hasGeneratedAnnotations = generatedFileMembers.stream().anyMatch(member -> hasGeneratedAnnotation(member));
 
@@ -115,36 +122,32 @@ public class PartialUpdateHandler {
         }
 
         NodeList<BodyDeclaration<?>> updatedMembersList = new NodeList<>();
-        // 4. Iterate existingFileMembers, keep manual written members, and replace generated members with the corresponding newly generated one
+        // 5. Iterate existingFileMembers, keep manual written members, and replace generated members with the corresponding newly generated one
         for (BodyDeclaration<?> existingMember : existingFileMembers) {
             boolean isGeneratedMethod = hasGeneratedAnnotation(existingMember);
             if (!isGeneratedMethod) { // manual written member
                 updatedMembersList.add(existingMember);
             } else {
                 // find the corresponding newly generated member
-                boolean hasFoundCorrespondingNewlyGeneratedMember = false;
                 for (BodyDeclaration<?> generatedMember : generatedFileMembers) {
                     if (isMembersCorresponding(existingMember, generatedMember)) {
-                        if (hasFoundCorrespondingNewlyGeneratedMember) {
-                            // it's not possible to find two methods in the generatedMembers with the same signature, otherwise generated file can have compilation error.
-                            throw new RuntimeException("Found more than one corresponding newly generated method. Generated file have methods with same signature and can ave compilation error");
-                        }
                         updatedMembersList.add(generatedMember);
-                        hasFoundCorrespondingNewlyGeneratedMember = true;
+                        break;
                     }
                 }
             }
         }
 
-        // 5. add remaining members in generated file to the new members list
+        // 6. Add remaining members in generated file to the new members list
         for (BodyDeclaration<?> generatedMember : generatedFileMembers) {
             boolean needToAddToUpdateMembersList = true;
             for (BodyDeclaration<?> existingMember : updatedMembersList) {
-                // If there is an existing member who has the same name as the generated member and is manually written,
-                // Or if the generated method and the existing method have the same method signature.
-                // Then we don't put the generated member to the updatedMembersList
-                if (isMembersWithSameName(existingMember, generatedMember) && !hasGeneratedAnnotation(existingMember) || isMembersCorresponding(existingMember, generatedMember)) {
+                // If the generated member and the existing member is corresponding,
+                // or if there is an existing member who has the same name as the generated member and is manually written,
+                // Then we don't put the generated member to the updatedMembersList.
+                if (isMembersCorresponding(existingMember, generatedMember) || (isMembersWithSameName(existingMember, generatedMember) && !hasGeneratedAnnotation(existingMember))) {
                     needToAddToUpdateMembersList = false;
+                    break;
                 }
             }
             if (needToAddToUpdateMembersList) {
@@ -152,13 +155,31 @@ public class PartialUpdateHandler {
             }
         }
 
-        // 6. update members
+        // 7. Update members
         generatedClazz.setMembers(updatedMembersList);
 
-        // 7. update imports
+        // 8. Update imports
         compilationUnitForGeneratedFile.getImports().addAll(compilationUnitForExistingFile.getImports());
 
         return compilationUnitForGeneratedFile.toString();
+    }
+
+    /**
+     * Verify if the generated class or interface is valid
+     * @param generatedFileMembers, members in the generated file
+     * @return true if the generated class or interface is valid, otherwise return false
+     */
+    private static void validateGeneratedClassOrInterface(List<BodyDeclaration<?>> generatedFileMembers) {
+        // 1. Verify there is no duplicate methods (methods with same signature are considered duplicate methods)
+        Set<CallableDeclaration.Signature> methodSignatureSet = new HashSet<>();
+        for (BodyDeclaration<?> generatedMember : generatedFileMembers) {
+            if (generatedMember.isCallableDeclaration()) {
+                if (methodSignatureSet.contains(generatedMember.asCallableDeclaration().getSignature())) {
+                    throw new RuntimeException(String.format("Found duplicate methods in the generated file."));
+                }
+                methodSignatureSet.add(generatedMember.asCallableDeclaration().getSignature());
+            }
+        }
     }
 
     /**
@@ -335,6 +356,12 @@ public class PartialUpdateHandler {
         }
     }
 
+    /**
+     * Compare whether two members are corresponding: if two members are callable, which means they are constructor or method, we will compare the signature, otherwise, we will compare the name.
+     * @param member1
+     * @param member2
+     * @return true if two members are corresponding, false if two members are not corresponding.
+     */
     private static boolean isMembersCorresponding(BodyDeclaration<?> member1, BodyDeclaration<?> member2) {
         if (member1.isCallableDeclaration() && member2.isCallableDeclaration()) {
             // compare signature
