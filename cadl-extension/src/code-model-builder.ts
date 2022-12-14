@@ -420,15 +420,15 @@ export class CodeModelBuilder {
     // responses
     op.responses.map((it) => this.processResponse(codeModelOperation, it));
 
-    this.processRouteForPaged(codeModelOperation, op.responses);
-    this.processRouteForLongRunning(codeModelOperation, operation, op.responses);
+    this.processRouteForPaged(codeModelOperation, op.responses, groupName);
+    this.processRouteForLongRunning(codeModelOperation, operation, op.responses, groupName);
 
     operationGroup.addOperation(codeModelOperation);
 
     return codeModelOperation;
   }
 
-  private processRouteForPaged(op: CodeModelOperation, responses: HttpOperationResponse[]) {
+  private processRouteForPaged(op: CodeModelOperation, responses: HttpOperationResponse[], groupName: string) {
     for (const response of responses) {
       if (response.responses && response.responses.length > 0 && response.responses[0].body) {
         const responseBody = response.responses[0].body;
@@ -449,7 +449,7 @@ export class CodeModelBuilder {
     }
   }
 
-  private processRouteForLongRunning(op: CodeModelOperation, operation: Operation, responses: HttpOperationResponse[]) {
+  private processRouteForLongRunning(op: CodeModelOperation, operation: Operation, responses: HttpOperationResponse[], groupName: string) {
     let pollingFoundInOperationLinks = false;
     const operationLinks = getOperationLinks(this.program, operation);
     if (operationLinks) {
@@ -462,8 +462,10 @@ export class CodeModelBuilder {
 
         if (linkOperation.linkedOperation) {
           // Cadl requires linked operation written before
-          const opLink = new OperationLink(this.operationCache.get(linkOperation.linkedOperation)!);
-          // parameters of operation link
+          if (!this.operationCache.get(linkOperation.linkedOperation)) {
+            this.processRoute(groupName, linkOperation.linkedOperation);
+          }
+          const opLink = new OperationLink(this.operationCache.get(linkOperation.linkedOperation)!);          // parameters of operation link
           if (linkOperation.parameters) {
             opLink.parameters = this.processSchema(linkOperation.parameters, "parameters");
           }
