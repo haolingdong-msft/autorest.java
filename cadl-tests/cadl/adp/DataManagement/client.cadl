@@ -15,7 +15,7 @@ namespace Adp.SDK.DotNet.DataManagement {
     service: Adp.DataManagement,
   })
   interface DataManagement
-    extends 
+    extends Adp.SDK.DotNet.Internal.LongRunningOperation,
       Adp.SDK.DotNet.Internal.Discovery,
       Adp.SDK.DotNet.Internal.Upload,
       Adp.SDK.DotNet.Internal.ClassificationSchema,
@@ -26,7 +26,10 @@ namespace Adp.SDK.DotNet.DataManagement {
 }
 
 namespace Adp.SDK.DotNet.Internal {
-
+  interface LongRunningOperation {
+    @convenienceAPI
+    getLongRunning is Adp.Shared.LongRunningOperations.getStatus;
+  }
 
   interface ClassificationSchema {
     #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom LRO response template the LRO actions."
