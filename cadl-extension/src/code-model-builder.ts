@@ -39,8 +39,8 @@ import {
   EmitContext,
   getProjectedName,
   getService,
-} from "@cadl-lang/compiler";
-import { getResourceOperation, getSegment } from "@cadl-lang/rest";
+} from "@typespec/compiler";
+import { getResourceOperation, getSegment } from "@typespec/rest";
 import {
   getAuthentication,
   getHeaderFieldName,
@@ -58,9 +58,9 @@ import {
   getHttpOperation,
   getQueryParamOptions,
   getHeaderFieldOptions,
-} from "@cadl-lang/rest/http";
-import { getVersion } from "@cadl-lang/versioning";
-import { isPollingLocation, getPagedResult, getOperationLinks, isFixed } from "@azure-tools/cadl-azure-core";
+} from "@typespec/http";
+import { getVersion } from "@typespec/versioning";
+import { isPollingLocation, getPagedResult, getOperationLinks, isFixed } from "@azure-tools/typespec-azure-core";
 import {
   DpgContext,
   listClients,
@@ -70,7 +70,7 @@ import {
   shouldGenerateConvenient,
   createDpgContext,
   shouldGenerateProtocol,
-} from "@azure-tools/cadl-dpg";
+} from "@azure-tools/typespec-client-generator-core";
 import { fail } from "assert";
 import {
   AnySchema,
@@ -156,7 +156,7 @@ export class CodeModelBuilder {
 
     const namespace1 = this.namespace;
     this.typeNameOptions = {
-      // shorten type names by removing Cadl and service namespace
+      // shorten type names by removing TypeSpec and service namespace
       namespaceFilter(ns) {
         const name = getNamespaceFullName(ns);
         return name !== "Cadl" && name !== namespace1;
@@ -211,26 +211,7 @@ export class CodeModelBuilder {
         let parameter;
 
         if (isApiVersion(this.dpgContext, it)) {
-          const schema = this.codeModel.schemas.add(
-            new ConstantSchema(it.name, "api-version", {
-              valueType: this.stringSchema,
-              value: new ConstantValue(""),
-            }),
-          );
-          parameter = new Parameter(it.name, this.getDoc(it), schema, {
-            implementation: ImplementationLocation.Client,
-            origin: "modelerfour:synthesized/api-version",
-            required: true,
-            protocol: {
-              http: new HttpParameter(ParameterLocation.Uri),
-            },
-            clientDefaultValue: this.getDefaultValue(it.default),
-            language: {
-              default: {
-                serializedName: it.name,
-              },
-            },
-          });
+          parameter = this.createApiVersionParameter(it.name, ParameterLocation.Uri);
         } else {
           const schema = this.processSchema(it.type, it.name);
           parameter = new Parameter(it.name, this.getDoc(it), schema, {
@@ -518,7 +499,7 @@ export class CodeModelBuilder {
 
       for (const [linkType, linkOperation] of operationLinks) {
         if (linkType === "polling" || linkType === "final") {
-          // some Cadl writes pollingOperation without the operation
+          // some TypeSpec writes pollingOperation without the operation
           pollingFoundInOperationLinks = true;
         }
 
@@ -587,7 +568,7 @@ export class CodeModelBuilder {
 
   private processParameter(op: CodeModelOperation, param: HttpOperationParameter) {
     if (isApiVersion(this.dpgContext, param)) {
-      const parameter = this.apiVersionParameter;
+      const parameter = param.type === "query" ? this.apiVersionParameter : this.apiVersionParameterInPath;
       op.addParameter(parameter);
     } else if (this.specialHeaderNames.has(param.name.toLowerCase())) {
       // special headers
@@ -898,7 +879,7 @@ export class CodeModelBuilder {
     if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
       const responseBody = resp.responses[0].body;
       const bodyType = this.findResponseBody(responseBody.type);
-      if (bodyType.kind === "Model" && bodyType.name === "bytes") {
+      if (bodyType.kind === "Scalar" && bodyType.name === "bytes") {
         // binary
         response = new BinaryResponse({
           protocol: {
@@ -947,8 +928,10 @@ export class CodeModelBuilder {
               if (match) {
                 schema = candidateResponseSchema;
                 this.program.trace(
-                  "cadl-java",
-                  `Replace Cadl model ${this.getName(bodyType)} with ${candidateResponseSchema.language.default.name}`,
+                  "typespec-java",
+                  `Replace TypeSpec model ${this.getName(bodyType)} with ${
+                    candidateResponseSchema.language.default.name
+                  }`,
                 );
               }
             }
@@ -1563,7 +1546,7 @@ export class CodeModelBuilder {
       return this.processChoiceSchemaForUnion(type, nonNullVariants, name);
     }
 
-    // TODO: name from cadl-dpg
+    // TODO: name from typespec-client-generator-core
     const namespace = getNamespace(type);
     const unionSchema = new OrSchema(pascalCase(name) + "ModelBase", this.getDoc(type), {
       summary: this.getSummary(type),
@@ -1686,7 +1669,7 @@ export class CodeModelBuilder {
   }
 
   private getName(target: Model | Enum | ModelProperty | Scalar | Operation): string {
-    // TODO: once getLibraryName API in cadl-dpg can get projected name from language and client, as well as can handle template case, use getLibraryName API
+    // TODO: once getLibraryName API in typespec-client-generator-core can get projected name from language and client, as well as can handle template case, use getLibraryName API
     const languageProjectedName = getProjectedName(this.program, target, "java");
     if (languageProjectedName) {
       return languageProjectedName;
@@ -1709,9 +1692,9 @@ export class CodeModelBuilder {
       target.templateMapper.args &&
       target.templateMapper.args.length > 0
     ) {
-      const cadlName = getTypeName(target, this.typeNameOptions);
+      const tspName = getTypeName(target, this.typeNameOptions);
       const newName = getNameForTemplate(target);
-      this.logWarning(`Rename Cadl model '${cadlName}' to '${newName}'`);
+      this.logWarning(`Rename TypeSpec model '${tspName}' to '${newName}'`);
       return newName;
     }
     return target.name;
@@ -1757,9 +1740,9 @@ export class CodeModelBuilder {
   }
 
   private logWarning(msg: string) {
-    this.program.trace("cadl-java", msg);
+    this.program.trace("typespec-java", msg);
     this.program.reportDiagnostic({
-      code: "cadl-java",
+      code: "typespec-java",
       severity: "warning",
       message: msg,
       target: NoTarget,
@@ -1798,37 +1781,50 @@ export class CodeModelBuilder {
   }
 
   private _anySchema?: AnySchema;
-  public get anySchema(): AnySchema {
+  get anySchema(): AnySchema {
     return this._anySchema ?? (this._anySchema = this.codeModel.schemas.add(new AnySchema("Anything")));
+  }
+
+  private createApiVersionParameter(serializedName: string, parameterLocation: ParameterLocation): Parameter {
+    return new Parameter(
+      serializedName,
+      "Version parameter",
+      this.codeModel.schemas.add(
+        new ConstantSchema(serializedName, "API Version", {
+          valueType: this.stringSchema,
+          value: new ConstantValue(""),
+        }),
+      ),
+      {
+        implementation: ImplementationLocation.Client,
+        origin: "modelerfour:synthesized/api-version",
+        required: true,
+        protocol: {
+          http: new HttpParameter(parameterLocation),
+        },
+        language: {
+          default: {
+            serializedName: serializedName,
+          },
+        },
+      },
+    );
   }
 
   private _apiVersionParameter?: Parameter;
   get apiVersionParameter(): Parameter {
     return (
       this._apiVersionParameter ||
-      (this._apiVersionParameter = new Parameter(
-        "api-version",
-        "Version parameter",
-        this.codeModel.schemas.add(
-          new ConstantSchema("accept", "api-version", {
-            valueType: this.stringSchema,
-            value: new ConstantValue(""),
-          }),
-        ),
-        {
-          implementation: ImplementationLocation.Client,
-          origin: "modelerfour:synthesized/api-version",
-          required: true,
-          protocol: {
-            http: new HttpParameter(ParameterLocation.Query),
-          },
-          language: {
-            default: {
-              serializedName: "api-version",
-            },
-          },
-        },
-      ))
+      (this._apiVersionParameter = this.createApiVersionParameter("api-version", ParameterLocation.Query))
+    );
+  }
+
+  private _apiVersionParameterInPath?: Parameter;
+  get apiVersionParameterInPath(): Parameter {
+    return (
+      this._apiVersionParameterInPath ||
+      // TODO: hardcode as "apiVersion", as it is what we get from compiler
+      (this._apiVersionParameterInPath = this.createApiVersionParameter("apiVersion", ParameterLocation.Path))
     );
   }
 

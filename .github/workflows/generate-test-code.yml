@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
@@ -42,7 +42,7 @@ jobs:
         run: |
           ./Generate.ps1
 
-      - name: Generate test code for cadl-java
+      - name: Generate test code for typespec-java
         if: ${{ inputs.scope == 'all' || inputs.scope == 'cadl' }}
         shell: pwsh
         run: |
