@@ -107,7 +107,7 @@ public class JavaEnum {
     }
 
     public final void annotation(String... annotations) {
-        addExpectedSemicolonAndNewLine();
+        addExpectedCommaAndNewLine();
         contents.annotation(annotations);
     }
 }

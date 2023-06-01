@@ -114,6 +114,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
         javaFile.javadocComment(comment -> comment.description(enumType.getDescription()));
         javaFile.publicEnum(enumType.getName(), enumBlock -> {
             for (ClientEnumValue value : enumType.getValues()) {
+                addGeneratedAnnotation(enumBlock);
                 enumBlock.value(value.getName(), value.getValue(), value.getDescription(), elementType);
             }
 
