@@ -10,6 +10,7 @@ import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.BodyDeclaration;
 import com.github.javaparser.ast.body.CallableDeclaration;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.ast.body.EnumDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.ast.comments.Comment;
 import com.github.javaparser.ast.expr.SimpleName;
@@ -74,6 +75,11 @@ public class PartialUpdateHandler {
             return handlePartialUpdateForClassOrInterfaceFile(generatedFileContent, existingFileContent);
         }
 
+        // 4. If it's enum file, handle partial update for enum file
+        if (isEnumFile(compilationUnitForExistingFile)) {
+            return handlePartialUpdateForEnumFile(generatedFileContent, existingFileContent);
+        }
+
         return generatedFileContent;
     }
 
@@ -82,9 +88,7 @@ public class PartialUpdateHandler {
      * <ul>
      *  <li>Parse existing file content and generated file content using JavaParser
      *  <li>Get class members for existing file and generated file
-     *  <li>Check if the file is in scope of partial update by iterate the members in generated file to see if there is a method has {@code @Generated} annotation. If it has {@code @Generated} annotation, then the file is in scope of partial update, otherwise return generated file content directly.
-     *  <li>Iterate existing file members, keep manual updated members, and replace generated members with the corresponding newly generated one. Here we will not do the replace on the existing file member list,  we just create a new member list {@code updatedMembersList} and put in those manually update members and newly generated members.
-     *  <li>Add remaining newly generated members to {@code updatedMembersList}
+     *  <li>Handle partial update for class members
      *  <li>Update generated file members with {@code updatedMembersList}
      *  <li>Update generated file imports
      * </ul>
@@ -112,76 +116,150 @@ public class PartialUpdateHandler {
         }
 
         // 3. Verify Generated File, will throw error if there is invalid part found.
-        validateGeneratedClassOrInterface(generatedFileMembers);
+        validateGeneratedBodyDeclarations(generatedFileMembers);
 
         // 4. Check if the file is in scope of partial update:
-        // if there is a method has @Generated annotation, then the file is in scope of partial update, otherwise return directly
-        boolean hasGeneratedAnnotations = generatedFileMembers.stream().anyMatch(member -> hasGeneratedAnnotation(member));
-
-        if (!hasGeneratedAnnotations) {
+        if (!isFileInScopeOfPartialUpdate(generatedFileMembers)) {
             return generatedFileContent;
         }
 
-        NodeList<BodyDeclaration<?>> updatedMembersList = new NodeList<>();
-        // 5. Iterate existingFileMembers, keep manual written members, and replace generated members with the corresponding newly generated one
-        for (BodyDeclaration<?> existingMember : existingFileMembers) {
-            boolean isGeneratedMethod = hasGeneratedAnnotation(existingMember);
-            if (!isGeneratedMethod) { // manual written member
-                updatedMembersList.add(existingMember);
-            } else {
-                // find the corresponding newly generated member
-                for (BodyDeclaration<?> generatedMember : generatedFileMembers) {
-                    if (isMembersCorresponding(existingMember, generatedMember)) {
-                        updatedMembersList.add(generatedMember);
-                        break;
-                    }
-                }
-            }
-        }
+        // 5. Handel partial update for members and return as updatedMembersList
+        NodeList<BodyDeclaration<?>> updatedMembersList = handlePartialUpdateForBodyDeclarations(generatedFileMembers, existingFileMembers);
 
-        // 6. Add remaining members in generated file to the new members list
-        for (BodyDeclaration<?> generatedMember : generatedFileMembers) {
-            boolean needToAddToUpdateMembersList = true;
-            for (BodyDeclaration<?> existingMember : updatedMembersList) {
-                // If the generated member and the existing member is corresponding,
-                // or if there is an existing member who has the same name as the generated member and is manually written,
-                // Then we don't put the generated member to the updatedMembersList.
-                if (isMembersCorresponding(existingMember, generatedMember) || (isMembersWithSameName(existingMember, generatedMember) && !hasGeneratedAnnotation(existingMember))) {
-                    needToAddToUpdateMembersList = false;
-                    break;
-                }
-            }
-            if (needToAddToUpdateMembersList) {
-                updatedMembersList.add(generatedMember);
-            }
-        }
-
-        // 7. Update members
+        // 6. Update members
         generatedClazz.setMembers(updatedMembersList);
 
-        // 8. Update imports
+        // 7. Update imports
         compilationUnitForGeneratedFile.getImports().addAll(compilationUnitForExistingFile.getImports());
 
         return compilationUnitForGeneratedFile.toString();
     }
 
     /**
-     * Verify if the generated class or interface is valid
-     * @param generatedFileMembers, members in the generated file
-     * @return true if the generated class or interface is valid, otherwise return false
+     * <p>Handle partial update for body declaration steps:
+     * <ul>
+     *     <li>Iterate existing file declarations, keep manual updated members, and replace generated members with the corresponding newly generated one. Here we will not do the replace on the existing file member list,  we just create a new member list {@code updatedMembersList} and put in those manually update members and newly generated members.
+     *     <li>Add remaining newly generated declarations to {@code updatedBodyDeclarationsList}
+     *     <li>Add remaining newly generated declarations to {@code updatedBodyDeclarationsList}
+     * </ul>
+     *
+     * @param generatedFileBodyDeclarations the declarations in newly generated file
+     * @param existingFileBodyDeclarations  the declarations in the existing file content that contains user's manual update code
+     * @return the declaration list after handling partial update
      */
-    private static void validateGeneratedClassOrInterface(List<BodyDeclaration<?>> generatedFileMembers) {
+    private static NodeList<BodyDeclaration<?>> handlePartialUpdateForBodyDeclarations(List<BodyDeclaration<?>> generatedFileBodyDeclarations, List<BodyDeclaration<?>> existingFileBodyDeclarations) {
+        NodeList<BodyDeclaration<?>> updatedBodyDeclarationsList = new NodeList<>();
+        // 1. Iterate existingFileBodyDeclarations, keep manual written members, and replace generated members with the corresponding newly generated one
+        for (BodyDeclaration<?> existingBodyDeclaration : existingFileBodyDeclarations) {
+            boolean isGeneratedMethod = hasGeneratedAnnotation(existingBodyDeclaration);
+            if (!isGeneratedMethod) { // manual written declarations
+                updatedBodyDeclarationsList.add(existingBodyDeclaration);
+            } else {
+                // find the corresponding newly generated declarations
+                for (BodyDeclaration<?> generatedBodyDeclaration : generatedFileBodyDeclarations) {
+                    if (isMembersCorresponding(existingBodyDeclaration, generatedBodyDeclaration)) {
+                        updatedBodyDeclarationsList.add(generatedBodyDeclaration);
+                        break;
+                    }
+                }
+            }
+        }
+
+        // 2. Add remaining members in generated file to the new members list
+        for (BodyDeclaration<?> generatedMember : generatedFileBodyDeclarations) {
+            boolean needToAddToUpdateMembersList = true;
+            for (BodyDeclaration<?> existingMember : updatedBodyDeclarationsList) {
+                // If the generated member and the existing member is corresponding,
+                // or if there is an existing member who has the same name as the generated member and is manually written,
+                // Then we don't put the generated member to the updatedBodyDeclarationsList.
+                if (isMembersCorresponding(existingMember, generatedMember) || (isMembersWithSameName(existingMember, generatedMember) && !hasGeneratedAnnotation(existingMember))) {
+                    needToAddToUpdateMembersList = false;
+                    break;
+                }
+            }
+            if (needToAddToUpdateMembersList) {
+                updatedBodyDeclarationsList.add(generatedMember);
+            }
+        }
+
+        return updatedBodyDeclarationsList;
+    }
+
+    private static String handlePartialUpdateForEnumFile(String generatedFileContent, String existingFileContent) {
+        // 1. Parse existing file content and generated file content using JavaParser
+        CompilationUnit compilationUnitForGeneratedFile = StaticJavaParser.parse(generatedFileContent);
+        CompilationUnit compilationUnitForExistingFile = StaticJavaParser.parse(existingFileContent);
+
+        EnumDeclaration generatedEnum = getEnumDeclaration(compilationUnitForGeneratedFile);
+        EnumDeclaration existingEnum = getEnumDeclaration(compilationUnitForExistingFile);
+
+        // 2. Get declarations for existing file and generated file
+        List<BodyDeclaration<?>> generatedFileBodyDeclarations = new ArrayList<>();
+        if (generatedEnum != null) {
+            generatedFileBodyDeclarations = generatedEnum.getMembers();
+            generatedFileBodyDeclarations.addAll(generatedEnum.getEntries());
+        }
+        List<BodyDeclaration<?>> existingFileBodyDeclarations = new ArrayList<>();
+        if (existingEnum != null) {
+            existingFileBodyDeclarations = existingEnum.getMembers();
+            existingFileBodyDeclarations.addAll(existingEnum.getEntries());
+        }
+
+        // 3. Verify Generated File, will throw error if there is invalid part found.
+        validateGeneratedBodyDeclarations(generatedFileBodyDeclarations);
+
+        // 4. Check if the file is in scope of partial update:
+        if (!isFileInScopeOfPartialUpdate(generatedFileBodyDeclarations)) {
+            return generatedFileContent;
+        }
+
+        // 5. Handle partial update for enum values
+        NodeList<BodyDeclaration<?>> updatedBodyDeclarationList = handlePartialUpdateForBodyDeclarations(generatedFileBodyDeclarations, existingFileBodyDeclarations);
+
+        // 6. Update enum values and members
+        generatedEnum.setEntries(new NodeList<>());
+        generatedEnum.setMembers(new NodeList<>());
+        for (BodyDeclaration<?> updatedBodyDeclaration : updatedBodyDeclarationList) {
+            if (updatedBodyDeclaration.isEnumConstantDeclaration()) {
+                generatedEnum.addEntry(updatedBodyDeclaration.asEnumConstantDeclaration());
+            } else {
+                generatedEnum.addMember(updatedBodyDeclaration);
+            }
+        }
+
+        // 7. Update imports
+        compilationUnitForGeneratedFile.getImports().addAll(compilationUnitForExistingFile.getImports());
+
+        return compilationUnitForGeneratedFile.toString();
+    }
+
+    /**
+     * Verify if the generated body declarations are valid
+     * @param generatedFileBodyDeclarations, body declarations in the generated file
+     * @return true if the body declarations are valid, otherwise return false
+     */
+    private static void validateGeneratedBodyDeclarations(List<BodyDeclaration<?>> generatedFileBodyDeclarations) {
         // 1. Verify there is no duplicate methods (methods with same signature are considered duplicate methods)
         Set<CallableDeclaration.Signature> methodSignatureSet = new HashSet<>();
-        for (BodyDeclaration<?> generatedMember : generatedFileMembers) {
-            if (generatedMember.isCallableDeclaration()) {
-                if (methodSignatureSet.contains(generatedMember.asCallableDeclaration().getSignature())) {
+        for (BodyDeclaration<?> generatedBodyDeclaration : generatedFileBodyDeclarations) {
+            if (generatedBodyDeclaration.isCallableDeclaration()) {
+                if (methodSignatureSet.contains(generatedBodyDeclaration.asCallableDeclaration().getSignature())) {
                     throw new RuntimeException(String.format("Found duplicate methods in the generated file."));
                 }
-                methodSignatureSet.add(generatedMember.asCallableDeclaration().getSignature());
+                methodSignatureSet.add(generatedBodyDeclaration.asCallableDeclaration().getSignature());
             }
         }
     }
+
+    /** Verify if the the file is in scope of partial update, currently the logic is:
+     * if there is a method has @Generated annotation, then the file is in scope of partial update, otherwise return directly
+     * @param generatedFileBodyDeclarations, body declarations in the generated file
+     * @return true if the file is in scope of partial update, otherwise return false
+     */
+    private static boolean isFileInScopeOfPartialUpdate(List<BodyDeclaration<?>> generatedFileBodyDeclarations) {
+        return generatedFileBodyDeclarations.stream().anyMatch(member -> hasGeneratedAnnotation(member));
+    }
+
 
     /**
      * Handle partial update for module-info.java file.
@@ -416,9 +494,28 @@ public class PartialUpdateHandler {
         return null;
     }
 
+    private static EnumDeclaration getEnumDeclaration(CompilationUnit cu) {
+        NodeList<TypeDeclaration<?>> types = cu.getTypes();
+        if (types.size() == 1 && types.get(0).isEnumDeclaration()) {
+            SimpleName className = types.get(0).getName();
+            if (cu.getEnumByName(className.asString()).isPresent()) {
+                return cu.getEnumByName(className.asString()).get();
+            }
+        }
+        return null;
+    }
+
     private static boolean isClassOrInterfaceFile(CompilationUnit cu) {
         NodeList<TypeDeclaration<?>> types = cu.getTypes();
         if (types.size() == 1 && types.get(0).isClassOrInterfaceDeclaration()) {
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean isEnumFile(CompilationUnit cu) {
+        NodeList<TypeDeclaration<?>> types = cu.getTypes();
+        if (types.size() == 1 && types.get(0).isEnumDeclaration()) {
             return true;
         }
         return false;
