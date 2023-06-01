@@ -6,6 +6,7 @@ package com.azure.autorest.partialupdate.util;
 
 import com.github.javaparser.ast.AccessSpecifier;
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.body.EnumDeclaration;
 import org.junit.jupiter.api.Test;
 
 
@@ -16,6 +17,7 @@ import java.nio.file.Paths;
 
 import static com.github.javaparser.StaticJavaParser.parse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -391,7 +393,36 @@ public class PartialUpdateHandlerTest {
     }
 
 
+    @Test
+    public void testEnumFile() throws URISyntaxException, IOException {
+        String existingFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/Color.java").toURI())));
+        String generatedFileContent = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("partialupdate/ColorGenerated.java").toURI())));
 
+        String output = PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
+
+        CompilationUnit compilationUnit = parse(output);
+        EnumDeclaration enumDeclaration = compilationUnit.getTypes().get(0).asEnumDeclaration();
+        // assertions for enum values with correct order
+        assertEquals(6, enumDeclaration.getEntries().size());
+        assertEquals("WHITE", enumDeclaration.getEntries().get(0).getName().getIdentifier());
+        assertEquals(0, enumDeclaration.getEntries().get(0).getAnnotations().size());
+        assertEquals("RED", enumDeclaration.getEntries().get(1).getName().getIdentifier());
+        assertEquals(1, enumDeclaration.getEntries().get(1).getAnnotations().size());
+        assertEquals("BLACK", enumDeclaration.getEntries().get(2).getName().getIdentifier());
+        assertEquals(0, enumDeclaration.getEntries().get(2).getAnnotations().size());
+        assertEquals("BLUE", enumDeclaration.getEntries().get(3).getName().getIdentifier());
+        assertEquals(1, enumDeclaration.getEntries().get(3).getAnnotations().size());
+        assertEquals("GREEN", enumDeclaration.getEntries().get(4).getName().getIdentifier());
+        assertEquals(1, enumDeclaration.getEntries().get(4).getAnnotations().size());
+        assertEquals("YELLOW", enumDeclaration.getEntries().get(5).getName().getIdentifier());
+        assertEquals(0, enumDeclaration.getEntries().get(5).getAnnotations().size());
+
+        // assertions for enum methods
+        assertEquals(1, enumDeclaration.getMethodsByName("addMethod").size());
+        assertFalse(enumDeclaration.getMethodsByName("addMethod").get(0).getAnnotations().stream().anyMatch(annotationExpr -> annotationExpr.getName().toString().equals("Generated")));
+        assertEquals(1, enumDeclaration.getMethodsByName("fromString").size());
+        assertFalse(enumDeclaration.getMethodsByName("fromString").get(0).getAnnotations().stream().anyMatch(annotationExpr -> annotationExpr.getName().toString().equals("Generated")));
+    }
 
 
 }
