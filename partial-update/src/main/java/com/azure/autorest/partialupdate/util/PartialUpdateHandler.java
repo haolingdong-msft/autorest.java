@@ -51,6 +51,7 @@ public class PartialUpdateHandler {
      *  <li>Parse existing file content and generated file content using JavaParser
      *  <li>If the file is module-info.java, then handle it by simply compare the difference between existing file and generated file
      *  <li>If the file is class or interface file, handle partial update for it
+     *  <li>If the file is enum file, handle partial update for it
      *  <li>Otherwise, we just return the generatedFileContent directly
      * </ul>
      *
