@@ -1,6 +1,8 @@
 import "@typespec/rest";
+import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Http;
+using Azure.Core;
 
 @service({
   title: "PartialUpdate",
@@ -14,9 +16,17 @@ model PartialUpdateModel {
   bytes: bytes;
 }
 
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "For testing"
+@fixed
+enum Color {
+  Red,
+  Blue,
+  Green,
+}
+
 @route("/partialupdate")
 interface PartialUpdateOp {
-  read(): {
+  read(@body color: Color): {
     @body body: PartialUpdateModel;
   };
 }
