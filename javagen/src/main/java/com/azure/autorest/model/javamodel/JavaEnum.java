@@ -68,6 +68,15 @@ public class JavaEnum {
         addNewLine = true;
     }
 
+    public final void value(String name, String value, String description, IType type, String... annotations) {
+        addExpectedCommaAndNewLine();
+        contents.javadocComment(CoreUtils.isNullOrEmpty(description) ? "Enum value " + value + "." : description);
+        contents.annotation(annotations);
+        contents.text(name + "(" + type.defaultValueExpression(value) + ")");
+        previouslyAddedValue = true;
+        addNewLine = true;
+    }
+
     public final void privateFinalMemberVariable(String variableType, String variableName) {
         addExpectedSemicolonAndNewLine();
         contents.line("private final " + variableType + " " + variableName + ";");
@@ -107,7 +116,7 @@ public class JavaEnum {
     }
 
     public final void annotation(String... annotations) {
-        addExpectedCommaAndNewLine();
+        addExpectedSemicolonAndNewLine();
         contents.annotation(annotations);
     }
 }
