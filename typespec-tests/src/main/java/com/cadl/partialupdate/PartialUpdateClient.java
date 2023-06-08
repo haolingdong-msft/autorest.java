@@ -15,55 +15,12 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.partialupdate.implementation.PartialUpdateClientImpl;
+import com.cadl.partialupdate.models.Color;
 import com.cadl.partialupdate.models.PartialUpdateModel;
 
 /** Initializes a new instance of the synchronous PartialUpdateClient type. */
 @ServiceClient(builder = PartialUpdateClientBuilder.class)
 public final class PartialUpdateClient {
-
-    /**
-     * The read operation.
-     *
-     * <p><strong>Response Body Schema</strong>
-     *
-     * <pre>{@code
-     * {
-     *     boolean: boolean (Required)
-     *     string: String (Required)
-     *     bytes: byte[] (Required)
-     * }
-     * }</pre>
-     *
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> readWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.readWithResponse(requestOptions);
-    }
-
-    /**
-     * The read operation.
-     *
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PartialUpdateModel read() {
-        // Generated convenience method for readWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return readWithResponse(requestOptions).getValue().toObject(PartialUpdateModel.class);
-    }
 
     @Generated private final PartialUpdateClientImpl serviceClient;
 
@@ -75,5 +32,60 @@ public final class PartialUpdateClient {
     @Generated
     PartialUpdateClient(PartialUpdateClientImpl serviceClient) {
         this.serviceClient = serviceClient;
+    }
+
+    /**
+     * The read operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * String(Red/Blue/Green)
+     * }</pre>
+     *
+     * <p><strong>Response Body Schema</strong>
+     *
+     * <pre>{@code
+     * {
+     *     boolean: boolean (Required)
+     *     string: String (Required)
+     *     bytes: byte[] (Required)
+     * }
+     * }</pre>
+     *
+     * @param color The color parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> readWithResponse(BinaryData color, RequestOptions requestOptions) {
+        return this.serviceClient.readWithResponse(color, requestOptions);
+    }
+
+    /**
+     * The read operation.
+     *
+     * @param color The color parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public PartialUpdateModel read(Color color) {
+        // Generated convenience method for readWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return readWithResponse(BinaryData.fromObject(color), requestOptions)
+                .getValue()
+                .toObject(PartialUpdateModel.class);
     }
 }

@@ -4,11 +4,12 @@
 
 package com.cadl.partialupdate.implementation;
 
+import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
-import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
+import com.azure.core.annotation.Post;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -119,7 +120,7 @@ public final class PartialUpdateClientImpl {
     @Host("{endpoint}")
     @ServiceInterface(name = "PartialUpdateClient")
     public interface PartialUpdateClientService {
-        @Get("/partialupdate")
+        @Post("/partialupdate")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -134,10 +135,11 @@ public final class PartialUpdateClientImpl {
         Mono<Response<BinaryData>> read(
                 @HostParam("endpoint") String endpoint,
                 @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData color,
                 RequestOptions requestOptions,
                 Context context);
 
-        @Get("/partialupdate")
+        @Post("/partialupdate")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(
                 value = ClientAuthenticationException.class,
@@ -152,12 +154,19 @@ public final class PartialUpdateClientImpl {
         Response<BinaryData> readSync(
                 @HostParam("endpoint") String endpoint,
                 @HeaderParam("accept") String accept,
+                @BodyParam("application/json") BinaryData color,
                 RequestOptions requestOptions,
                 Context context);
     }
 
     /**
      * The read operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * String(Red/Blue/Green)
+     * }</pre>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -169,6 +178,7 @@ public final class PartialUpdateClientImpl {
      * }
      * }</pre>
      *
+     * @param color The color parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -177,13 +187,20 @@ public final class PartialUpdateClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> readWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> readWithResponseAsync(BinaryData color, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.read(this.getEndpoint(), accept, requestOptions, context));
+        return FluxUtil.withContext(
+                context -> service.read(this.getEndpoint(), accept, color, requestOptions, context));
     }
 
     /**
      * The read operation.
+     *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * String(Red/Blue/Green)
+     * }</pre>
      *
      * <p><strong>Response Body Schema</strong>
      *
@@ -195,6 +212,7 @@ public final class PartialUpdateClientImpl {
      * }
      * }</pre>
      *
+     * @param color The color parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -203,8 +221,8 @@ public final class PartialUpdateClientImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> readWithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> readWithResponse(BinaryData color, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.readSync(this.getEndpoint(), accept, requestOptions, Context.NONE);
+        return service.readSync(this.getEndpoint(), accept, color, requestOptions, Context.NONE);
     }
 }

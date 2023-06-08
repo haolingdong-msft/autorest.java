@@ -16,6 +16,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.cadl.partialupdate.implementation.PartialUpdateClientImpl;
+import com.cadl.partialupdate.models.Color;
 import com.cadl.partialupdate.models.PartialUpdateModel;
 import reactor.core.publisher.Mono;
 
@@ -38,6 +39,12 @@ public final class PartialUpdateAsyncClient {
     /**
      * The read operation.
      *
+     * <p><strong>Request Body Schema</strong>
+     *
+     * <pre>{@code
+     * String(Red/Blue/Green)
+     * }</pre>
+     *
      * <p><strong>Response Body Schema</strong>
      *
      * <pre>{@code
@@ -48,6 +55,7 @@ public final class PartialUpdateAsyncClient {
      * }
      * }</pre>
      *
+     * @param color The color parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -57,13 +65,15 @@ public final class PartialUpdateAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> readWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.readWithResponseAsync(requestOptions);
+    public Mono<Response<BinaryData>> readWithResponse(BinaryData color, RequestOptions requestOptions) {
+        return this.serviceClient.readWithResponseAsync(color, requestOptions);
     }
 
     /**
      * The read operation.
      *
+     * @param color The color parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -73,10 +83,10 @@ public final class PartialUpdateAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PartialUpdateModel> read() {
+    public Mono<PartialUpdateModel> read(Color color) {
         // Generated convenience method for readWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return readWithResponse(requestOptions)
+        return readWithResponse(BinaryData.fromObject(color), requestOptions)
                 .flatMap(FluxUtil::toMono)
                 .map(protocolMethodData -> protocolMethodData.toObject(PartialUpdateModel.class));
     }
