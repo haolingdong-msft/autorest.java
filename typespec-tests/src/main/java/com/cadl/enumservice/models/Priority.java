@@ -4,20 +4,24 @@
 
 package com.cadl.enumservice.models;
 
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /** Defines values for Priority. */
 public enum Priority {
     /** Enum value 100. */
+    @Generated
     HIGH(100L),
 
     /** Enum value 0. */
+    @Generated
     LOW(0L);
 
     /** The actual serialized value for a Priority instance. */
-    private final long value;
+    @Generated private final long value;
 
+    @Generated
     Priority(long value) {
         this.value = value;
     }
@@ -29,6 +33,7 @@ public enum Priority {
      * @return the parsed Priority object, or null if unable to parse.
      */
     @JsonCreator
+    @Generated
     public static Priority fromLong(long value) {
         Priority[] items = Priority.values();
         for (Priority item : items) {
@@ -45,6 +50,7 @@ public enum Priority {
      * @return the long value.
      */
     @JsonValue
+    @Generated
     public long toLong() {
         return this.value;
     }

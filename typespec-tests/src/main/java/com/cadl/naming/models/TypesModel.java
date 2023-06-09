@@ -4,6 +4,7 @@
 
 package com.cadl.naming.models;
 
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -14,14 +15,17 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public enum TypesModel {
     /** Enum value Blob. */
+    @Generated
     BLOB("Blob"),
 
     /** Enum value File. */
+    @Generated
     FILE("File");
 
     /** The actual serialized value for a TypesModel instance. */
-    private final String value;
+    @Generated private final String value;
 
+    @Generated
     TypesModel(String value) {
         this.value = value;
     }
@@ -33,6 +37,7 @@ public enum TypesModel {
      * @return the parsed TypesModel object, or null if unable to parse.
      */
     @JsonCreator
+    @Generated
     public static TypesModel fromString(String value) {
         if (value == null) {
             return null;
@@ -49,6 +54,7 @@ public enum TypesModel {
     /** {@inheritDoc} */
     @JsonValue
     @Override
+    @Generated
     public String toString() {
         return this.value;
     }

@@ -4,6 +4,7 @@
 
 package com.cadl.union;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ServiceVersion;
 
 /** Service version of UnionClient. */
@@ -14,14 +15,16 @@ public enum UnionServiceVersion implements ServiceVersion {
     /** Enum value 2022-06-01-preview. */
     V2022_06_01_PREVIEW("2022-06-01-preview");
 
-    private final String version;
+    @Generated private final String version;
 
+    @Generated
     UnionServiceVersion(String version) {
         this.version = version;
     }
 
     /** {@inheritDoc} */
     @Override
+    @Generated
     public String getVersion() {
         return this.version;
     }
@@ -31,6 +34,7 @@ public enum UnionServiceVersion implements ServiceVersion {
      *
      * @return The latest {@link UnionServiceVersion}.
      */
+    @Generated
     public static UnionServiceVersion getLatest() {
         return V2022_06_01_PREVIEW;
     }

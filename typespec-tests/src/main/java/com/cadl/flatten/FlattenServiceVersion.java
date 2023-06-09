@@ -4,6 +4,7 @@
 
 package com.cadl.flatten;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ServiceVersion;
 
 /** Service version of FlattenClient. */
@@ -11,14 +12,16 @@ public enum FlattenServiceVersion implements ServiceVersion {
     /** Enum value 2022-06-01-preview. */
     V2022_06_01_PREVIEW("2022-06-01-preview");
 
-    private final String version;
+    @Generated private final String version;
 
+    @Generated
     FlattenServiceVersion(String version) {
         this.version = version;
     }
 
     /** {@inheritDoc} */
     @Override
+    @Generated
     public String getVersion() {
         return this.version;
     }
@@ -28,6 +31,7 @@ public enum FlattenServiceVersion implements ServiceVersion {
      *
      * @return The latest {@link FlattenServiceVersion}.
      */
+    @Generated
     public static FlattenServiceVersion getLatest() {
         return V2022_06_01_PREVIEW;
     }

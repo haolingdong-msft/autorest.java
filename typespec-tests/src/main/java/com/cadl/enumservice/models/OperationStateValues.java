@@ -4,23 +4,28 @@
 
 package com.cadl.enumservice.models;
 
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /** Defines values for OperationStateValues. */
 public enum OperationStateValues {
     /** Enum value Running. */
+    @Generated
     RUNNING("Running"),
 
     /** Enum value Completed. */
+    @Generated
     COMPLETED("Completed"),
 
     /** Enum value Failed. */
+    @Generated
     FAILED("Failed");
 
     /** The actual serialized value for a OperationStateValues instance. */
-    private final String value;
+    @Generated private final String value;
 
+    @Generated
     OperationStateValues(String value) {
         this.value = value;
     }
@@ -32,6 +37,7 @@ public enum OperationStateValues {
      * @return the parsed OperationStateValues object, or null if unable to parse.
      */
     @JsonCreator
+    @Generated
     public static OperationStateValues fromString(String value) {
         if (value == null) {
             return null;
@@ -48,6 +54,7 @@ public enum OperationStateValues {
     /** {@inheritDoc} */
     @JsonValue
     @Override
+    @Generated
     public String toString() {
         return this.value;
     }
