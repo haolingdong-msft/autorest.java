@@ -10,15 +10,19 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /** Operation status. */
 public enum AnalyzeResultOperationStatus {
     /** Enum value notStarted. */
+    @Generated
     NOT_STARTED("notStarted"),
 
     /** Enum value running. */
+    @Generated
     RUNNING("running"),
 
     /** Enum value failed. */
+    @Generated
     FAILED("failed"),
 
     /** Enum value succeeded. */
+    @Generated
     SUCCEEDED("succeeded");
 
     /** The actual serialized value for a AnalyzeResultOperationStatus instance. */

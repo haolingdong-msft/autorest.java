@@ -10,9 +10,11 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /** Defines values for NoModelAsStringNoRequiredTwoValueDefaultOpEnum. */
 public enum NoModelAsStringNoRequiredTwoValueDefaultOpEnum {
     /** Enum value value1. */
+    @Generated
     VALUE1("value1"),
 
     /** Enum value value2. */
+    @Generated
     VALUE2("value2");
 
     /** The actual serialized value for a NoModelAsStringNoRequiredTwoValueDefaultOpEnum instance. */

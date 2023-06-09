@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /** Capacity of product. For example, 4 people. */
 public enum SimpleProductPropertiesMaxProductCapacity {
     /** Enum value Large. */
+    @Generated
     LARGE("Large");
 
     /** The actual serialized value for a SimpleProductPropertiesMaxProductCapacity instance. */

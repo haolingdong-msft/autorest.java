@@ -7,12 +7,15 @@ package fixtures.streamstylexmlserialization.models;
 /** Defines values for BlobType. */
 public enum BlobType {
     /** Enum value BlockBlob. */
+    @Generated
     BLOCK_BLOB("BlockBlob"),
 
     /** Enum value PageBlob. */
+    @Generated
     PAGE_BLOB("PageBlob"),
 
     /** Enum value AppendBlob. */
+    @Generated
     APPEND_BLOB("AppendBlob");
 
     /** The actual serialized value for a BlobType instance. */

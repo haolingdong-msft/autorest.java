@@ -10,9 +10,11 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /** SKU name to specify whether the key vault is a standard vault or a premium vault. */
 public enum SkuName {
     /** Enum value standard. */
+    @Generated
     STANDARD("standard"),
 
     /** Enum value premium. */
+    @Generated
     PREMIUM("premium");
 
     /** The actual serialized value for a SkuName instance. */

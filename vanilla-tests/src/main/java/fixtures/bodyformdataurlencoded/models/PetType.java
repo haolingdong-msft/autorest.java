@@ -10,12 +10,15 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /** Can take a value of dog, or cat, or fish. */
 public enum PetType {
     /** Enum value dog. */
+    @Generated
     DOG("dog"),
 
     /** Enum value cat. */
+    @Generated
     CAT("cat"),
 
     /** Enum value fish. */
+    @Generated
     FISH("fish");
 
     /** The actual serialized value for a PetType instance. */

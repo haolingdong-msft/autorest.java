@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ServiceVersion;
 
 /** Service version of AutoRestComplexTestServiceClient. */
@@ -11,14 +12,16 @@ public enum AutoRestComplexTestServiceVersion implements ServiceVersion {
     /** Enum value 2016-02-29. */
     V2016_02_29("2016-02-29");
 
-    private final String version;
+    @Generated private final String version;
 
+    @Generated
     AutoRestComplexTestServiceVersion(String version) {
         this.version = version;
     }
 
     /** {@inheritDoc} */
     @Override
+    @Generated
     public String getVersion() {
         return this.version;
     }
@@ -28,6 +31,7 @@ public enum AutoRestComplexTestServiceVersion implements ServiceVersion {
      *
      * @return The latest {@link AutoRestComplexTestServiceVersion}.
      */
+    @Generated
     public static AutoRestComplexTestServiceVersion getLatest() {
         return V2016_02_29;
     }

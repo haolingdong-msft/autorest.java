@@ -7,9 +7,11 @@ package fixtures.streamstylexmlserialization.models;
 /** Defines values for LeaseDurationType. */
 public enum LeaseDurationType {
     /** Enum value infinite. */
+    @Generated
     INFINITE("infinite"),
 
     /** Enum value fixed. */
+    @Generated
     FIXED("fixed");
 
     /** The actual serialized value for a LeaseDurationType instance. */

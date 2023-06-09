@@ -10,12 +10,15 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /** Defines values for FooEnum. */
 public enum FooEnum {
     /** Enum value foo1. */
+    @Generated
     FOO1("foo1"),
 
     /** Enum value foo2. */
+    @Generated
     FOO2("foo2"),
 
     /** Enum value foo3. */
+    @Generated
     FOO3("foo3");
 
     /** The actual serialized value for a FooEnum instance. */

@@ -10,18 +10,23 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /** Defines values for LeaseStateType. */
 public enum LeaseStateType {
     /** Enum value available. */
+    @Generated
     AVAILABLE("available"),
 
     /** Enum value leased. */
+    @Generated
     LEASED("leased"),
 
     /** Enum value expired. */
+    @Generated
     EXPIRED("expired"),
 
     /** Enum value breaking. */
+    @Generated
     BREAKING("breaking"),
 
     /** Enum value broken. */
+    @Generated
     BROKEN("broken");
 
     /** The actual serialized value for a LeaseStateType instance. */

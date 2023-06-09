@@ -10,24 +10,31 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /** Content type for upload. */
 public enum ContentType {
     /** Content Type 'application/octet-stream'. */
+    @Generated
     APPLICATION_OCTET_STREAM("application/octet-stream"),
 
     /** Content Type 'application/pdf'. */
+    @Generated
     APPLICATION_PDF("application/pdf"),
 
     /** Content Type 'image/bmp'. */
+    @Generated
     IMAGE_BMP("image/bmp"),
 
     /** Content Type 'image/heif'. */
+    @Generated
     IMAGE_HEIF("image/heif"),
 
     /** Content Type 'image/jpeg'. */
+    @Generated
     IMAGE_JPEG("image/jpeg"),
 
     /** Content Type 'image/png'. */
+    @Generated
     IMAGE_PNG("image/png"),
 
     /** Content Type 'image/tiff'. */
+    @Generated
     IMAGE_TIFF("image/tiff");
 
     /** The actual serialized value for a ContentType instance. */

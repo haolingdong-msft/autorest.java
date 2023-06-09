@@ -10,15 +10,19 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /** Defines values for CopyStatusType. */
 public enum CopyStatusType {
     /** Enum value pending. */
+    @Generated
     PENDING("pending"),
 
     /** Enum value success. */
+    @Generated
     SUCCESS("success"),
 
     /** Enum value aborted. */
+    @Generated
     ABORTED("aborted"),
 
     /** Enum value failed. */
+    @Generated
     FAILED("failed");
 
     /** The actual serialized value for a CopyStatusType instance. */

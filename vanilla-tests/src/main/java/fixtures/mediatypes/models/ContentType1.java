@@ -10,9 +10,11 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /** Content type for upload. */
 public enum ContentType1 {
     /** Content Type 'application/json'. */
+    @Generated
     APPLICATION_JSON("application/json"),
 
     /** Content Type 'application/octet-stream'. */
+    @Generated
     APPLICATION_OCTET_STREAM("application/octet-stream");
 
     /** The actual serialized value for a ContentType1 instance. */

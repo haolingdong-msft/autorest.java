@@ -10,9 +10,11 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /** Defines values for LeaseStatusType. */
 public enum LeaseStatusType {
     /** Enum value locked. */
+    @Generated
     LOCKED("locked"),
 
     /** Enum value unlocked. */
+    @Generated
     UNLOCKED("unlocked");
 
     /** The actual serialized value for a LeaseStatusType instance. */

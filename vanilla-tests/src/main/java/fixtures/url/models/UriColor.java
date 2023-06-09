@@ -10,12 +10,15 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /** Defines values for UriColor. */
 public enum UriColor {
     /** Enum value red color. */
+    @Generated
     RED_COLOR("red color"),
 
     /** Enum value green color. */
+    @Generated
     GREEN_COLOR("green color"),
 
     /** Enum value blue color. */
+    @Generated
     BLUE_COLOR("blue color");
 
     /** The actual serialized value for a UriColor instance. */

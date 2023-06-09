@@ -7,9 +7,11 @@ package com.azure.containers.containerregistry.implementation.models;
 /** Grant type is expected to be refresh_token. */
 public enum TokenGrantType {
     /** Enum value refresh_token. */
+    @Generated
     REFRESH_TOKEN("refresh_token"),
 
     /** Enum value password. */
+    @Generated
     PASSWORD("password");
 
     /** The actual serialized value for a TokenGrantType instance. */

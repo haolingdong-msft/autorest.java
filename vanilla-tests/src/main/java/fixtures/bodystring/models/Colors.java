@@ -10,12 +10,15 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /** Referenced Color Enum Description. */
 public enum Colors {
     /** Enum value red color. */
+    @Generated
     RED_COLOR("red color"),
 
     /** Enum value green-color. */
+    @Generated
     GREEN_COLOR("green-color"),
 
     /** Enum value blue_color. */
+    @Generated
     BLUE_COLOR("blue_color");
 
     /** The actual serialized value for a Colors instance. */
