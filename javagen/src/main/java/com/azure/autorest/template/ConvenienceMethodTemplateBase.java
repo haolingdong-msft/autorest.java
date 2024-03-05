@@ -109,7 +109,6 @@ abstract class ConvenienceMethodTemplateBase {
         methodBlock.line("RequestOptions requestOptions = new RequestOptions();");
 
         boolean isJsonMergePatchOperation = protocolMethod != null && protocolMethod.getProxyMethod() != null && "application/merge-patch+json".equalsIgnoreCase(protocolMethod.getProxyMethod().getRequestContentType());
-
         // parameter transformation
         if (!CoreUtils.isNullOrEmpty(convenienceMethod.getMethodTransformationDetails())) {
             convenienceMethod.getMethodTransformationDetails().forEach(d -> writeParameterTransformation(d, convenienceMethod, protocolMethod, methodBlock, parametersMap, isJsonMergePatchOperation));
@@ -142,8 +141,14 @@ abstract class ConvenienceMethodTemplateBase {
 
                     case BODY: {
                         Consumer<JavaBlock> writeLine = javaBlock -> {
+                            IType parameterType = parameter.getClientMethodParameter().getClientType();
                             String expression =  expressionConvertToBinaryData(parameter.getName(), parameter.getClientMethodParameter().getWireType(), protocolMethod.getProxyMethod().getRequestContentType());
+                            if (isJsonMergePatchOperation && ClientModelUtil.isClientModel(parameterType) && ClientModelUtil.isJsonMergePatchModel(ClientModelUtil.getClientModel(((ClassType) parameterType).getName()))) {
+                                String variableName = writeParameterConversionExpressionWithJsonMergePatchEnabled(javaBlock, parameterType.toString(), parameter.getName(), expression);
+                                javaBlock.line(String.format("requestOptions.setBody(%s);", variableName));
+                            } else {
                                 javaBlock.line(String.format("requestOptions.setBody(%s);", expression));
+                            }
                         };
                         if (!parameter.getClientMethodParameter().isRequired()) {
                             methodBlock.ifBlock(String.format("%s != null", parameter.getName()), writeLine);
@@ -161,7 +166,12 @@ abstract class ConvenienceMethodTemplateBase {
                 .map(p -> {
                     String parameterName = p.getName();
                     String expression = parameterExpressionsMap.get(parameterName);
-                    return expression == null ? parameterName : expression;
+                    IType parameterRawType = p.getRawType();
+                    if (isJsonMergePatchOperation && ClientModelUtil.isClientModel(parameterRawType) && RequestParameterLocation.BODY.equals(p.getRequestParameterLocation()) && ClientModelUtil.isJsonMergePatchModel(ClientModelUtil.getClientModel(((ClassType) parameterRawType).getName()))) {
+                        return writeParameterConversionExpressionWithJsonMergePatchEnabled(methodBlock, parameterRawType.toString(), parameterName, expression);
+                    } else {
+                        return expression == null ? parameterName : expression;
+                    }
                 })
                 .collect(Collectors.joining(", "));
 
