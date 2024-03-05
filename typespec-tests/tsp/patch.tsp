@@ -74,21 +74,47 @@ model Salmon extends Fish {
 interface Patch {
   @patch
   @route("/resource")
-  createOrUpdateResource(
+  updateResource(
     @header("content-type") contentType: "application/merge-patch+json",
     @body resource: Resource,
   ): Resource;
 
   @patch
+  @route("/resource/implicit/body")
+  updateResourceWithImplicitBody(
+    @header("content-type") contentType: "application/merge-patch+json",
+    resource: Resource,
+  ): Resource;
+
+  @post
   @route("/resource/optional")
-  createOrUpdateOptionalResource(
+  createOptionalResource(@body body?: Resource): OkResponse;
+
+  @post
+  @route("/resource/implicit/body")
+  createResourceWithImplicitBody(body: Resource): OkResponse;
+
+  @post
+  @route("/resource/optional/implicit/body")
+  createOptionalResourceWithImplicitBody(body?: Resource): OkResponse;
+
+  @patch
+  @route("/resource/optional")
+  updateOptionalResource(
     @header("content-type") contentType: "application/merge-patch+json",
     @body resource?: Resource,
   ): Resource;
 
   @patch
+  @route("/resource/optional/implicit/body")
+  updateOptionalResourceWithImplicitBody(
+    @header("content-type") contentType: "application/merge-patch+json",
+    resource?: Resource,
+  ): Resource;
+
+  @patch
   @route("/fish")
-  createOrUpdateFish(
+  updateFish(
     @header("content-type") contentType: "application/merge-patch+json",
     @body fish: Fish,
   ): Fish;
