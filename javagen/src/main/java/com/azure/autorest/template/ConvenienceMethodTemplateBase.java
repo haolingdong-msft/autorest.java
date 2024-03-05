@@ -108,14 +108,15 @@ abstract class ConvenienceMethodTemplateBase {
         // RequestOptions
         methodBlock.line("RequestOptions requestOptions = new RequestOptions();");
 
+        boolean isJsonMergePatchOperation = protocolMethod != null && protocolMethod.getProxyMethod() != null && "application/merge-patch+json".equalsIgnoreCase(protocolMethod.getProxyMethod().getRequestContentType());
+
         // parameter transformation
         if (!CoreUtils.isNullOrEmpty(convenienceMethod.getMethodTransformationDetails())) {
-            convenienceMethod.getMethodTransformationDetails().forEach(d -> writeParameterTransformation(d, convenienceMethod, protocolMethod, methodBlock, parametersMap));
+            convenienceMethod.getMethodTransformationDetails().forEach(d -> writeParameterTransformation(d, convenienceMethod, protocolMethod, methodBlock, parametersMap, isJsonMergePatchOperation));
         }
 
         writeValidationForVersioning(convenienceMethod, parametersMap.keySet(), methodBlock);
 
-        boolean isJsonMergePatchOperation = protocolMethod != null && protocolMethod.getProxyMethod() != null && "application/merge-patch+json".equalsIgnoreCase(protocolMethod.getProxyMethod().getRequestContentType());
         Map<String, String> parameterExpressionsMap = new HashMap<>();
         for (Map.Entry<MethodParameter, MethodParameter> entry : parametersMap.entrySet()) {
             MethodParameter parameter = entry.getKey();
@@ -141,14 +142,8 @@ abstract class ConvenienceMethodTemplateBase {
 
                     case BODY: {
                         Consumer<JavaBlock> writeLine = javaBlock -> {
-                            IType parameterType = parameter.getClientMethodParameter().getClientType();
                             String expression =  expressionConvertToBinaryData(parameter.getName(), parameter.getClientMethodParameter().getWireType(), protocolMethod.getProxyMethod().getRequestContentType());
-                            if (isJsonMergePatchOperation && ClientModelUtil.isClientModel(parameterType) && ClientModelUtil.isJsonMergePatchModel(ClientModelUtil.getClientModel(((ClassType) parameterType).getName()))) {
-                                String variableName = writeParameterConversionExpressionWithJsonMergePatchEnabled(javaBlock, parameterType.toString(), parameter.getName(), expression);
-                                javaBlock.line(String.format("requestOptions.setBody(%s);", variableName));
-                            } else {
                                 javaBlock.line(String.format("requestOptions.setBody(%s);", expression));
-                            }
                         };
                         if (!parameter.getClientMethodParameter().isRequired()) {
                             methodBlock.ifBlock(String.format("%s != null", parameter.getName()), writeLine);
@@ -166,12 +161,7 @@ abstract class ConvenienceMethodTemplateBase {
                 .map(p -> {
                     String parameterName = p.getName();
                     String expression = parameterExpressionsMap.get(parameterName);
-                    IType parameterRawType = p.getRawType();
-                    if (isJsonMergePatchOperation && ClientModelUtil.isClientModel(parameterRawType) && RequestParameterLocation.BODY.equals(p.getRequestParameterLocation()) && ClientModelUtil.isJsonMergePatchModel(ClientModelUtil.getClientModel(((ClassType) parameterRawType).getName()))) {
-                        return writeParameterConversionExpressionWithJsonMergePatchEnabled(methodBlock, parameterRawType.toString(), parameterName, expression);
-                    } else {
-                        return expression == null ? parameterName : expression;
-                    }
+                    return expression == null ? parameterName : expression;
                 })
                 .collect(Collectors.joining(", "));
 
@@ -215,7 +205,8 @@ abstract class ConvenienceMethodTemplateBase {
             MethodTransformationDetail detail,
             ClientMethod convenienceMethod, ClientMethod protocolMethod,
             JavaBlock methodBlock,
-            Map<MethodParameter, MethodParameter> parametersMap) {
+            Map<MethodParameter, MethodParameter> parametersMap,
+            boolean isJsonMergePatch) {
 
         if (isGroupByTransformation(detail)) {
             // grouping
@@ -305,6 +296,10 @@ abstract class ConvenienceMethodTemplateBase {
                     expression = expressionConvertToBinaryData(targetParameterObjectName, targetParameter.getRawType(), protocolMethod.getProxyMethod().getRequestContentType());
                 }
                 methodBlock.line(String.format("BinaryData %1$s = %2$s;", targetParameterName, expression));
+
+                if (isJsonMergePatch) {
+                    writeParameterConversionExpressionWithJsonMergePatchEnabled(methodBlock, targetType.toString(), targetParameterObjectName, targetParameterName );
+                }
             }
         }
     }
@@ -774,7 +769,7 @@ abstract class ConvenienceMethodTemplateBase {
     private static String writeParameterConversionExpressionWithJsonMergePatchEnabled(JavaBlock javaBlock, String convenientParameterTypeName, String convenientParameterName, String expression) {
             String variableName = convenientParameterName + "InBinaryData";
             javaBlock.line(String.format("JsonMergePatchHelper.get%1$sAccessor().prepareModelForJsonMergePatch(%2$s, true);", convenientParameterTypeName, convenientParameterName));
-            javaBlock.line(String.format("BinaryData %1$s = BinaryData.fromBytes(%2$s.toBytes());", variableName, expression)); // BinaryData.fromObject() will not fire serialization, use toBytes() to fire serialization
+            javaBlock.line(String.format("BinaryData %1$s = BinaryData.fromBytes(%2$s.toBytes());", variableName, expression == null ? convenientParameterName : expression)); // BinaryData.fromObject() will not fire serialization, use toBytes() to fire serialization
             javaBlock.line(String.format("JsonMergePatchHelper.get%1$sAccessor().prepareModelForJsonMergePatch(%2$s, false);", convenientParameterTypeName, convenientParameterName));
             return variableName;
     }
