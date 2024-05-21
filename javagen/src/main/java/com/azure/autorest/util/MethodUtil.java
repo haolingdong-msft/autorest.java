@@ -99,15 +99,16 @@ public class MethodUtil {
             description = parameter.getLanguage().getDefault().getDescription();
         }
 
-        // add allowed enum values
-        if (isProtocolMethod && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.BODY) {
-            description = MethodUtil.appendAllowedEnumValuesForEnumType(parameter, description);
-        }
-
         String javadocDescription = SchemaUtil.mergeSummaryWithDescription(summary, description);
         if (CoreUtils.isNullOrEmpty(javadocDescription)) { // fallback to dummy description only when both summary and description are empty
             javadocDescription = "The " + name + " parameter";
         }
+
+        // add allowed enum values
+        if (isProtocolMethod && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.BODY) {
+            javadocDescription = MethodUtil.appendAllowedEnumValuesForEnumType(parameter, javadocDescription);
+        }
+
         return javadocDescription;
     }
 
