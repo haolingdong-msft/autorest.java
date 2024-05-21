@@ -272,9 +272,8 @@ public final class BasicClient {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>another</td><td>String</td><td>No</td><td>An extensible enum input parameter.
-     * 
-     * . Allowed values: "First", "Second".</td></tr>
+     * <tr><td>another</td><td>String</td><td>No</td><td>An extensible enum input parameter. Allowed values: "First",
+     * "Second".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Request Body Schema</strong></p>
