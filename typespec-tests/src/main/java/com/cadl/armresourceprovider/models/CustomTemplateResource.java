@@ -71,7 +71,7 @@ public interface CustomTemplateResource {
     ProvisioningState provisioningState();
 
     /**
-     * Gets the dog property: Test extensible enum type for discriminator.
+     * Gets the dog property: The dog property.
      * 
      * @return the dog value.
      */
@@ -151,8 +151,6 @@ public interface CustomTemplateResource {
              * Specifies resourceGroupName.
              * 
              * @param resourceGroupName A sequence of textual characters.
-             * 
-             * The resourceGroupName parameter.
              * @return the next definition stage.
              */
             WithCreate withExistingResourceGroup(String resourceGroupName);
@@ -211,9 +209,9 @@ public interface CustomTemplateResource {
          */
         interface WithDog {
             /**
-             * Specifies the dog property: Test extensible enum type for discriminator.
+             * Specifies the dog property: The dog property..
              * 
-             * @param dog Test extensible enum type for discriminator.
+             * @param dog The dog property.
              * @return the next definition stage.
              */
             WithCreate withDog(Dog dog);
@@ -224,13 +222,9 @@ public interface CustomTemplateResource {
          */
         interface WithIfMatch {
             /**
-             * Specifies the ifMatch property: A sequence of textual characters.
-             * 
-             * The ifMatch parameter.
+             * Specifies the ifMatch property: A sequence of textual characters..
              * 
              * @param ifMatch A sequence of textual characters.
-             * 
-             * The ifMatch parameter.
              * @return the next definition stage.
              */
             WithCreate withIfMatch(String ifMatch);
@@ -241,13 +235,9 @@ public interface CustomTemplateResource {
          */
         interface WithIfNoneMatch {
             /**
-             * Specifies the ifNoneMatch property: A sequence of textual characters.
-             * 
-             * The ifNoneMatch parameter.
+             * Specifies the ifNoneMatch property: A sequence of textual characters..
              * 
              * @param ifNoneMatch A sequence of textual characters.
-             * 
-             * The ifNoneMatch parameter.
              * @return the next definition stage.
              */
             WithCreate withIfNoneMatch(String ifNoneMatch);
