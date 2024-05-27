@@ -43,6 +43,7 @@ import {
 import { KnownMediaType } from "@azure-tools/codegen";
 import { getLroMetadata, getPagedResult, isPollingLocation } from "@azure-tools/typespec-azure-core";
 import {
+  AccessFlags,
   SdkArrayType,
   SdkBuiltInType,
   SdkClient,
@@ -57,6 +58,7 @@ import {
   SdkModelType,
   SdkType,
   SdkUnionType,
+  UsageFlags,
   createSdkContext,
   getAllModels,
   getClientNameOverride,
@@ -269,7 +271,7 @@ export class CodeModelBuilder {
 
     this.processModels(clients);
 
-    this.processSchemaUsage();
+    // this.processSchemaUsage();
 
     if (this.options.namer) {
       this.codeModel = new PreNamer(this.codeModel).init().process();
@@ -433,19 +435,19 @@ export class CodeModelBuilder {
         } else if (access === "internal") {
           const schema = this.processSchemaFromSdkType(model, model.name);
 
-          this.trackSchemaUsage(schema, {
-            usage: [SchemaContext.Internal],
-          });
+          // this.trackSchemaUsage(schema, {
+          //   usage: [SchemaContext.Internal],
+          // });
         }
 
-        const usage = getUsage(model.__raw);
-        if (usage) {
-          const schema = this.processSchemaFromSdkType(model, "");
+        // const usage = model.usage;
+        // if (usage) {
+        const schema = this.processSchemaFromSdkType(model, "");
 
-          this.trackSchemaUsage(schema, {
-            usage: usage,
-          });
-        }
+          // this.trackSchemaUsage(schema, {
+          //   usage: usage,
+          // });
+        // }
 
         processedSdkModels.add(model);
       }
@@ -1891,6 +1893,7 @@ export class CodeModelBuilder {
         },
       },
     });
+    schema.usage = this.processSchemaUsageFromSdkType(type, schema.usage);
     schema.crossLanguageDefinitionId = type.crossLanguageDefinitionId;
     return this.codeModel.schemas.add(schema);
   }
@@ -1987,6 +1990,7 @@ export class CodeModelBuilder {
         },
       },
     });
+    objectSchema.usage = this.processSchemaUsageFromSdkType(type, objectSchema.usage) as any;
     objectSchema.crossLanguageDefinitionId = type.crossLanguageDefinitionId;
     this.codeModel.schemas.add(objectSchema);
 
@@ -2585,4 +2589,41 @@ export class CodeModelBuilder {
   private isArm(): boolean {
     return Boolean(this.codeModel.arm);
   }
+
+  // private processSchemaUsageFromSdkType(usageFlags: UsageFlags, accessFlags: AccessFlags | undefined): SchemaContext[] {
+  //   const usage: SchemaContext[] = [];
+  //   if (usageFlags & UsageFlags.Input) usage.push(SchemaContext.Input);
+  //   if (usageFlags & UsageFlags.Output) usage.push(SchemaContext.Output);
+  //   if (usageFlags & UsageFlags.JsonMergePatch) usage.push(SchemaContext.JsonMergePatch);
+  
+
+  //   if (accessFlags === "internal") {
+  //     usage.push(SchemaContext.Internal);
+  //   } else {
+  //     usage.push(SchemaContext.Public);
+  //   }
+
+  //   return usage;
+  // }
+
+  private processSchemaUsageFromSdkType(sdkType: SdkModelType | SdkEnumType, schemaUsage: SchemaContext[] | undefined): SchemaContext[] {
+    let usage: SchemaContext[] = schemaUsage ?? [];
+    const usageFlags = sdkType.usage;
+    if (usageFlags & UsageFlags.Input) 
+      usage = pushDistinct(usage, SchemaContext.Input);
+    if (usageFlags & UsageFlags.Output) 
+      usage = pushDistinct(usage, SchemaContext.Output);
+    if (usageFlags & UsageFlags.JsonMergePatch) 
+      usage = pushDistinct(usage, SchemaContext.JsonMergePatch);
+  
+
+    const accessFlags = sdkType.access;
+    if (accessFlags === "internal") {
+      usage = pushDistinct(usage ?? [], SchemaContext.Internal);
+    } else {
+      usage = pushDistinct(usage ?? [], SchemaContext.Public);
+    }
+    return usage;
+  }
+
 }
