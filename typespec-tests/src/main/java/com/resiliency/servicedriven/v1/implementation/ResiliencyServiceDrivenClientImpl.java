@@ -283,7 +283,7 @@ public final class ResiliencyServiceDrivenClientImpl {
      * Test that currently accepts one required parameter, will be updated in next spec to accept a new optional
      * parameter as well.
      * 
-     * @param parameter I am a required parameter.
+     * @param parameter A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -303,7 +303,7 @@ public final class ResiliencyServiceDrivenClientImpl {
      * Test that currently accepts one required parameter, will be updated in next spec to accept a new optional
      * parameter as well.
      * 
-     * @param parameter I am a required parameter.
+     * @param parameter A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -325,7 +325,7 @@ public final class ResiliencyServiceDrivenClientImpl {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>parameter</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
+     * <tr><td>parameter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -351,7 +351,7 @@ public final class ResiliencyServiceDrivenClientImpl {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>parameter</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
+     * <tr><td>parameter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 

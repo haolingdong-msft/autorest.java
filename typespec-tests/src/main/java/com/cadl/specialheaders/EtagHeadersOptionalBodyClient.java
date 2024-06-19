@@ -53,16 +53,11 @@ public final class EtagHeadersOptionalBodyClient {
      * <table border="1">
      * <caption>Header Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>If-Match</td><td>String</td><td>No</td><td>The request should only proceed if an entity matches this
-     * string.</td></tr>
-     * <tr><td>If-None-Match</td><td>String</td><td>No</td><td>The request should only proceed if no entity matches this
-     * string.</td></tr>
-     * <tr><td>If-Unmodified-Since</td><td>OffsetDateTime</td><td>No</td><td>The request should only proceed if the
-     * entity was not modified after this time.</td></tr>
-     * <tr><td>If-Modified-Since</td><td>OffsetDateTime</td><td>No</td><td>The request should only proceed if the entity
-     * was modified after this time.</td></tr>
-     * <tr><td>timestamp</td><td>OffsetDateTime</td><td>No</td><td>An instant in coordinated universal time
-     * (UTC)"</td></tr>
+     * <tr><td>If-Match</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <tr><td>If-None-Match</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <tr><td>If-Unmodified-Since</td><td>OffsetDateTime</td><td>No</td><td>The ifUnmodifiedSince parameter</td></tr>
+     * <tr><td>If-Modified-Since</td><td>OffsetDateTime</td><td>No</td><td>The ifModifiedSince parameter</td></tr>
+     * <tr><td>timestamp</td><td>OffsetDateTime</td><td>No</td><td>The timestamp parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
@@ -106,7 +101,7 @@ public final class EtagHeadersOptionalBodyClient {
      * 
      * @param format A sequence of textual characters.
      * @param filter A sequence of textual characters.
-     * @param timestamp An instant in coordinated universal time (UTC)".
+     * @param timestamp The timestamp parameter.
      * @param body The body parameter.
      * @param requestConditions Specifies HTTP options for conditional requests based on modification time.
      * @throws IllegalArgumentException thrown if parameters fail the validation.

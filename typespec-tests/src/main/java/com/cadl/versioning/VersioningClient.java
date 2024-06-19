@@ -86,8 +86,8 @@ public final class VersioningClient {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>Select the specified fields to be included in the
-     * response. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>The select parameter. Call
+     * {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * <tr><td>expand</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
@@ -137,7 +137,7 @@ public final class VersioningClient {
      * }</pre>
      * 
      * @param name A sequence of textual characters.
-     * @param resource The resource instance.
+     * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -199,7 +199,7 @@ public final class VersioningClient {
     /**
      * Resource list operation template.
      * 
-     * @param select Select the specified fields to be included in the response.
+     * @param select The select parameter.
      * @param expand A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -249,7 +249,7 @@ public final class VersioningClient {
      * Long-running resource create or replace operation template.
      * 
      * @param name A sequence of textual characters.
-     * @param resource The resource instance.
+     * @param resource The resource parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

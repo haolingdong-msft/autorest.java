@@ -217,8 +217,8 @@ public final class StandardClientImpl {
      * }
      * }</pre>
      * 
-     * @param name The name of user.
-     * @param resource The resource instance.
+     * @param name A sequence of textual characters.
+     * @param resource Details about a user.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -256,8 +256,8 @@ public final class StandardClientImpl {
      * }
      * }</pre>
      * 
-     * @param name The name of user.
-     * @param resource The resource instance.
+     * @param name A sequence of textual characters.
+     * @param resource Details about a user.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -295,8 +295,8 @@ public final class StandardClientImpl {
      * }
      * }</pre>
      * 
-     * @param name The name of user.
-     * @param resource The resource instance.
+     * @param name A sequence of textual characters.
+     * @param resource Details about a user.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -341,8 +341,8 @@ public final class StandardClientImpl {
      * }
      * }</pre>
      * 
-     * @param name The name of user.
-     * @param resource The resource instance.
+     * @param name A sequence of textual characters.
+     * @param resource Details about a user.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -387,8 +387,8 @@ public final class StandardClientImpl {
      * }
      * }</pre>
      * 
-     * @param name The name of user.
-     * @param resource The resource instance.
+     * @param name A sequence of textual characters.
+     * @param resource Details about a user.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -433,8 +433,8 @@ public final class StandardClientImpl {
      * }
      * }</pre>
      * 
-     * @param name The name of user.
-     * @param resource The resource instance.
+     * @param name A sequence of textual characters.
+     * @param resource Details about a user.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -478,7 +478,7 @@ public final class StandardClientImpl {
      * }
      * }</pre>
      * 
-     * @param name The name of user.
+     * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -515,7 +515,7 @@ public final class StandardClientImpl {
      * }
      * }</pre>
      * 
-     * @param name The name of user.
+     * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -550,7 +550,7 @@ public final class StandardClientImpl {
      * }
      * }</pre>
      * 
-     * @param name The name of user.
+     * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -592,7 +592,7 @@ public final class StandardClientImpl {
      * }
      * }</pre>
      * 
-     * @param name The name of user.
+     * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -634,7 +634,7 @@ public final class StandardClientImpl {
      * }
      * }</pre>
      * 
-     * @param name The name of user.
+     * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -677,7 +677,7 @@ public final class StandardClientImpl {
      * }
      * }</pre>
      * 
-     * @param name The name of user.
+     * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -719,8 +719,8 @@ public final class StandardClientImpl {
      * }
      * }</pre>
      * 
-     * @param name The name of user.
-     * @param format The format of the data.
+     * @param name A sequence of textual characters.
+     * @param format A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -758,8 +758,8 @@ public final class StandardClientImpl {
      * }
      * }</pre>
      * 
-     * @param name The name of user.
-     * @param format The format of the data.
+     * @param name A sequence of textual characters.
+     * @param format A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -795,8 +795,8 @@ public final class StandardClientImpl {
      * }
      * }</pre>
      * 
-     * @param name The name of user.
-     * @param format The format of the data.
+     * @param name A sequence of textual characters.
+     * @param format A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -840,8 +840,8 @@ public final class StandardClientImpl {
      * }
      * }</pre>
      * 
-     * @param name The name of user.
-     * @param format The format of the data.
+     * @param name A sequence of textual characters.
+     * @param format A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -884,8 +884,8 @@ public final class StandardClientImpl {
      * }
      * }</pre>
      * 
-     * @param name The name of user.
-     * @param format The format of the data.
+     * @param name A sequence of textual characters.
+     * @param format A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -929,8 +929,8 @@ public final class StandardClientImpl {
      * }
      * }</pre>
      * 
-     * @param name The name of user.
-     * @param format The format of the data.
+     * @param name A sequence of textual characters.
+     * @param format A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

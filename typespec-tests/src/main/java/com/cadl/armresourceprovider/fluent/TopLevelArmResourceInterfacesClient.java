@@ -21,8 +21,8 @@ public interface TopLevelArmResourceInterfacesClient {
     /**
      * Get a TopLevelArmResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
+     * @param resourceGroupName A sequence of textual characters.
+     * @param topLevelArmResourceName A sequence of textual characters.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -36,8 +36,8 @@ public interface TopLevelArmResourceInterfacesClient {
     /**
      * Get a TopLevelArmResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
+     * @param resourceGroupName A sequence of textual characters.
+     * @param topLevelArmResourceName A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -49,9 +49,10 @@ public interface TopLevelArmResourceInterfacesClient {
     /**
      * Create a TopLevelArmResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param resource Resource create parameters.
+     * @param resourceGroupName A sequence of textual characters.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * @param resource Concrete tracked resource types can be created by aliasing this type using a specific property
+     * type.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -65,9 +66,10 @@ public interface TopLevelArmResourceInterfacesClient {
     /**
      * Create a TopLevelArmResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param resource Resource create parameters.
+     * @param resourceGroupName A sequence of textual characters.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * @param resource Concrete tracked resource types can be created by aliasing this type using a specific property
+     * type.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -82,9 +84,10 @@ public interface TopLevelArmResourceInterfacesClient {
     /**
      * Create a TopLevelArmResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param resource Resource create parameters.
+     * @param resourceGroupName A sequence of textual characters.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * @param resource Concrete tracked resource types can be created by aliasing this type using a specific property
+     * type.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -97,9 +100,10 @@ public interface TopLevelArmResourceInterfacesClient {
     /**
      * Create a TopLevelArmResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param resource Resource create parameters.
+     * @param resourceGroupName A sequence of textual characters.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * @param resource Concrete tracked resource types can be created by aliasing this type using a specific property
+     * type.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -113,9 +117,9 @@ public interface TopLevelArmResourceInterfacesClient {
     /**
      * Update a TopLevelArmResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param properties The resource properties to be updated.
+     * @param resourceGroupName A sequence of textual characters.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * @param properties The type used for update operations of the TopLevelArmResource.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -130,9 +134,9 @@ public interface TopLevelArmResourceInterfacesClient {
     /**
      * Update a TopLevelArmResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param properties The resource properties to be updated.
+     * @param resourceGroupName A sequence of textual characters.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * @param properties The type used for update operations of the TopLevelArmResource.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -145,8 +149,8 @@ public interface TopLevelArmResourceInterfacesClient {
     /**
      * Delete a TopLevelArmResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
+     * @param resourceGroupName A sequence of textual characters.
+     * @param topLevelArmResourceName A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -158,8 +162,8 @@ public interface TopLevelArmResourceInterfacesClient {
     /**
      * Delete a TopLevelArmResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
+     * @param resourceGroupName A sequence of textual characters.
+     * @param topLevelArmResourceName A sequence of textual characters.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -173,8 +177,8 @@ public interface TopLevelArmResourceInterfacesClient {
     /**
      * Delete a TopLevelArmResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
+     * @param resourceGroupName A sequence of textual characters.
+     * @param topLevelArmResourceName A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -185,8 +189,8 @@ public interface TopLevelArmResourceInterfacesClient {
     /**
      * Delete a TopLevelArmResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
+     * @param resourceGroupName A sequence of textual characters.
+     * @param topLevelArmResourceName A sequence of textual characters.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -198,7 +202,7 @@ public interface TopLevelArmResourceInterfacesClient {
     /**
      * List TopLevelArmResource resources by resource group.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -210,7 +214,7 @@ public interface TopLevelArmResourceInterfacesClient {
     /**
      * List TopLevelArmResource resources by resource group.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param resourceGroupName A sequence of textual characters.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.

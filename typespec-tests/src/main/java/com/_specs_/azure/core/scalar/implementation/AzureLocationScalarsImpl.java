@@ -211,7 +211,7 @@ public final class AzureLocationScalarsImpl {
      * String
      * }</pre>
      * 
-     * @param body _.
+     * @param body Represents an Azure geography region where supported resource providers live.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -233,7 +233,7 @@ public final class AzureLocationScalarsImpl {
      * String
      * }</pre>
      * 
-     * @param body _.
+     * @param body Represents an Azure geography region where supported resource providers live.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -265,7 +265,7 @@ public final class AzureLocationScalarsImpl {
      * }
      * }</pre>
      * 
-     * @param body _.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -297,7 +297,7 @@ public final class AzureLocationScalarsImpl {
      * }
      * }</pre>
      * 
-     * @param body _.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -314,7 +314,7 @@ public final class AzureLocationScalarsImpl {
     /**
      * azureLocation value header.
      * 
-     * @param region _.
+     * @param region Represents an Azure geography region where supported resource providers live.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -331,7 +331,7 @@ public final class AzureLocationScalarsImpl {
     /**
      * azureLocation value header.
      * 
-     * @param region _.
+     * @param region Represents an Azure geography region where supported resource providers live.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -348,7 +348,7 @@ public final class AzureLocationScalarsImpl {
     /**
      * azureLocation value query.
      * 
-     * @param region _.
+     * @param region Represents an Azure geography region where supported resource providers live.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -365,7 +365,7 @@ public final class AzureLocationScalarsImpl {
     /**
      * azureLocation value query.
      * 
-     * @param region _.
+     * @param region Represents an Azure geography region where supported resource providers live.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

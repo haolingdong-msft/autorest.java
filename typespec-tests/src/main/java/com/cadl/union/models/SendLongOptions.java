@@ -14,13 +14,13 @@ import com.azure.core.util.BinaryData;
 @Fluent
 public final class SendLongOptions {
     /*
-     * The id property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String id;
 
     /*
-     * The filter property.
+     * A sequence of textual characters.
      */
     @Generated
     private String filter;
@@ -76,7 +76,7 @@ public final class SendLongOptions {
     }
 
     /**
-     * Get the id property: The id property.
+     * Get the id property: A sequence of textual characters.
      * 
      * @return the id value.
      */
@@ -86,7 +86,7 @@ public final class SendLongOptions {
     }
 
     /**
-     * Get the filter property: The filter property.
+     * Get the filter property: A sequence of textual characters.
      * 
      * @return the filter value.
      */
@@ -96,7 +96,7 @@ public final class SendLongOptions {
     }
 
     /**
-     * Set the filter property: The filter property.
+     * Set the filter property: A sequence of textual characters.
      * 
      * @param filter the filter value to set.
      * @return the SendLongOptions object itself.

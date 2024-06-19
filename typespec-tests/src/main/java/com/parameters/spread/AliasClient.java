@@ -125,7 +125,7 @@ public final class AliasClient {
     /**
      * The spreadAsRequestBody operation.
      * 
-     * @param name A sequence of textual characters.
+     * @param name The name parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -148,7 +148,7 @@ public final class AliasClient {
      * 
      * @param id A sequence of textual characters.
      * @param xMsTestHeader A sequence of textual characters.
-     * @param name A sequence of textual characters.
+     * @param name The name parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

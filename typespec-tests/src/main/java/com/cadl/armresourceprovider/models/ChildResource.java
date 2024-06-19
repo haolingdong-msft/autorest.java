@@ -136,8 +136,8 @@ public interface ChildResource {
             /**
              * Specifies resourceGroupName, topLevelArmResourceName.
              * 
-             * @param resourceGroupName The name of the resource group. The name is case insensitive.
-             * @param topLevelArmResourceName arm resource name for path.
+             * @param resourceGroupName A sequence of textual characters.
+             * @param topLevelArmResourceName A sequence of textual characters.
              * @return the next definition stage.
              */
             WithCreate withExistingTopLevelArmResource(String resourceGroupName, String topLevelArmResourceName);

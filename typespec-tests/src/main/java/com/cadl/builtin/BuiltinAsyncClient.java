@@ -57,8 +57,7 @@ public final class BuiltinAsyncClient {
      * <table border="1">
      * <caption>Header Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>x-ms-date</td><td>OffsetDateTime</td><td>No</td><td>An instant in coordinated universal time
-     * (UTC)"</td></tr>
+     * <tr><td>x-ms-date</td><td>OffsetDateTime</td><td>No</td><td>The dateTime parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Response Body Schema</strong></p>
@@ -174,7 +173,7 @@ public final class BuiltinAsyncClient {
      * 
      * @param queryParam A sequence of textual characters.
      * @param queryParamEncoded Represent a URL string as described by https://url.spec.whatwg.org/.
-     * @param dateTime An instant in coordinated universal time (UTC)".
+     * @param dateTime The dateTime parameter.
      * @param filter A sequence of textual characters.
      * @param queryParamOptional A sequence of textual characters.
      * @param queryParamOptionalEncoded Represent a URL string as described by https://url.spec.whatwg.org/.

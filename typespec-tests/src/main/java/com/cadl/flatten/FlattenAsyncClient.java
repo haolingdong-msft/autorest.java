@@ -238,7 +238,7 @@ public final class FlattenAsyncClient {
      * The send operation.
      * 
      * @param id A sequence of textual characters.
-     * @param input A sequence of textual characters.
+     * @param input The input parameter.
      * @param user The user parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -262,7 +262,7 @@ public final class FlattenAsyncClient {
      * The send operation.
      * 
      * @param id A sequence of textual characters.
-     * @param input A sequence of textual characters.
+     * @param input The input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -285,7 +285,7 @@ public final class FlattenAsyncClient {
      * The sendProjectedName operation.
      * 
      * @param id A sequence of textual characters.
-     * @param fileIdentifier A sequence of textual characters.
+     * @param fileIdentifier The fileIdentifier parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -368,7 +368,7 @@ public final class FlattenAsyncClient {
      * The uploadFile operation.
      * 
      * @param name A sequence of textual characters.
-     * @param fileData The file details for the "file_data" field.
+     * @param fileData The fileData parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

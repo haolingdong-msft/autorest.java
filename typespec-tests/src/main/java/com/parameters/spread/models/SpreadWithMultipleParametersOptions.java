@@ -13,13 +13,13 @@ import com.azure.core.annotation.Immutable;
 @Immutable
 public final class SpreadWithMultipleParametersOptions {
     /*
-     * The id property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String id;
 
     /*
-     * The x-ms-test-header property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String xMsTestHeader;
@@ -86,7 +86,7 @@ public final class SpreadWithMultipleParametersOptions {
     }
 
     /**
-     * Get the id property: The id property.
+     * Get the id property: A sequence of textual characters.
      * 
      * @return the id value.
      */
@@ -96,7 +96,7 @@ public final class SpreadWithMultipleParametersOptions {
     }
 
     /**
-     * Get the xMsTestHeader property: The x-ms-test-header property.
+     * Get the xMsTestHeader property: A sequence of textual characters.
      * 
      * @return the xMsTestHeader value.
      */

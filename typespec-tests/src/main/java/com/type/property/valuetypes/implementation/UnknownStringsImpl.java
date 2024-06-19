@@ -151,7 +151,7 @@ public final class UnknownStringsImpl {
      * }
      * }</pre>
      * 
-     * @param body body.
+     * @param body Model with a property unknown, and the data is a string.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -175,7 +175,7 @@ public final class UnknownStringsImpl {
      * }
      * }</pre>
      * 
-     * @param body body.
+     * @param body Model with a property unknown, and the data is a string.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
